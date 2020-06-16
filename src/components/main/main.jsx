@@ -100,7 +100,7 @@ const Main = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {films.map((film) => <Card key = {film.title} film = {film}/>)}
+          {films.map((film) => <Card key = {film.title} film = {film} onTitleClick = {() => {}}/>)}
         </div>
 
         <div className="catalog__more">

@@ -7,7 +7,12 @@ const App = (props) => {
   const {promoTitle, promoGenres, promoRelease, films} = props;
 
   return <React.Fragment>
-    <Main title = {promoTitle} genres = {promoGenres} release = {promoRelease} films = {films}/>
+    <Main
+      title = {promoTitle}
+      genres = {promoGenres}
+      release = {promoRelease}
+      films = {films}
+    />
   </React.Fragment>;
 };
 
