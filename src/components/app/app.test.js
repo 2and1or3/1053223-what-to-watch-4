@@ -11,13 +11,19 @@ const promoFilm = {
 
 const films = [
   {
-    title: `Fantastic Beasts`,
+    id: `0`,
+    title: `Fantastic Beasts: The Crimes of Grindelwald`,
+    preview: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   },
   {
+    id: `1`,
     title: `Bohemian Rhapsody`,
+    preview: `img/bohemian-rhapsody.jpg`,
   },
   {
+    id: `2`,
     title: `Macbeth`,
+    preview: `img/macbeth.jpg`,
   }];
 
 it(`Render App component`, () => {

@@ -1,13 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Main from './main.jsx';
-
-const promoFilm = {
-  title: `The Grand Budapest Hotel`,
-  genres: [`Drama`],
-  release: 2014,
-};
+import FilmList from './film-list.jsx';
 
 const films = [
   {
@@ -26,14 +20,9 @@ const films = [
     preview: `img/macbeth.jpg`,
   }];
 
-it(`Render Main component`, () => {
+it(`Render FilmList component`, () => {
   const tree = renderer
-    .create(<Main
-      title = {promoFilm.title}
-      genres = {promoFilm.genres}
-      release = {promoFilm.release}
-      films = {films}
-    />)
+    .create(<FilmList films = {films}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

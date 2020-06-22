@@ -6,14 +6,14 @@ import Main from '../main/main.jsx';
 const App = (props) => {
   const {promoTitle, promoGenres, promoRelease, films} = props;
 
-  return <React.Fragment>
+  return (
     <Main
       title = {promoTitle}
       genres = {promoGenres}
       release = {promoRelease}
       films = {films}
     />
-  </React.Fragment>;
+  );
 };
 
 App.propTypes = {
