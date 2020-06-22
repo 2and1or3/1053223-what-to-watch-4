@@ -4,6 +4,7 @@ import {PureComponent} from "react";
 
 import Card from '../card/card.jsx';
 
+import {filmProp} from '../../props.js';
 
 class FilmList extends PureComponent {
   constructor(props) {
@@ -15,7 +16,7 @@ class FilmList extends PureComponent {
   }
 
   render() {
-    const {films} = this.props;
+    const {films, onCardClick} = this.props;
 
     return (
       <div className="catalog__movies-list">
@@ -25,7 +26,7 @@ class FilmList extends PureComponent {
             return <Card
               key = {film.title + i}
               film = {film}
-              onTitleClick = {() => {}}
+              onCardClick = {onCardClick}
               onHover = {(hoveredFilm) => {
                 this.setState({
                   hoveredCard: hoveredFilm,
@@ -38,7 +39,8 @@ class FilmList extends PureComponent {
 }
 
 FilmList.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };
 
 export default FilmList;

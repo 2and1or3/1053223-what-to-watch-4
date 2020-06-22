@@ -10,6 +10,7 @@ exports[`Render FilmList component 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Fantastic Beasts: The Crimes of Grindelwald"
@@ -36,9 +37,10 @@ exports[`Render FilmList component 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
-        alt="Bohemian Rhapsody"
+        alt="the Grand Budapest Hotel"
         height="175"
         src="img/bohemian-rhapsody.jpg"
         width="280"
@@ -52,7 +54,7 @@ exports[`Render FilmList component 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Bohemian Rhapsody
+        the Grand Budapest Hotel
       </a>
     </h3>
   </article>
@@ -62,6 +64,7 @@ exports[`Render FilmList component 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Macbeth"

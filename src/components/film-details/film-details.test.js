@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Card from './card.jsx';
+import FilmDetails from './film-details.jsx';
 
 const film = {
   id: `1`,
@@ -18,10 +18,10 @@ const film = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
-it(`Render Card component`, () => {
+it(`Render FilmDetails component`, () => {
   const tree = renderer
-    .create(<Card film = {film} onCardClick = {() => {}} onHover = {() => {}}/>)
-    .toJSON();
+  .create(<FilmDetails film = {film}/>)
+  .toJSON();
 
   expect(tree).toMatchSnapshot();
 });

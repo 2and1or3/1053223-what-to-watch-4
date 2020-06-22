@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {filmProp} from '../../props.js';
+
 const Card = (props) => {
-  const {film, onTitleClick, onHover} = props;
+  const {film, onCardClick, onHover} = props;
 
   return (
     <article
@@ -10,23 +12,30 @@ const Card = (props) => {
       onMouseEnter={() => {
         onHover(film);
       }}>
-      <div className="small-movie-card__image">
-        <img src={film.preview} alt={film.title} width="280" height="175" />
+      <div
+        className="small-movie-card__image"
+        onClick={(evt) => {
+          evt.preventDefault();
+          onCardClick(film);
+        }}>
+        <img src={film.preview} alt={film.title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onTitleClick}>{film.title}</a>
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+          onClick={(evt) => {
+            evt.preventDefault();
+            onCardClick(film);
+          }}>{film.title}</a>
       </h3>
     </article>
   );
 };
 
 Card.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }).isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  film: filmProp,
+  onCardClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
 };
 
