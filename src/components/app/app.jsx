@@ -13,6 +13,7 @@ const ScreenTypes = {
   DETAILS: `details`,
 };
 
+
 class App extends PureComponent {
   constructor(props) {
     super(props);

@@ -13,7 +13,8 @@ const films = [
   {
     id: `0`,
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
-    preview: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -27,7 +28,8 @@ const films = [
   {
     id: `1`,
     title: `the Grand Budapest Hotel`,
-    preview: `img/bohemian-rhapsody.jpg`,
+    poster: `img/bohemian-rhapsody.jpg`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -41,7 +43,8 @@ const films = [
   {
     id: `2`,
     title: `Macbeth`,
-    preview: `img/macbeth.jpg`,
+    poster: `img/macbeth.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -60,7 +63,14 @@ it(`Render App component`, () => {
       promoGenres = {promoFilm.genres}
       promoRelease = {promoFilm.release}
       films = {films}
-    />)
+    />, {
+      createNodeMock: (element) => {
+        if (element.type === `video`) {
+          return element;
+        }
+
+        return null;
+      }})
     .toJSON();
 
   expect(tree).toMatchSnapshot();

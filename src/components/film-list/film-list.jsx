@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 import {PureComponent} from "react";
 
 import Card from '../card/card.jsx';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 
 import {filmProp} from '../../props.js';
+
+
+const CardWithVideoPlayer = withVideoPlayer(Card);
 
 class FilmList extends PureComponent {
   constructor(props) {
@@ -23,7 +27,7 @@ class FilmList extends PureComponent {
         {films
           .map((film, i) => {
 
-            return <Card
+            return <CardWithVideoPlayer
               key = {film.title + i}
               film = {film}
               onCardClick = {onCardClick}

@@ -2,7 +2,8 @@ const films = [
   {
     id: `0`,
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
-    preview: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -16,7 +17,8 @@ const films = [
   {
     id: `1`,
     title: `the Grand Budapest Hotel`,
-    preview: `img/bohemian-rhapsody.jpg`,
+    poster: `img/bohemian-rhapsody.jpg`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -30,7 +32,8 @@ const films = [
   {
     id: `2`,
     title: `Macbeth`,
-    preview: `img/macbeth.jpg`,
+    poster: `img/macbeth.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -44,7 +47,8 @@ const films = [
   {
     id: `3`,
     title: `Aviator`,
-    preview: `img/aviator.jpg`,
+    poster: `img/aviator.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -58,7 +62,8 @@ const films = [
   {
     id: `4`,
     title: `We need to talk about Kevin`,
-    preview: `img/we-need-to-talk-about-kevin.jpg`,
+    poster: `img/we-need-to-talk-about-kevin.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -72,7 +77,8 @@ const films = [
   {
     id: `5`,
     title: `What We Do in the Shadows`,
-    preview: `img/what-we-do-in-the-shadows.jpg`,
+    poster: `img/what-we-do-in-the-shadows.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -86,7 +92,8 @@ const films = [
   {
     id: `6`,
     title: `Revenant`,
-    preview: `img/revenant.jpg`,
+    poster: `img/revenant.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,
@@ -100,7 +107,8 @@ const films = [
   {
     id: `7`,
     title: `Johnny English`,
-    preview: `img/johnny-english.jpg`,
+    poster: `img/johnny-english.jpg`,
+    preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     genre: `Drama`,

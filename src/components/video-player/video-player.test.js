@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import FilmDetails from './film-details.jsx';
+import VideoPlayer from './video-player.jsx';
 
 const film = {
-  id: `1`,
-  title: `the Grand Budapest Hotel`,
-  poster: `img/bohemian-rhapsody.jpg`,
-  preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  id: `0`,
+  title: `Fantastic Beasts: The Crimes of Grindelwald`,
+  poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   genre: `Drama`,
@@ -19,9 +19,17 @@ const film = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
-it(`Render FilmDetails component`, () => {
+it(`Render VideoPlayer component`, () => {
   const tree = renderer
-  .create(<FilmDetails film = {film}/>)
+  .create(<VideoPlayer isPlaying = {true} film = {film} isMuted = {true}/>, {
+    createNodeMock: (element) => {
+      if (element.type === `video`) {
+        return element;
+      }
+
+      return null;
+    }
+  })
   .toJSON();
 
   expect(tree).toMatchSnapshot();

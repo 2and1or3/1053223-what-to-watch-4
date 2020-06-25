@@ -6,7 +6,8 @@ import Card from './card.jsx';
 const film = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
-  preview: `img/bohemian-rhapsody.jpg`,
+  poster: `img/bohemian-rhapsody.jpg`,
+  preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   genre: `Drama`,
@@ -20,7 +21,7 @@ const film = {
 
 it(`Render Card component`, () => {
   const tree = renderer
-    .create(<Card film = {film} onCardClick = {() => {}} onHover = {() => {}}/>)
+    .create(<Card film = {film} onCardClick = {() => {}} onHover = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}} renderPlayer = {() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

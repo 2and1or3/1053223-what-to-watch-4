@@ -7,15 +7,14 @@ exports[`Render FilmList component 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
+      <video
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
         width="280"
       />
     </div>
@@ -34,15 +33,14 @@ exports[`Render FilmList component 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="the Grand Budapest Hotel"
+      <video
         height="175"
-        src="img/bohemian-rhapsody.jpg"
         width="280"
       />
     </div>
@@ -61,15 +59,14 @@ exports[`Render FilmList component 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="Macbeth"
+      <video
         height="175"
-        src="img/macbeth.jpg"
         width="280"
       />
     </div>

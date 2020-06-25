@@ -1,7 +1,11 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import Enzyme from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 
-import FilmDetails from './film-details.jsx';
+import VideoPlayer from './video-player.jsx';
+
+Enzyme.configure({adapter: new Adapter()});
 
 const film = {
   id: `1`,
@@ -19,10 +23,24 @@ const film = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
-it(`Render FilmDetails component`, () => {
-  const tree = renderer
-  .create(<FilmDetails film = {film}/>)
-  .toJSON();
+describe(`VideoPlayer component`, () => {
+  it(`VideoPlayer has playback state`, () => {
+    const wrapper = shallow(<VideoPlayer
+      isPlaying = {true}
+      film = {film}
+      isMuted = {true}/>,
+    {disableLifecycleMethods: true});
 
-  expect(tree).toMatchSnapshot();
+    expect(wrapper.state(`isPlaying`)).toBe(true);
+  });
+
+  it(`VideoPlayer has pause state`, () => {
+    const wrapper = shallow(<VideoPlayer
+      isPlaying = {false}
+      film = {film}
+      isMuted = {true}/>,
+    {disableLifecycleMethods: true});
+
+    expect(wrapper.state(`isPlaying`)).toBe(false);
+  });
 });

@@ -10,7 +10,8 @@ Enzyme.configure({adapter: new Adapter()});
 const film = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
-  preview: `img/bohemian-rhapsody.jpg`,
+  poster: `img/bohemian-rhapsody.jpg`,
+  preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   genre: `Drama`,
@@ -30,7 +31,14 @@ describe(`Card component`, () => {
   it(`Title and img of card is clickable`, () => {
     const onClick = jest.fn();
 
-    const wrapper = shallow(<Card film = {film} onCardClick = {onClick} onHover = {() => {}}/>);
+    const wrapper = shallow(<Card
+      film = {film}
+      onCardClick = {onClick}
+      onHover = {() => {}}
+      onCardHover = {() => {}}
+      onCardLeave = {() => {}}
+      renderPlayer = {() => {}}
+    />);
     wrapper.find(`.small-movie-card__link`).simulate(`click`, mockEvent);
     wrapper.find(`.small-movie-card__image`).simulate(`click`, mockEvent);
 
@@ -42,7 +50,14 @@ describe(`Card component`, () => {
   it(`When card is hovered callback receives correct film`, () => {
     const onHover = jest.fn();
 
-    const wrapper = shallow(<Card film = {film} onCardClick = {() => {}} onHover = {onHover}/>);
+    const wrapper = shallow(<Card
+      film = {film}
+      onCardClick = {() => {}}
+      onHover = {onHover}
+      onCardHover = {() => {}}
+      onCardLeave = {() => {}}
+      renderPlayer = {() => {}}
+    />);
     wrapper.find(`.small-movie-card`).simulate(`mouseenter`);
 
     expect(onHover).toHaveBeenCalledTimes(1);
