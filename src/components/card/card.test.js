@@ -21,7 +21,7 @@ const film = {
 
 it(`Render Card component`, () => {
   const tree = renderer
-    .create(<Card film = {film} onCardClick = {() => {}} onHover = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}} renderPlayer = {() => {}}/>)
+    .create(<Card film = {film} onCardClick = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}} renderPlayer = {() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

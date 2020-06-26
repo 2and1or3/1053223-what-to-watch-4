@@ -34,7 +34,6 @@ describe(`Card component`, () => {
     const wrapper = shallow(<Card
       film = {film}
       onCardClick = {onClick}
-      onHover = {() => {}}
       onCardHover = {() => {}}
       onCardLeave = {() => {}}
       renderPlayer = {() => {}}
@@ -48,20 +47,19 @@ describe(`Card component`, () => {
   });
 
   it(`When card is hovered callback receives correct film`, () => {
-    const onHover = jest.fn();
+    const onCardHover = jest.fn();
 
     const wrapper = shallow(<Card
       film = {film}
       onCardClick = {() => {}}
-      onHover = {onHover}
-      onCardHover = {() => {}}
+      onCardHover = {onCardHover}
       onCardLeave = {() => {}}
       renderPlayer = {() => {}}
     />);
     wrapper.find(`.small-movie-card`).simulate(`mouseenter`);
 
-    expect(onHover).toHaveBeenCalledTimes(1);
+    expect(onCardHover).toHaveBeenCalledTimes(1);
 
-    expect(onHover.mock.calls[0][0]).toMatchObject(film);
+    expect(onCardHover.mock.calls[0][0]).toMatchObject(film);
   });
 });

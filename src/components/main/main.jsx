@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 
 import FilmList from '../film-list/film-list.jsx';
 
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
+
 import {filmProp} from '../../props.js';
+
+
+const FilmListWithVideoPlayer = withVideoPlayer(FilmList);
 
 const Main = (props) => {
   const {title, genres, release, films, onCardClick} = props;
@@ -101,7 +106,7 @@ const Main = (props) => {
           </li>
         </ul>
 
-        <FilmList films = {films} onCardClick = {onCardClick}/>
+        <FilmListWithVideoPlayer films = {films} onCardClick = {onCardClick}/>
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>

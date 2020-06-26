@@ -5,14 +5,13 @@ import {filmProp} from '../../props.js';
 
 
 const Card = (props) => {
-  const {film, onCardClick, onHover, renderPlayer, onCardHover, onCardLeave} = props;
+  const {film, onCardClick, renderPlayer, onCardHover, onCardLeave} = props;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
-        onHover(film);
-        onCardHover();
+        onCardHover(film);
       }}
       onMouseLeave={() => {
         onCardLeave();
@@ -41,7 +40,6 @@ const Card = (props) => {
 Card.propTypes = {
   film: filmProp,
   onCardClick: PropTypes.func.isRequired,
-  onHover: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onCardLeave: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,

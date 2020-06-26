@@ -12,22 +12,22 @@ const withVideoPlayer = (Component) => {
       super(props);
 
       this.state = {
-        isPlaying: false,
+        hoveredFilm: null,
       };
 
       this._handleCardHover = this._handleCardHover.bind(this);
       this._handleCardLeave = this._handleCardLeave.bind(this);
     }
 
-    _handleCardHover() {
+    _handleCardHover(film) {
       this._timerId = setTimeout(() => {
-        this.setState({isPlaying: true});
+        this.setState({hoveredFilm: film});
       }, PREVIEW_DELAY);
     }
 
     _handleCardLeave() {
       clearTimeout(this._timerId);
-      this.setState({isPlaying: false});
+      this.setState({hoveredFilm: null});
     }
 
     render() {
@@ -35,7 +35,9 @@ const withVideoPlayer = (Component) => {
         <Component
           {...this.props}
           renderPlayer = {(film, isMuted) => {
-            return <VideoPlayer film = {film} isPlaying = {this.state.isPlaying} isMuted = {isMuted}/>;
+            const isPlay = this.state.hoveredFilm === film;
+
+            return <VideoPlayer film = {film} isPlaying = {isPlay} isMuted = {isMuted}/>;
           }}
           onCardHover = {this._handleCardHover}
           onCardLeave = {this._handleCardLeave}

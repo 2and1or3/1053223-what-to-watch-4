@@ -52,7 +52,7 @@ const films = [
 
 it(`Render FilmList component`, () => {
   const tree = renderer
-    .create(<FilmList films = {films} onCardClick = {() => {}}/>, {
+    .create(<FilmList films = {films} onCardClick = {() => {}} renderPlayer = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}}/>, {
       createNodeMock: (element) => {
         if (element.type === `video`) {
           return element;
