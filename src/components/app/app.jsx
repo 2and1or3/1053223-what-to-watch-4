@@ -22,6 +22,15 @@ class App extends PureComponent {
       screen: ScreenTypes.MAIN,
       currentFilm: null,
     };
+
+    this._handleCardClick = this._handleCardClick.bind(this);
+  }
+
+  _handleCardClick(film) {
+    this.setState({
+      screen: ScreenTypes.DETAILS,
+      currentFilm: film,
+    });
   }
 
   _renderApp() {
@@ -36,16 +45,11 @@ class App extends PureComponent {
             genres = {promoGenres}
             release = {promoRelease}
             films = {films}
-            onCardClick = {(film) => {
-              this.setState({
-                screen: ScreenTypes.DETAILS,
-                currentFilm: film,
-              });
-            }}
+            onCardClick = {this._handleCardClick}
           />);
       case ScreenTypes.DETAILS:
         return (
-          <FilmDetails film = {this.state.currentFilm}/>
+          <FilmDetails currentFilm = {this.state.currentFilm} films = {films} onCardClick = {this._handleCardClick}/>
         );
     }
 
@@ -64,7 +68,7 @@ class App extends PureComponent {
         </Switch>
         <Switch>
           <Route exact path="/dev-details">
-            <FilmDetails film = {films[1]}/>
+            <FilmDetails currentFilm = {films[1]} films = {films} onCardClick = {() => {}}/>
           </Route>
         </Switch>
       </BrowserRouter>

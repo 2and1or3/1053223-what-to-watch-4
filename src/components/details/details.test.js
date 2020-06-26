@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Card from './card.jsx';
+import Details from './details.jsx';
 
 const film = {
   id: `1`,
@@ -33,9 +33,9 @@ const film = {
   commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
-it(`Render Card component`, () => {
+it(`Render Details component`, () => {
   const tree = renderer
-    .create(<Card film = {film} onCardClick = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}} renderPlayer = {() => {}}/>)
+    .create(<Details film = {film}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

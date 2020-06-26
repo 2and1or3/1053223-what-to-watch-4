@@ -15,4 +15,12 @@ const filmProp = PropTypes.shape({
   actors: PropTypes.arrayOf(PropTypes.string).isRequired,
 }).isRequired;
 
-export {filmProp};
+const commentProp = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  rate: PropTypes.string.isRequired,
+}).isRequired;
+
+export {filmProp, commentProp};
