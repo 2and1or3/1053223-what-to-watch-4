@@ -1,3 +1,5 @@
+import {reducer, ActionType, ActionCreator} from './reducer.js';
+
 const films = [
   {
     id: `0`,
@@ -233,4 +235,110 @@ const films = [
   },
 ];
 
-export {films};
+describe(`Reducer works correctly`, () => {
+  it(`Reducer should return initial state in default case`, () => {
+    const initialState = {
+      screen: `main`,
+      currentFilm: null,
+      currentGenre: `all`,
+      films,
+    };
+
+    expect(reducer(void 0, {})).toEqual(initialState);
+  });
+
+  it(`Reducer should return changed state with new current genre`, () => {
+    const stateBefore = {
+      screen: `main`,
+      currentFilm: null,
+      currentGenre: `all`,
+      films,
+    };
+    const action = {
+      type: ActionType.SET_FILTER,
+      payload: `comedy`,
+    };
+    const stateAfter = {
+      screen: `main`,
+      currentFilm: null,
+      currentGenre: `comedy`,
+      films,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it(`Reducer should return changed state with details screen`, () => {
+    const stateBefore = {
+      screen: `main`,
+      currentFilm: null,
+      currentGenre: `all`,
+      films,
+    };
+    const action = {
+      type: ActionType.CHANGE_SCREEN,
+      payload: `details`,
+    };
+    const stateAfter = {
+      screen: `details`,
+      currentFilm: null,
+      currentGenre: `all`,
+      films,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it(`Reducer should return changed state with current film`, () => {
+    const stateBefore = {
+      screen: `main`,
+      currentFilm: null,
+      currentGenre: `all`,
+      films,
+    };
+    const action = {
+      type: ActionType.SET_CURRENT_FILM,
+      payload: films[0],
+    };
+    const stateAfter = {
+      screen: `main`,
+      currentFilm: films[0],
+      currentGenre: `all`,
+      films,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator should return correct action for setFilter`, () => {
+    const filter = `drama`;
+    const resultAction = {
+      type: ActionType.SET_FILTER,
+      payload: filter,
+    };
+
+    expect(ActionCreator.setFilter(filter)).toEqual(resultAction);
+  });
+
+  it(`Action creator should return correct action for changeScreen`, () => {
+    const nextScreen = `details`;
+    const resultAction = {
+      type: ActionType.CHANGE_SCREEN,
+      payload: nextScreen,
+    };
+
+    expect(ActionCreator.changeScreen(nextScreen)).toEqual(resultAction);
+  });
+
+  it(`Action creator should return correct action for setCurrentFilm`, () => {
+    const currentFilm = films[0];
+    const resultAction = {
+      type: ActionType.SET_CURRENT_FILM,
+      payload: currentFilm,
+    };
+
+    expect(ActionCreator.setCurrentFilm(currentFilm)).toEqual(resultAction);
+  });
+});

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import {filmProp} from '../../props.js';
 
@@ -9,16 +8,12 @@ import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 
 import {comments} from '../../mocks/comments.js';
 
-const LOOK_LIKE_LIST_COUNT = 4;
-
 
 const FilmListWithVideoPlayer = withVideoPlayer(FilmList);
 
 const FilmDetails = (props) => {
-  const {currentFilm, films, onCardClick} = props;
+  const {currentFilm} = props;
   const {title, background, genre, release} = currentFilm;
-
-  const lookLikeFilms = films.filter((film) => currentFilm.genre === film.genre).slice(0, LOOK_LIKE_LIST_COUNT);
 
   return (
     <React.Fragment>
@@ -76,15 +71,13 @@ const FilmDetails = (props) => {
         {<Tabs film = {currentFilm} comments = {comments}/>}
 
       </section>
-      <FilmListWithVideoPlayer films = {lookLikeFilms} isFull = {false} onCardClick = {onCardClick}/>
+      <FilmListWithVideoPlayer isFull = {false}/>
     </React.Fragment>
   );
 };
 
 FilmDetails.propTypes = {
   currentFilm: filmProp,
-  films: PropTypes.arrayOf(filmProp),
-  onCardClick: PropTypes.func.isRequired,
 };
 
 export default FilmDetails;

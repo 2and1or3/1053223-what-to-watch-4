@@ -2,54 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {PureComponent} from "react";
+import {connect} from "react-redux";
 
 import Main from '../main/main.jsx';
 import FilmDetails from '../film-details/film-details.jsx';
 
 import {filmProp} from '../../props.js';
-
-const ScreenTypes = {
-  MAIN: `main`,
-  DETAILS: `details`,
-};
+import {ScreenType} from '../../consts.js';
 
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      screen: ScreenTypes.MAIN,
-      currentFilm: null,
-    };
-
-    this._handleCardClick = this._handleCardClick.bind(this);
-  }
-
-  _handleCardClick(film) {
-    this.setState({
-      screen: ScreenTypes.DETAILS,
-      currentFilm: film,
-    });
-  }
-
   _renderApp() {
-    const {promoTitle, promoGenres, promoRelease, films} = this.props;
-    const screen = this.state.screen;
+    const {promoTitle, promoGenres, promoRelease, screen, currentFilm} = this.props;
 
     switch (screen) {
-      case ScreenTypes.MAIN:
+      case ScreenType.MAIN:
         return (
           <Main
             title = {promoTitle}
             genres = {promoGenres}
             release = {promoRelease}
-            films = {films}
-            onCardClick = {this._handleCardClick}
           />);
-      case ScreenTypes.DETAILS:
+      case ScreenType.DETAILS:
         return (
-          <FilmDetails currentFilm = {this.state.currentFilm} films = {films} onCardClick = {this._handleCardClick}/>
+          <FilmDetails currentFilm = {currentFilm}/>
         );
     }
 
@@ -68,7 +44,7 @@ class App extends PureComponent {
         </Switch>
         <Switch>
           <Route exact path="/dev-details">
-            <FilmDetails currentFilm = {films[1]} films = {films} onCardClick = {() => {}}/>
+            <FilmDetails currentFilm = {films[1]} films = {films}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -80,7 +56,19 @@ App.propTypes = {
   promoTitle: PropTypes.string.isRequired,
   promoGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
   promoRelease: PropTypes.number.isRequired,
+  screen: PropTypes.string.isRequired,
+  currentFilm: PropTypes.shape(filmProp),
   films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  screen: state.screen,
+  currentFilm: state.currentFilm,
+  films: state.films,
+});
+
+const ConectedApp = connect(mapStateToProps, null)(App);
+
+
+export {App};
+export default ConectedApp;

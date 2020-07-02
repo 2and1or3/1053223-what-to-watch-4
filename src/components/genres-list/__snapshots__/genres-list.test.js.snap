@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render GenresList component 1`] = `
+<ul
+  className="catalog__genres-list"
+>
+  <li
+    className="catalog__genres-item catalog__genres-item--active"
+    id="all"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      All genres
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="comedy"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Comedies
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="crime"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Crime
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="documentary"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Documentary
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="drama"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Dramas
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="horror"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Horror
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="family"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Kids & Family
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="romance"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Romance
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="sciFi"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Sci-Fi
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+    id="thriller"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Thrillers
+    </a>
+  </li>
+</ul>
+`;

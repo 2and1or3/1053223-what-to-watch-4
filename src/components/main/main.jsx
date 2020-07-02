@@ -5,13 +5,11 @@ import FilmList from '../film-list/film-list.jsx';
 
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 
-import {filmProp} from '../../props.js';
-
 
 const FilmListWithVideoPlayer = withVideoPlayer(FilmList);
 
 const Main = (props) => {
-  const {title, genres, release, films, onCardClick} = props;
+  const {title, genres, release} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -69,7 +67,7 @@ const Main = (props) => {
       </div>
     </section>
 
-    <FilmListWithVideoPlayer films = {films} isFull = {true} onCardClick = {onCardClick}/>
+    <FilmListWithVideoPlayer isFull = {true}/>
   </React.Fragment>;
 };
 
@@ -77,8 +75,6 @@ Main.propTypes = {
   title: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   release: PropTypes.number.isRequired,
-  films: PropTypes.arrayOf(filmProp).isRequired,
-  onCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;

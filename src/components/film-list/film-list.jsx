@@ -1,55 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 import Card from '../card/card.jsx';
+import GenresList from '../genres-list/genres-list.jsx';
 
 import {filmProp} from '../../props.js';
+import {ScreenType, GenreType} from '../../consts.js';
+import {ActionCreator} from '../../reducer.js';
+
+const LOOK_LIKE_LIST_COUNT = 4;
 
 
 const FilmList = (props) => {
-  const {films, isFull, onCardClick, renderPlayer, onCardHover, onCardLeave} = props;
+  const {films, isFull, onCardClick, renderPlayer, onCardHover, onCardLeave, currentFilm, currentGenre, onLinkClick} = props;
+
+  let filmsToRender = films;
+  let filterByGenre = currentFilm ? currentFilm.genre : currentGenre;
+
+  if (filterByGenre !== GenreType.ALL.id) {
+    filmsToRender = films.filter((film) => filterByGenre === film.genre);
+  }
+
+  if (!isFull) {
+    filmsToRender = filmsToRender.slice(0, LOOK_LIKE_LIST_COUNT);
+  }
 
   return (
     <div className="page-content">
       <section className={`catalog ${isFull ? `` : `catalog--like-this`}`}>
         <h2 className={`catalog__title ${isFull ? `visually-hidden` : ``}`}>{isFull ? `Catalog` : `More like this`}</h2>
 
-        {isFull ?
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul> : ``}
+        {isFull ? <GenresList currentGenre = {currentGenre} onLinkClick = {onLinkClick}/> : ``}
 
         <div className="catalog__movies-list">
-          {films
+          {filmsToRender
           .map((film, i) => {
 
             return (
@@ -95,6 +80,28 @@ FilmList.propTypes = {
   onCardLeave: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,
   isFull: PropTypes.bool.isRequired,
+  currentFilm: PropTypes.shape(filmProp).isRequired,
+  currentGenre: PropTypes.string.isRequired,
+  onLinkClick: PropTypes.func.isRequired,
 };
 
-export default FilmList;
+const mapStateToProps = (state) => ({
+  films: state.films,
+  currentFilm: state.currentFilm,
+  currentGenre: state.currentGenre,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCardClick: (film) => {
+    dispatch(ActionCreator.changeScreen(ScreenType.DETAILS));
+    dispatch(ActionCreator.setCurrentFilm(film));
+  },
+  onLinkClick: (currentGenreId) => {
+    dispatch(ActionCreator.setFilter(currentGenreId));
+  }
+});
+
+const ConnectedFilmList = connect(mapStateToProps, mapDispatchToProps)(FilmList);
+
+export {FilmList};
+export default ConnectedFilmList;

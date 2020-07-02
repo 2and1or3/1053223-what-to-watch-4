@@ -1,7 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 
 import FilmDetails from './film-details.jsx';
+
+const middlewares = [];
+const mockStore = configureStore(middlewares);
 
 const films = [
   {
@@ -94,16 +99,27 @@ const films = [
 ];
 
 it(`Render FilmDetails component`, () => {
-  const tree = renderer
-  .create(<FilmDetails currentFilm = {films[1]} films = {films} onCardClick = {() => {}}/>, {
-    createNodeMock: (element) => {
-      if (element.type === `video`) {
-        return element;
-      }
+  const initialState = {
+    films,
+    currentFilm: films[0],
+    currentGenre: `all`,
+  };
+  const store = mockStore(initialState);
 
-      return null;
-    }
-  })
+  const tree = renderer
+  .create(
+      <Provider store = {store}>
+        <FilmDetails currentFilm = {films[1]}/>
+      </Provider>
+      , {
+        createNodeMock: (element) => {
+          if (element.type === `video`) {
+            return element;
+          }
+
+          return null;
+        }
+      })
   .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -1,7 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 
-import FilmList from './film-list.jsx';
+import {FilmList} from './film-list.jsx';
+
+const middlewares = [];
+const mockStore = configureStore(middlewares);
 
 const films = [
   {
@@ -95,30 +100,68 @@ const films = [
 
 describe(`Render FilmList component`, () => {
   it(`Render full FilmList component`, () => {
-    const tree = renderer
-      .create(<FilmList films = {films} isFull = {true} onCardClick = {() => {}} renderPlayer = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}}/>, {
-        createNodeMock: (element) => {
-          if (element.type === `video`) {
-            return element;
-          }
+    const initialState = {
+      currentFilm: films[0],
+    };
 
-          return null;
-        }})
+    const store = mockStore(initialState);
+
+    const tree = renderer
+      .create(
+          <Provider store = {store}>
+            <FilmList
+              films = {films}
+              isFull = {true}
+              onCardClick = {() => {}}
+              renderPlayer = {() => {}}
+              onCardHover = {() => {}}
+              onCardLeave = {() => {}}
+              currentFilm = {films[0]}
+              currentGenre = {`all`}
+              onLinkClick = {() => {}}
+            />
+          </Provider>, {
+            createNodeMock: (element) => {
+              if (element.type === `video`) {
+                return element;
+              }
+
+              return null;
+            }})
       .toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it(`Render short FilmList component`, () => {
-    const tree = renderer
-      .create(<FilmList films = {films} isFull = {false} onCardClick = {() => {}} renderPlayer = {() => {}} onCardHover = {() => {}} onCardLeave = {() => {}}/>, {
-        createNodeMock: (element) => {
-          if (element.type === `video`) {
-            return element;
-          }
+    const initialState = {
+      currentFilm: films[0],
+    };
 
-          return null;
-        }})
+    const store = mockStore(initialState);
+
+    const tree = renderer
+      .create(
+          <Provider store = {store}>
+            <FilmList
+              films = {films}
+              isFull = {false}
+              onCardClick = {() => {}}
+              renderPlayer = {() => {}}
+              onCardHover = {() => {}}
+              onCardLeave = {() => {}}
+              currentFilm = {films[0]}
+              currentGenre = {`all`}
+              onLinkClick = {() => {}}
+            />
+          </Provider>, {
+            createNodeMock: (element) => {
+              if (element.type === `video`) {
+                return element;
+              }
+
+              return null;
+            }})
       .toJSON();
 
     expect(tree).toMatchSnapshot();

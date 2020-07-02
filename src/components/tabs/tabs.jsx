@@ -8,7 +8,7 @@ import Details from '../details/details.jsx';
 import Reviews from '../reviews/reviews.jsx';
 
 import {filmProp, commentProp} from '../../props.js';
-import {TABS} from '../../consts.js';
+import {TabType} from '../../consts.js';
 
 const ACTIVE_CLASS = `movie-nav__item--active`;
 
@@ -18,7 +18,7 @@ class Tabs extends PureComponent {
     super(props);
 
     this.state = {
-      currentTab: TABS.OVERVIEW,
+      currentTab: TabType.OVERVIEW,
     };
 
   }
@@ -37,15 +37,15 @@ class Tabs extends PureComponent {
     let currentTab = null;
 
     switch (this.state.currentTab) {
-      case TABS.OVERVIEW:
+      case TabType.OVERVIEW:
         currentTab = <Overview film = {film}/>;
         break;
 
-      case TABS.DETAILS:
+      case TabType.DETAILS:
         currentTab = <Details film = {film}/>;
         break;
 
-      case TABS.REVIEWS:
+      case TabType.REVIEWS:
         currentTab = <Reviews comments = {comments}/>;
         break;
     }
@@ -60,19 +60,19 @@ class Tabs extends PureComponent {
           <div className="movie-card__desc">
             <nav className="movie-nav movie-card__nav">
               <ul className="movie-nav__list">
-                <li className={`movie-nav__item ${this._getActiveClass(TABS.OVERVIEW)}`}>
+                <li className={`movie-nav__item ${this._getActiveClass(TabType.OVERVIEW)}`}>
                   <a href="#" className="movie-nav__link" onClick={() => {
-                    this.setState({currentTab: TABS.OVERVIEW});
+                    this.setState({currentTab: TabType.OVERVIEW});
                   }}>Overview</a>
                 </li>
-                <li className={`movie-nav__item ${this._getActiveClass(TABS.DETAILS)}`}>
+                <li className={`movie-nav__item ${this._getActiveClass(TabType.DETAILS)}`}>
                   <a href="#" className="movie-nav__link" onClick={() => {
-                    this.setState({currentTab: TABS.DETAILS});
+                    this.setState({currentTab: TabType.DETAILS});
                   }}>Details</a>
                 </li>
-                <li className={`movie-nav__item ${this._getActiveClass(TABS.REVIEWS)}`}>
+                <li className={`movie-nav__item ${this._getActiveClass(TabType.REVIEWS)}`}>
                   <a href="#" className="movie-nav__link" onClick={() => {
-                    this.setState({currentTab: TABS.REVIEWS});
+                    this.setState({currentTab: TabType.REVIEWS});
                   }}>Reviews</a>
                 </li>
               </ul>
