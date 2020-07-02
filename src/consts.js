@@ -52,4 +52,6 @@ const ScreenType = {
   DETAILS: `details`,
 };
 
-export {TabType, GenreType, ScreenType};
+const STEP_VISIBLE_CARDS = 8;
+
+export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS};

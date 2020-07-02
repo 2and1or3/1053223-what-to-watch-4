@@ -110,7 +110,9 @@ describe(`Render FilmList component`, () => {
       .create(
           <Provider store = {store}>
             <FilmList
-              films = {films}
+              filmsToRender = {films}
+              endOfFilteredFilms = {9}
+              onMoreClick = {() => {}}
               isFull = {true}
               onCardClick = {() => {}}
               renderPlayer = {() => {}}
@@ -144,7 +146,9 @@ describe(`Render FilmList component`, () => {
       .create(
           <Provider store = {store}>
             <FilmList
-              films = {films}
+              filmsToRender = {films}
+              endOfFilteredFilms = {9}
+              onMoreClick = {() => {}}
               isFull = {false}
               onCardClick = {() => {}}
               renderPlayer = {() => {}}

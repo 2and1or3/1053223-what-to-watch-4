@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 
 import Card from '../card/card.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
+import ShowMore from '../show-more/show-more.jsx';
 
 import {filmProp} from '../../props.js';
 import {ScreenType, GenreType} from '../../consts.js';
@@ -11,16 +12,14 @@ import {ActionCreator} from '../../reducer.js';
 
 const LOOK_LIKE_LIST_COUNT = 4;
 
+const getFilteredFilms = (films, filter) => films.filter((film) => filter === film.genre);
+
 
 const FilmList = (props) => {
-  const {films, isFull, onCardClick, renderPlayer, onCardHover, onCardLeave, currentFilm, currentGenre, onLinkClick} = props;
+  const {isFull, onCardClick, renderPlayer, onCardHover, onCardLeave, currentGenre, onLinkClick, onMoreClick, endOfFilteredFilms} = props;
+  let {filmsToRender} = props;
 
-  let filmsToRender = films;
-  let filterByGenre = currentFilm ? currentFilm.genre : currentGenre;
-
-  if (filterByGenre !== GenreType.ALL.id) {
-    filmsToRender = films.filter((film) => filterByGenre === film.genre);
-  }
+  const isEndOfFilms = filmsToRender.length >= endOfFilteredFilms;
 
   if (!isFull) {
     filmsToRender = filmsToRender.slice(0, LOOK_LIKE_LIST_COUNT);
@@ -50,10 +49,7 @@ const FilmList = (props) => {
           })}
         </div>
 
-        {isFull ?
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div> : ``}
+        {isFull && !isEndOfFilms ? <ShowMore onMoreClick = {onMoreClick}/> : ``}
       </section>
 
       <footer className="page-footer">
@@ -74,22 +70,37 @@ const FilmList = (props) => {
 };
 
 FilmList.propTypes = {
-  films: PropTypes.arrayOf(filmProp).isRequired,
+  filmsToRender: PropTypes.arrayOf(filmProp).isRequired,
   onCardClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onCardLeave: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,
   isFull: PropTypes.bool.isRequired,
-  currentFilm: PropTypes.shape(filmProp).isRequired,
   currentGenre: PropTypes.string.isRequired,
   onLinkClick: PropTypes.func.isRequired,
+  onMoreClick: PropTypes.func.isRequired,
+  endOfFilteredFilms: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  films: state.films,
-  currentFilm: state.currentFilm,
-  currentGenre: state.currentGenre,
-});
+const mapStateToProps = (state) => {
+  const {films, currentFilm, currentGenre, visibleCards} = state;
+  let filmsToRender = films;
+  const filterByGenre = currentFilm ? currentFilm.genre : currentGenre;
+
+  if (filterByGenre !== GenreType.ALL.id) {
+    filmsToRender = getFilteredFilms(filmsToRender, filterByGenre);
+  }
+
+  const endOfFilteredFilms = filmsToRender.length;
+  filmsToRender = filmsToRender.slice(0, visibleCards);
+
+  return {
+    films,
+    endOfFilteredFilms,
+    filmsToRender,
+    currentGenre,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onCardClick: (film) => {
@@ -98,6 +109,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onLinkClick: (currentGenreId) => {
     dispatch(ActionCreator.setFilter(currentGenreId));
+    dispatch(ActionCreator.resetVisibleCards());
+  },
+  onMoreClick: () => {
+    dispatch(ActionCreator.addVisibleCards());
   }
 });
 
