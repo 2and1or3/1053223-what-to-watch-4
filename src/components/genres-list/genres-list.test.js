@@ -5,7 +5,7 @@ import GenresList from './genres-list.jsx';
 
 it(`Render GenresList component`, () => {
   const tree = renderer
-    .create(<GenresList currentGenre = {`all`} onLinkClick = {() => {}}/>)
+    .create(<GenresList activeItem = {`all`} onLinkClick = {() => {}} onTargetClick = {() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

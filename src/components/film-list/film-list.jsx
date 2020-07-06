@@ -9,14 +9,18 @@ import ShowMore from '../show-more/show-more.jsx';
 import {filmProp} from '../../props.js';
 import {ScreenType, GenreType} from '../../consts.js';
 import {ActionCreator} from '../../reducer.js';
+import withVideo from '../../hocs/with-video/with-video.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 const LOOK_LIKE_LIST_COUNT = 4;
 
 const getFilteredFilms = (films, filter) => films.filter((film) => filter === film.genre);
 
+const CardWithVideo = withVideo(Card);
+const GenresListWithActiveItem = withActiveItem(GenresList);
 
 const FilmList = (props) => {
-  const {isFull, onCardClick, renderPlayer, onCardHover, onCardLeave, currentGenre, onLinkClick, onMoreClick, endOfFilteredFilms} = props;
+  const {isFull, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, endOfFilteredFilms, activeItem} = props;
   let {filmsToRender} = props;
 
   const isEndOfFilms = filmsToRender.length >= endOfFilteredFilms;
@@ -30,26 +34,26 @@ const FilmList = (props) => {
       <section className={`catalog ${isFull ? `` : `catalog--like-this`}`}>
         <h2 className={`catalog__title ${isFull ? `visually-hidden` : ``}`}>{isFull ? `Catalog` : `More like this`}</h2>
 
-        {isFull ? <GenresList currentGenre = {currentGenre} onLinkClick = {onLinkClick}/> : ``}
+        {isFull ? <GenresListWithActiveItem onLinkClick = {onLinkClick}/> : ``}
 
         <div className="catalog__movies-list">
           {filmsToRender
           .map((film, i) => {
-
             return (
-              <Card
+              <CardWithVideo
                 key = {film.title + i}
                 film = {film}
                 onCardClick = {onCardClick}
-                renderPlayer = {renderPlayer}
-                onCardHover = {onCardHover}
-                onCardLeave = {onCardLeave}
+                onCardHover = {onTargetHover}
+                onCardLeave = {onTargetLeave}
+                isMuted = {true}
+                isPlaying = {activeItem === film}
               />
             );
           })}
         </div>
 
-        {isFull && !isEndOfFilms ? <ShowMore onMoreClick = {onMoreClick}/> : ``}
+        {isFull ? <ShowMore hide = {isEndOfFilms} onMoreClick = {onMoreClick}/> : ``}
       </section>
 
       <footer className="page-footer">
@@ -72,14 +76,13 @@ const FilmList = (props) => {
 FilmList.propTypes = {
   filmsToRender: PropTypes.arrayOf(filmProp).isRequired,
   onCardClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired,
-  onCardLeave: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  onTargetHover: PropTypes.func.isRequired,
+  onTargetLeave: PropTypes.func.isRequired,
   isFull: PropTypes.bool.isRequired,
-  currentGenre: PropTypes.string.isRequired,
   onLinkClick: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
   endOfFilteredFilms: PropTypes.number.isRequired,
+  activeItem: PropTypes.any.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -98,7 +101,6 @@ const mapStateToProps = (state) => {
     films,
     endOfFilteredFilms,
     filmsToRender,
-    currentGenre,
   };
 };
 

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 import FilmList from '../film-list/film-list.jsx';
 
-import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 
-const FilmListWithVideoPlayer = withVideoPlayer(FilmList);
+const FilmListWithActiveItem = withActiveItem(FilmList);
 
 const Main = (props) => {
   const {title, genres, release} = props;
@@ -67,7 +67,7 @@ const Main = (props) => {
       </div>
     </section>
 
-    <FilmListWithVideoPlayer isFull = {true}/>
+    <FilmListWithActiveItem isFull = {true}/>
   </React.Fragment>;
 };
 

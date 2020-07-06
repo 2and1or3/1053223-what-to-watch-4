@@ -4,12 +4,13 @@ import {filmProp} from '../../props.js';
 
 import Tabs from '../tabs/tabs.jsx';
 import FilmList from '../film-list/film-list.jsx';
-import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 import {comments} from '../../mocks/comments.js';
 
 
-const FilmListWithVideoPlayer = withVideoPlayer(FilmList);
+const FilmListWithActiveItem = withActiveItem(FilmList);
+const TabsWithActiveItem = withActiveItem(Tabs);
 
 const FilmDetails = (props) => {
   const {currentFilm} = props;
@@ -68,10 +69,10 @@ const FilmDetails = (props) => {
           </div>
         </div>
 
-        {<Tabs film = {currentFilm} comments = {comments}/>}
+        {<TabsWithActiveItem film = {currentFilm} comments = {comments}/>}
 
       </section>
-      <FilmListWithVideoPlayer isFull = {false}/>
+      <FilmListWithActiveItem isFull = {false}/>
     </React.Fragment>
   );
 };

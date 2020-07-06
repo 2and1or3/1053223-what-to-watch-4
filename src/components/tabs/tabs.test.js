@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import Tabs from './tabs.jsx';
+import {TabType} from '../../consts.js';
 
 const film = {
   id: `1`,
@@ -57,7 +58,7 @@ const comments = [{
 
 it(`Render Tabs component`, () => {
   const tree = renderer
-    .create(<Tabs film = {film} comments = {comments}/>)
+    .create(<Tabs film = {film} comments = {comments} onTargetClick = {() => {}} activeItem = {TabType.OVERVIEW}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

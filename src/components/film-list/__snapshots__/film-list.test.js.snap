@@ -147,7 +147,12 @@ exports[`Render FilmList component Render full FilmList component 1`] = `
         <div
           className="small-movie-card__image"
           onClick={[Function]}
-        />
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
         <h3
           className="small-movie-card__title"
         >
@@ -168,7 +173,12 @@ exports[`Render FilmList component Render full FilmList component 1`] = `
         <div
           className="small-movie-card__image"
           onClick={[Function]}
-        />
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
         <h3
           className="small-movie-card__title"
         >
@@ -189,7 +199,12 @@ exports[`Render FilmList component Render full FilmList component 1`] = `
         <div
           className="small-movie-card__image"
           onClick={[Function]}
-        />
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
         <h3
           className="small-movie-card__title"
         >
@@ -276,7 +291,12 @@ exports[`Render FilmList component Render short FilmList component 1`] = `
         <div
           className="small-movie-card__image"
           onClick={[Function]}
-        />
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
         <h3
           className="small-movie-card__title"
         >
@@ -297,7 +317,12 @@ exports[`Render FilmList component Render short FilmList component 1`] = `
         <div
           className="small-movie-card__image"
           onClick={[Function]}
-        />
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
         <h3
           className="small-movie-card__title"
         >
@@ -318,7 +343,12 @@ exports[`Render FilmList component Render short FilmList component 1`] = `
         <div
           className="small-movie-card__image"
           onClick={[Function]}
-        />
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
         <h3
           className="small-movie-card__title"
         >

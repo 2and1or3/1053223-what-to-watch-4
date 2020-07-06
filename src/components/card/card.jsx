@@ -3,17 +3,22 @@ import PropTypes from "prop-types";
 
 import {filmProp} from '../../props.js';
 
+const PREVIEW_DELAY = 1000;
 
 const Card = (props) => {
-  const {film, onCardClick, renderPlayer, onCardHover, onCardLeave} = props;
+  const {film, onCardClick, onCardHover, onCardLeave, children} = props;
+  let timerId = null;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
-        onCardHover(film);
+        timerId = setTimeout(() => {
+          onCardHover(film);
+        }, PREVIEW_DELAY);
       }}
       onMouseLeave={() => {
+        clearTimeout(timerId);
         onCardLeave();
       }}>
       <div
@@ -22,7 +27,7 @@ const Card = (props) => {
           evt.preventDefault();
           onCardClick(film);
         }}>
-        {renderPlayer(film, true)}
+        {children}
       </div>
       <h3 className="small-movie-card__title">
         <a
@@ -42,7 +47,7 @@ Card.propTypes = {
   onCardClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onCardLeave: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Card;

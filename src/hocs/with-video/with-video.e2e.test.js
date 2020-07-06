@@ -2,8 +2,9 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {shallow} from "enzyme";
+import PropTypes from "prop-types";
 
-import VideoPlayer from './video-player.jsx';
+import withVideo from './with-video.js';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -23,9 +24,27 @@ const film = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
+const MockComponent = (props) => {
+  const {children} = props;
+  return (
+    <div>
+      {children}
+    </div>
+  );
+};
+
+MockComponent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+};
+
+const MockComponentWithVideo = withVideo(MockComponent);
+
 describe(`VideoPlayer component`, () => {
   it(`VideoPlayer has playback state`, () => {
-    const wrapper = shallow(<VideoPlayer
+    const wrapper = shallow(<MockComponentWithVideo
       isPlaying = {true}
       film = {film}
       isMuted = {true}/>,
@@ -35,7 +54,7 @@ describe(`VideoPlayer component`, () => {
   });
 
   it(`VideoPlayer has pause state`, () => {
-    const wrapper = shallow(<VideoPlayer
+    const wrapper = shallow(<MockComponentWithVideo
       isPlaying = {false}
       film = {film}
       isMuted = {true}/>,

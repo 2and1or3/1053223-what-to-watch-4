@@ -31,13 +31,13 @@ describe(`Card component`, () => {
   it(`Title and img of card is clickable`, () => {
     const onClick = jest.fn();
 
-    const wrapper = shallow(<Card
-      film = {film}
-      onCardClick = {onClick}
-      onCardHover = {() => {}}
-      onCardLeave = {() => {}}
-      renderPlayer = {() => {}}
-    />);
+    const wrapper = shallow(
+        <Card
+          film = {film}
+          onCardClick = {onClick}
+          onCardHover = {() => {}}
+          onCardLeave = {() => {}}>[]
+        </Card>);
     wrapper.find(`.small-movie-card__link`).simulate(`click`, mockEvent);
     wrapper.find(`.small-movie-card__image`).simulate(`click`, mockEvent);
 
@@ -46,20 +46,23 @@ describe(`Card component`, () => {
     expect(onClick.mock.calls[0][0]).toMatchObject(film);
   });
 
-  it(`When card is hovered callback receives correct film`, () => {
-    const onCardHover = jest.fn();
+  it(`When card is hovered callback receives correct film`, (done) => {
+    function onCardHover(data) {
+      try {
+        expect(data).toEqual(film);
+        done();
+      } catch (error) {
+        done(error);
+      }
+    }
 
-    const wrapper = shallow(<Card
-      film = {film}
-      onCardClick = {() => {}}
-      onCardHover = {onCardHover}
-      onCardLeave = {() => {}}
-      renderPlayer = {() => {}}
-    />);
+    const wrapper = shallow(
+        <Card
+          film = {film}
+          onCardClick = {() => {}}
+          onCardHover = {onCardHover}
+          onCardLeave = {() => {}}>[]
+        </Card>);
     wrapper.find(`.small-movie-card`).simulate(`mouseenter`);
-
-    expect(onCardHover).toHaveBeenCalledTimes(1);
-
-    expect(onCardHover.mock.calls[0][0]).toMatchObject(film);
   });
 });

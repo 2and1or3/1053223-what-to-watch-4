@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import {FilmList} from './film-list.jsx';
+import {createVideoMock} from '../../utils.js';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
@@ -97,6 +98,18 @@ const films = [
     commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   }];
 
+const commonProps = {
+  filmsToRender: films,
+  onCardClick: () => {},
+  onTargetHover: () => {},
+  onTargetLeave: () => {},
+  isFull: true,
+  onLinkClick: () => {},
+  onMoreClick: () => {},
+  endOfFilteredFilms: 9,
+  activeItem: ``,
+};
+
 
 describe(`Render FilmList component`, () => {
   it(`Render full FilmList component`, () => {
@@ -110,26 +123,11 @@ describe(`Render FilmList component`, () => {
       .create(
           <Provider store = {store}>
             <FilmList
-              filmsToRender = {films}
-              endOfFilteredFilms = {9}
-              onMoreClick = {() => {}}
+              {...commonProps}
               isFull = {true}
-              onCardClick = {() => {}}
-              renderPlayer = {() => {}}
-              onCardHover = {() => {}}
-              onCardLeave = {() => {}}
-              currentFilm = {films[0]}
-              currentGenre = {`all`}
-              onLinkClick = {() => {}}
             />
           </Provider>, {
-            createNodeMock: (element) => {
-              if (element.type === `video`) {
-                return element;
-              }
-
-              return null;
-            }})
+            createNodeMock: createVideoMock})
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -146,26 +144,11 @@ describe(`Render FilmList component`, () => {
       .create(
           <Provider store = {store}>
             <FilmList
-              filmsToRender = {films}
-              endOfFilteredFilms = {9}
-              onMoreClick = {() => {}}
+              {...commonProps}
               isFull = {false}
-              onCardClick = {() => {}}
-              renderPlayer = {() => {}}
-              onCardHover = {() => {}}
-              onCardLeave = {() => {}}
-              currentFilm = {films[0]}
-              currentGenre = {`all`}
-              onLinkClick = {() => {}}
             />
           </Provider>, {
-            createNodeMock: (element) => {
-              if (element.type === `video`) {
-                return element;
-              }
-
-              return null;
-            }})
+            createNodeMock: createVideoMock})
       .toJSON();
 
     expect(tree).toMatchSnapshot();

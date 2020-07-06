@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ShowMore = (props) => {
-  const {onMoreClick} = props;
+  const {onMoreClick, hide} = props;
 
-  return (
+  const element = (
     <div className="catalog__more">
       <button className="catalog__button" type="button" onClick={onMoreClick}>Show more</button>
     </div>
   );
+
+  return hide ? hide : element;
 };
 
 ShowMore.propTypes = {

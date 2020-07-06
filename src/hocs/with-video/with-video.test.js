@@ -1,7 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import PropTypes from "prop-types";
 
-import VideoPlayer from './video-player.jsx';
+import {createVideoMock} from '../../utils.js';
+import withVideo from './with-video.js';
 
 const film = {
   id: `0`,
@@ -33,17 +35,34 @@ const film = {
   commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
-it(`Render VideoPlayer component`, () => {
-  const tree = renderer
-  .create(<VideoPlayer isPlaying = {true} film = {film} isMuted = {true}/>, {
-    createNodeMock: (element) => {
-      if (element.type === `video`) {
-        return element;
-      }
+const MockComponent = (props) => {
+  const {children} = props;
+  return (
+    <div>
+      {children}
+    </div>
+  );
+};
 
-      return null;
-    }
-  })
+MockComponent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired
+};
+
+const MockComponentWithVideo = withVideo(MockComponent);
+
+it(`Render Component with video`, () => {
+  const tree = renderer
+  .create(
+      <MockComponentWithVideo
+        film = {film}
+        isMuted = {true}
+        isPlaying = {false}
+      />, {
+        createNodeMock: createVideoMock
+      })
   .toJSON();
 
   expect(tree).toMatchSnapshot();
