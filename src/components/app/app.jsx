@@ -6,26 +6,39 @@ import {connect} from "react-redux";
 
 import Main from '../main/main.jsx';
 import FilmDetails from '../film-details/film-details.jsx';
+import PlayerScreen from '../player-screen/player-screen.jsx';
+import withVideo from '../../hocs/with-video/with-video.js';
 
 import {filmProp} from '../../props.js';
 import {ScreenType} from '../../consts.js';
+import {ActionCreator} from '../../reducer.js';
+
+const PlayerScreenWithVideo = withVideo(PlayerScreen);
 
 
 class App extends PureComponent {
   _renderApp() {
-    const {promoTitle, promoGenres, promoRelease, screen, currentFilm} = this.props;
+    const {promoFilm, screen, currentFilm, onExit} = this.props;
 
     switch (screen) {
       case ScreenType.MAIN:
         return (
           <Main
-            title = {promoTitle}
-            genres = {promoGenres}
-            release = {promoRelease}
+            promoFilm = {promoFilm}
           />);
       case ScreenType.DETAILS:
         return (
           <FilmDetails currentFilm = {currentFilm}/>
+        );
+
+      case ScreenType.PLAYER:
+        return (
+          <PlayerScreenWithVideo
+            film = {currentFilm ? currentFilm : promoFilm}
+            isPlaying = {true}
+            isMuted = {false}
+            onExit = {onExit}
+          />
         );
     }
 
@@ -53,12 +66,11 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoTitle: PropTypes.string.isRequired,
-  promoGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  promoRelease: PropTypes.number.isRequired,
+  promoFilm: filmProp,
   screen: PropTypes.string.isRequired,
   currentFilm: PropTypes.shape(filmProp),
   films: PropTypes.arrayOf(filmProp).isRequired,
+  onExit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -67,7 +79,13 @@ const mapStateToProps = (state) => ({
   films: state.films,
 });
 
-const ConectedApp = connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => ({
+  onExit: () => {
+    dispatch(ActionCreator.changeScreen(ScreenType.MAIN));
+  }
+});
+
+const ConectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 export {App};

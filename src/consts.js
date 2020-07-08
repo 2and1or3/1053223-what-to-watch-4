@@ -50,6 +50,7 @@ const GenreType = {
 const ScreenType = {
   MAIN: `main`,
   DETAILS: `details`,
+  PLAYER: `player`,
 };
 
 const STEP_VISIBLE_CARDS = 8;

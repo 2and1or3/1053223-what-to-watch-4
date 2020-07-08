@@ -1,20 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import {createStore} from "redux";
-import {Provider} from "react-redux";
+import renderer from "react-test-renderer";
 
-import App from './components/app/app.jsx';
+import PlayerScreen from './player-screen.jsx';
 
-import {reducer} from './reducer.js';
-
-const rootContainer = document.querySelector(`#root`);
-
-const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
-);
-
-const promoFilm = {
+const film = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
@@ -26,7 +15,7 @@ const promoFilm = {
   description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
   rating: 8.9,
   voiceCount: 240,
-  duration: 33,
+  duration: 99,
   director: `Wes Andreson`,
   actors: [
     `Bill Murray`,
@@ -44,9 +33,29 @@ const promoFilm = {
   commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
-ReactDOM.render(
-    <Provider store = {store}>
-      <App promoFilm = {promoFilm}/>
-    </Provider>,
-    rootContainer
-);
+const children = <div/>;
+
+const commonProps = {
+  film,
+  onPlayClick: () => {},
+  progress: 5,
+  isPlaying: false,
+  onExit: () => {},
+  onFullScreen: () => {},
+  onToggleMove: () => {},
+  togglerPosition: 5,
+};
+
+it(`Render PlayerScreen component`, () => {
+
+  const tree = renderer
+    .create(
+        <PlayerScreen
+          {...commonProps}
+          containerRef = {React.createRef()}
+          progressRef = {React.createRef()}
+        >{children}</PlayerScreen>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

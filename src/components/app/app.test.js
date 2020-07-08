@@ -4,16 +4,11 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import {App} from './app.jsx';
+import {createVideoMock} from '../../utils.js';
 
 const middlewares = [];
 
 const mockStore = configureStore(middlewares);
-
-const promoFilm = {
-  title: `The Grand Budapest Hotel`,
-  genres: [`Drama`],
-  release: 2014,
-};
 
 const films = [
   {
@@ -106,12 +101,22 @@ const films = [
   }];
 
 
+const commonProps = {
+  promoFilm: films[0],
+  films,
+  screen: `main`,
+  currentFilm: films[0],
+  onExit: () => {},
+};
+
+
 describe(`Render App component`, () => {
   it(`Redner main screen`, () => {
     const initialState = {
       films,
       currentFilm: films[0],
       currentGenre: `all`,
+      onPlayClick: () => {},
     };
 
     const store = mockStore(initialState);
@@ -120,21 +125,11 @@ describe(`Render App component`, () => {
       .create(
           <Provider store = {store}>
             <App
-              promoTitle = {promoFilm.title}
-              promoGenres = {promoFilm.genres}
-              promoRelease = {promoFilm.release}
-              films = {films}
+              {...commonProps}
               screen = {`main`}
-              currentFilm = {films[0]}
             />
           </Provider>, {
-            createNodeMock: (element) => {
-              if (element.type === `video`) {
-                return element;
-              }
-
-              return null;
-            }})
+            createNodeMock: createVideoMock})
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -153,21 +148,34 @@ describe(`Render App component`, () => {
       .create(
           <Provider store = {store}>
             <App
-              promoTitle = {promoFilm.title}
-              promoGenres = {promoFilm.genres}
-              promoRelease = {promoFilm.release}
-              films = {films}
-              screen = {`details`}
-              currentFilm = {films[0]}
+              {...commonProps}
+              screen = {`detials`}
             />
           </Provider>, {
-            createNodeMock: (element) => {
-              if (element.type === `video`) {
-                return element;
-              }
+            createNodeMock: createVideoMock})
+      .toJSON();
 
-              return null;
-            }})
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Redner player screen`, () => {
+    const initialState = {
+      films,
+      currentFilm: films[0],
+      currentGenre: `all`,
+    };
+
+    const store = mockStore(initialState);
+
+    const tree = renderer
+      .create(
+          <Provider store = {store}>
+            <App
+              {...commonProps}
+              screen = {`player`}
+            />
+          </Provider>, {
+            createNodeMock: createVideoMock})
       .toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -149,6 +149,7 @@ exports[`Render FilmList component Render full FilmList component 1`] = `
           onClick={[Function]}
         >
           <video
+            className="player__video"
             height="175"
             width="280"
           />
@@ -175,6 +176,7 @@ exports[`Render FilmList component Render full FilmList component 1`] = `
           onClick={[Function]}
         >
           <video
+            className="player__video"
             height="175"
             width="280"
           />
@@ -201,6 +203,7 @@ exports[`Render FilmList component Render full FilmList component 1`] = `
           onClick={[Function]}
         >
           <video
+            className="player__video"
             height="175"
             width="280"
           />
@@ -293,6 +296,7 @@ exports[`Render FilmList component Render short FilmList component 1`] = `
           onClick={[Function]}
         >
           <video
+            className="player__video"
             height="175"
             width="280"
           />
@@ -319,6 +323,7 @@ exports[`Render FilmList component Render short FilmList component 1`] = `
           onClick={[Function]}
         >
           <video
+            className="player__video"
             height="175"
             width="280"
           />
@@ -345,6 +350,7 @@ exports[`Render FilmList component Render short FilmList component 1`] = `
           onClick={[Function]}
         >
           <video
+            className="player__video"
             height="175"
             width="280"
           />

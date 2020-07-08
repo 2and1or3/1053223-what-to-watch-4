@@ -4,12 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import Main from './main.jsx';
-
-const promoFilm = {
-  title: `The Grand Budapest Hotel`,
-  genres: [`Drama`],
-  release: 2014,
-};
+import {createVideoMock} from '../../utils.js';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
@@ -115,18 +110,10 @@ it(`Render Main component`, () => {
     .create(
         <Provider store = {store}>
           <Main
-            title = {promoFilm.title}
-            genres = {promoFilm.genres}
-            release = {promoFilm.release}
+            promoFilm = {films[0]}
           />
         </Provider>, {
-          createNodeMock: (element) => {
-            if (element.type === `video`) {
-              return element;
-            }
-
-            return null;
-          }})
+          createNodeMock: createVideoMock})
     .toJSON();
 
   expect(tree).toMatchSnapshot();

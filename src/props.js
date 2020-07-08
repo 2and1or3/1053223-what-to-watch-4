@@ -23,4 +23,9 @@ const commentProp = PropTypes.shape({
   rate: PropTypes.string.isRequired,
 }).isRequired;
 
-export {filmProp, commentProp};
+const refProp = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.shape({current: PropTypes.instanceOf(Element)})
+]).isRequired;
+
+export {filmProp, commentProp, refProp};
