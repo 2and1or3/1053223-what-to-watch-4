@@ -8,22 +8,22 @@ import ShowMore from '../show-more/show-more.jsx';
 
 import {filmProp} from '../../props.js';
 import {ScreenType, GenreType} from '../../consts.js';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/application/application.js';
 import withVideo from '../../hocs/with-video/with-video.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
-const LOOK_LIKE_LIST_COUNT = 4;
+import {getCurrentGenre, getVisibleCards, getFilteredFilms} from '../../reducer/application/selectors.js';
+import {getFilms} from '../../reducer/data/selectors.js';
 
-const getFilteredFilms = (films, filter) => films.filter((film) => filter === film.genre);
+const LOOK_LIKE_LIST_COUNT = 4;
 
 const CardWithVideo = withVideo(Card);
 const GenresListWithActiveItem = withActiveItem(GenresList);
 
 const FilmList = (props) => {
-  const {isFull, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, endOfFilteredFilms, activeItem} = props;
+  const {isFull, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, isNoMore, activeItem} = props;
   let {filmsToRender} = props;
 
-  const isEndOfFilms = filmsToRender.length >= endOfFilteredFilms;
 
   if (!isFull) {
     filmsToRender = filmsToRender.slice(0, LOOK_LIKE_LIST_COUNT);
@@ -53,7 +53,7 @@ const FilmList = (props) => {
           })}
         </div>
 
-        {isFull ? <ShowMore hide = {isEndOfFilms} onMoreClick = {onMoreClick}/> : ``}
+        {isFull ? <ShowMore hide = {isNoMore} onMoreClick = {onMoreClick}/> : ``}
       </section>
 
       <footer className="page-footer">
@@ -81,25 +81,30 @@ FilmList.propTypes = {
   isFull: PropTypes.bool.isRequired,
   onLinkClick: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
-  endOfFilteredFilms: PropTypes.number.isRequired,
+  isNoMore: PropTypes.bool.isRequired,
   activeItem: PropTypes.any.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const {films, currentFilm, currentGenre, visibleCards} = state;
-  let filmsToRender = films;
-  const filterByGenre = currentFilm ? currentFilm.genre : currentGenre;
+  const currentGenre = getCurrentGenre(state);
+  const visibleCards = getVisibleCards(state);
 
-  if (filterByGenre !== GenreType.ALL.id) {
-    filmsToRender = getFilteredFilms(filmsToRender, filterByGenre);
+  let filmsToRender = [];
+
+  if (currentGenre !== GenreType.ALL.id) {
+    filmsToRender = getFilteredFilms(state);
+  } else {
+    filmsToRender = getFilms(state);
   }
 
-  const endOfFilteredFilms = filmsToRender.length;
+  const endOfFilms = filmsToRender.length;
+
   filmsToRender = filmsToRender.slice(0, visibleCards);
 
+  const isNoMore = filmsToRender.length >= endOfFilms;
+
   return {
-    films,
-    endOfFilteredFilms,
+    isNoMore,
     filmsToRender,
   };
 };
@@ -108,6 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCardClick: (film) => {
     dispatch(ActionCreator.changeScreen(ScreenType.DETAILS));
     dispatch(ActionCreator.setCurrentFilm(film));
+    dispatch(ActionCreator.setFilter(film.genre));
   },
   onLinkClick: (currentGenreId) => {
     dispatch(ActionCreator.setFilter(currentGenreId));

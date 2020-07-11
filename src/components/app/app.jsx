@@ -11,20 +11,21 @@ import withVideo from '../../hocs/with-video/with-video.js';
 
 import {filmProp} from '../../props.js';
 import {ScreenType} from '../../consts.js';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/application/application.js';
+import {getScreen, getCurrentFilm} from '../../reducer/application/selectors.js';
 
 const PlayerScreenWithVideo = withVideo(PlayerScreen);
 
 
 class App extends PureComponent {
   _renderApp() {
-    const {promoFilm, screen, currentFilm, onExit} = this.props;
+    const {screen, currentFilm, onExit} = this.props;
 
     switch (screen) {
       case ScreenType.MAIN:
         return (
           <Main
-            promoFilm = {promoFilm}
+            promoFilm = {currentFilm}
           />);
       case ScreenType.DETAILS:
         return (
@@ -34,7 +35,7 @@ class App extends PureComponent {
       case ScreenType.PLAYER:
         return (
           <PlayerScreenWithVideo
-            film = {currentFilm ? currentFilm : promoFilm}
+            film = {currentFilm}
             isPlaying = {true}
             isMuted = {false}
             onExit = {onExit}
@@ -46,18 +47,11 @@ class App extends PureComponent {
   }
 
   render() {
-    const {films} = this.props;
-
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
-          </Route>
-        </Switch>
-        <Switch>
-          <Route exact path="/dev-details">
-            <FilmDetails currentFilm = {films[1]} films = {films}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -66,17 +60,14 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoFilm: filmProp,
   screen: PropTypes.string.isRequired,
-  currentFilm: PropTypes.shape(filmProp),
-  films: PropTypes.arrayOf(filmProp).isRequired,
+  currentFilm: filmProp,
   onExit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  screen: state.screen,
-  currentFilm: state.currentFilm,
-  films: state.films,
+  screen: getScreen(state),
+  currentFilm: getCurrentFilm(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -7,6 +7,8 @@ const filmProp = PropTypes.shape({
   background: PropTypes.string.isRequired,
   cover: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  src: PropTypes.string.isRequired,
   release: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,

@@ -9,6 +9,11 @@ exports[`Render Header component Render full Header component 1`] = `
   >
     <div
       className="movie-card__bg"
+      style={
+        Object {
+          "backgroundColor": undefined,
+        }
+      }
     >
       <img
         alt="the Grand Budapest Hotel"
@@ -153,6 +158,11 @@ exports[`Render Header component Render short Header component 1`] = `
   >
     <div
       className="movie-card__bg"
+      style={
+        Object {
+          "backgroundColor": undefined,
+        }
+      }
     >
       <img
         alt="the Grand Budapest Hotel"

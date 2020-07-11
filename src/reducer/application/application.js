@@ -1,5 +1,5 @@
-import {films} from './mocks/films.js';
-import {GenreType, ScreenType, STEP_VISIBLE_CARDS} from './consts.js';
+import {GenreType, ScreenType, STEP_VISIBLE_CARDS} from '../../consts.js';
+import {extend} from '../../utils.js';
 
 const ActionType = {
   SET_FILTER: `setFilter`,
@@ -10,16 +10,31 @@ const ActionType = {
   RESET_VISIBLE_CARDS: `resetVisibleCards`,
 };
 
-
-const extend = (a, b) => {
-  return Object.assign({}, a, b);
+const DEFAULT_FILM = {
+  id: `default`,
+  title: `default`,
+  poster: `default`,
+  preview: `default`,
+  src: `default`,
+  isFavorite: false,
+  background: `default`,
+  backgroundColor: `default`,
+  cover: `default`,
+  genre: `default`,
+  release: `default`,
+  description: `default`,
+  rating: 8.9,
+  voiceCount: 240,
+  duration: 33,
+  director: `default`,
+  actors: [`default`],
+  commentIds: [`default`],
 };
 
 const initialState = {
   screen: ScreenType.MAIN,
-  currentFilm: null,
+  currentFilm: DEFAULT_FILM,
   currentGenre: GenreType.ALL.id,
-  films,
   visibleCards: STEP_VISIBLE_CARDS,
 };
 
@@ -43,7 +58,7 @@ const ActionCreator = {
   resetVisibleCards: () => ({
     type: ActionType.RESET_VISIBLE_CARDS,
     payload: null,
-  })
+  }),
 };
 
 
@@ -59,10 +74,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {currentFilm: action.payload});
 
     case ActionType.ADD_VISIBLE_CARDS:
-      const addStep = () => state.visibleCards + action.payload;
-      let filmsEnd = addStep() > state.films.length ? state.films.length : addStep();
-
-      return extend(state, {visibleCards: filmsEnd});
+      return extend(state, {visibleCards: state.visibleCards + action.payload});
 
     case ActionType.RESET_VISIBLE_CARDS:
       return extend(state, {visibleCards: STEP_VISIBLE_CARDS});

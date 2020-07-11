@@ -12,6 +12,8 @@ const film = {
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
+  isFavorite: false,
+  src: `path`,
   genre: `Drama`,
   release: `2014`,
   description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,

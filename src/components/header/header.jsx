@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {filmProp} from '../../props.js';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/application/application.js';
 import {ScreenType} from '../../consts.js';
 
 const Header = (props) => {
   const {film, isFull, children, onPlayClick} = props;
-  const {title, background, genre, release, cover} = film;
+  const {title, background, genre, release, cover, backgroundColor} = film;
 
   return (
     <section className={`movie-card ${isFull ? `movie-card--full` : ``}`}>
       <div className={isFull ? `movie-card__hero` : ``}>
 
-        <div className="movie-card__bg">
-          <img src={background} alt={title} />
+        <div className="movie-card__bg" style={{backgroundColor}}>
+          <img src={background} alt={title}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>

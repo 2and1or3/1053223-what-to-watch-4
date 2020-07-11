@@ -10,6 +10,11 @@ Array [
     >
       <div
         className="movie-card__bg"
+        style={
+          Object {
+            "backgroundColor": undefined,
+          }
+        }
       >
         <img
           alt="the Grand Budapest Hotel"
