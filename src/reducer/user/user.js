@@ -50,6 +50,16 @@ const Operation = {
       .catch((err) => {
         throw err;
       });
+  },
+
+  sendComment: (review, id, enableForm) => (dispatch, getState, api) => {
+
+    return api.post(URL.COMMENT + id, review)
+      .then(() => enableForm())
+      .catch((err) => {
+        enableForm();
+        throw err;
+      });
   }
 };
 

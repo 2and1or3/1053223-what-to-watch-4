@@ -9,6 +9,7 @@ import FilmDetails from '../film-details/film-details.jsx';
 import PlayerScreen from '../player-screen/player-screen.jsx';
 import AlertError from '../alert-error/alert-error.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
+import AddReview from '../add-review/add-review.jsx';
 
 import {filmProp} from '../../props.js';
 import {ScreenType} from '../../consts.js';
@@ -57,13 +58,17 @@ class App extends PureComponent {
   }
 
   render() {
-    const {error, onClose} = this.props;
+    const {error, onClose, onCommentSend} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
+            <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
+          </Route>
+          <Route exact path="/dev-review">
+            <AddReview onCommentSend = {onCommentSend}/>
             <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
           </Route>
         </Switch>
@@ -78,6 +83,7 @@ App.propTypes = {
   onExit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onAuthSubmit: PropTypes.func.isRequired,
+  onCommentSend: PropTypes.func.isRequired,
   error: PropTypes.shape({
     message: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
@@ -99,6 +105,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onAuthSubmit: (login, password) => {
     dispatch(UserOperation.sendAuth(login, password));
+  },
+  onCommentSend: (review, id, enableForm) => {
+    dispatch(UserOperation.sendComment(review, id, enableForm));
   }
 });
 

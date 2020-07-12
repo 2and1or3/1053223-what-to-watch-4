@@ -18,6 +18,8 @@ const Header = (props) => {
       <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
     </div>);
 
+  const reviewLinkElement = authStatus === UserStatus.AUTH ? <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``;
+
   return (
     <section className={`movie-card ${isFull ? `movie-card--full` : ``}`}>
       <div className={isFull ? `movie-card__hero` : ``}>
@@ -70,7 +72,7 @@ const Header = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                {isFull ? <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``}
+                {isFull ? reviewLinkElement : ``}
               </div>
             </div>
           </div>

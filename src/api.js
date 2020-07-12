@@ -3,6 +3,7 @@ import axios from "axios";
 import {URL} from './consts.js';
 
 const ErrorStatus = {
+  BAD_REQUES: 400,
   UNAUTH: 401,
   SERVER_UNAVAILABLE: 503,
 };
@@ -27,6 +28,10 @@ const createApi = (errorHandlers) => {
         throw err;
 
       case ErrorStatus.SERVER_UNAVAILABLE:
+        errorHandlers.showError(response.statusText, response.status);
+        throw err;
+
+      case ErrorStatus.BAD_REQUES:
         errorHandlers.showError(response.statusText, response.status);
         throw err;
     }

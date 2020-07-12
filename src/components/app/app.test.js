@@ -119,6 +119,7 @@ const commonProps = {
   },
   onClose: () => {},
   onAuthSubmit: () => {},
+  onCommentSend: () => {},
 };
 
 

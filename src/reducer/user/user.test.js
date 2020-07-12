@@ -80,4 +80,28 @@ describe(`Operation works correctly`, () => {
           throw err;
         });
   });
+
+  it(`Post request on /comments/:film_id should enable form`, () => {
+    const review = {
+      rating: 3,
+      comment: `some comment text`,
+    };
+    const id = 1;
+
+    const enableForm = jest.fn();
+    const sendComment = Operation.sendComment(review, id, enableForm);
+
+    const mockApi = new MockAdatper(api);
+    mockApi
+    .onPost(URL.COMMENT + id, review)
+    .reply(200, {});
+
+    return sendComment(null, null, api)
+      .then(() => {
+        expect(enableForm).toHaveBeenCalledTimes(1);
+      })
+        .catch((err) => {
+          throw err;
+        });
+  });
 });

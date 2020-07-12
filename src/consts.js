@@ -58,6 +58,7 @@ const URL = {
   LOAD: `/films`,
   PROMO: `/films/promo`,
   LOGIN: `/login`,
+  COMMENT: `/comments/`
 };
 
 export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS, URL, UserStatus};
