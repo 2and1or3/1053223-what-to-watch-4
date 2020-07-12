@@ -4,11 +4,12 @@ import {URL} from './consts.js';
 
 const ErrorStatus = {
   UNAUTH: 401,
+  SERVER_UNAVAILABLE: 503,
 };
 
 const TIMEOUT = 5000;
 
-const createApi = (onUnAuthorized) => {
+const createApi = (errorHandlers) => {
   const api = axios.create({
     baseURL: URL.BASE,
     timeout: TIMEOUT,
@@ -20,10 +21,14 @@ const createApi = (onUnAuthorized) => {
   const onError = (err) => {
     const {response} = err;
 
-    if (response.status === ErrorStatus.UNAUTH) {
-      onUnAuthorized();
+    switch (response.status) {
+      case ErrorStatus.UNAUTH:
+        errorHandlers.onUnAuthorized();
+        throw err;
 
-      throw err;
+      case ErrorStatus.SERVER_UNAVAILABLE:
+        errorHandlers.showError(response.statusText, response.status);
+        throw err;
     }
 
     throw err;

@@ -113,6 +113,12 @@ const commonProps = {
   screen: `main`,
   currentFilm: films[0],
   onExit: () => {},
+  error: {
+    message: ``,
+    code: ``,
+  },
+  onClose: () => {},
+  onAuthSubmit: () => {},
 };
 
 
@@ -125,7 +131,10 @@ describe(`Render App component`, () => {
       },
       [NameSpace.DATA]: {
         films,
-      }
+      },
+      [NameSpace.USER]: {
+        authStatus: `NO_AUTH`,
+      },
     };
 
     const store = mockStore(initialState);
@@ -152,7 +161,10 @@ describe(`Render App component`, () => {
       },
       [NameSpace.DATA]: {
         films,
-      }
+      },
+      [NameSpace.USER]: {
+        authStatus: `NO_AUTH`,
+      },
     };
 
     const store = mockStore(initialState);
@@ -179,7 +191,10 @@ describe(`Render App component`, () => {
       },
       [NameSpace.DATA]: {
         films,
-      }
+      },
+      [NameSpace.USER]: {
+        authStatus: `NO_AUTH`,
+      },
     };
 
     const store = mockStore(initialState);

@@ -65,6 +65,10 @@ describe(`Reducer works correctly`, () => {
       currentFilm: DEFAULT_FILM,
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
+      error: {
+        message: ``,
+        code: ``,
+      }
     };
 
     expect(reducer(void 0, {})).toEqual(initialState);

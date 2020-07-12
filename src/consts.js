@@ -4,6 +4,11 @@ const TabType = {
   REVIEWS: `reviews`,
 };
 
+const UserStatus = {
+  NO_AUTH: `NO_AUTH`,
+  AUTH: `AUTH`,
+};
+
 const GenreType = {
   ALL: {
     id: `all`,
@@ -43,6 +48,7 @@ const ScreenType = {
   MAIN: `main`,
   DETAILS: `details`,
   PLAYER: `player`,
+  SIGN: `sign`,
 };
 
 const STEP_VISIBLE_CARDS = 8;
@@ -51,6 +57,7 @@ const URL = {
   BASE: `https://4.react.pages.academy/wtw`,
   LOAD: `/films`,
   PROMO: `/films/promo`,
+  LOGIN: `/login`,
 };
 
-export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS, URL};
+export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS, URL, UserStatus};

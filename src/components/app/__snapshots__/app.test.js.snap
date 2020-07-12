@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App component Redner details screen 1`] = `null`;
+exports[`Render App component Redner details screen 1`] = `""`;
 
 exports[`Render App component Redner main screen 1`] = `
 Array [
@@ -58,16 +58,19 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__sign-in"
+            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#dfcf77",
+                "textDecoration": "none",
+              }
+            }
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
-          </div>
+            Sign In
+          </a>
         </div>
       </header>
       <div
@@ -386,102 +389,106 @@ Array [
       </div>
     </footer>
   </div>,
+  "",
 ]
 `;
 
 exports[`Render App component Redner player screen 1`] = `
-<div
-  className="player"
->
-  <video
-    className="player__video"
-    height="175"
-    width="280"
-  />
-  <button
-    className="player__exit"
-    onClick={[Function]}
-    type="button"
-  >
-    Exit
-  </button>
+Array [
   <div
-    className="player__controls"
+    className="player"
   >
+    <video
+      className="player__video"
+      height="175"
+      width="280"
+    />
+    <button
+      className="player__exit"
+      onClick={[Function]}
+      type="button"
+    >
+      Exit
+    </button>
     <div
-      className="player__controls-row"
+      className="player__controls"
     >
       <div
-        className="player__time"
-        onMouseDown={[Function]}
+        className="player__controls-row"
       >
-        <progress
-          className="player__progress"
-          max="100"
-          value={0}
-        />
         <div
-          className="player__toggler"
-          style={
-            Object {
-              "left": "0%",
-            }
-          }
+          className="player__time"
+          onMouseDown={[Function]}
         >
-          Toggler
+          <progress
+            className="player__progress"
+            max="100"
+            value={0}
+          />
+          <div
+            className="player__toggler"
+            style={
+              Object {
+                "left": "0%",
+              }
+            }
+          >
+            Toggler
+          </div>
+        </div>
+        <div
+          className="player__time-value"
+        >
+          0:1:39
         </div>
       </div>
       <div
-        className="player__time-value"
+        className="player__controls-row"
       >
-        0:1:39
+        <button
+          className="player__play"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            height="21"
+            viewBox="0 0 14 21"
+            width="14"
+          >
+            <use
+              xlinkHref="#pause"
+            />
+          </svg>
+          <span>
+            Pause
+          </span>
+        </button>
+        <div
+          className="player__name"
+        >
+          Transpotting
+        </div>
+        <button
+          className="player__full-screen"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            height="27"
+            viewBox="0 0 27 27"
+            width="27"
+          >
+            <use
+              xlinkHref="#full-screen"
+            />
+          </svg>
+          <span>
+            Full screen
+          </span>
+        </button>
       </div>
     </div>
-    <div
-      className="player__controls-row"
-    >
-      <button
-        className="player__play"
-        onClick={[Function]}
-        type="button"
-      >
-        <svg
-          height="21"
-          viewBox="0 0 14 21"
-          width="14"
-        >
-          <use
-            xlinkHref="#pause"
-          />
-        </svg>
-        <span>
-          Pause
-        </span>
-      </button>
-      <div
-        className="player__name"
-      >
-        Transpotting
-      </div>
-      <button
-        className="player__full-screen"
-        onClick={[Function]}
-        type="button"
-      >
-        <svg
-          height="27"
-          viewBox="0 0 27 27"
-          width="27"
-        >
-          <use
-            xlinkHref="#full-screen"
-          />
-        </svg>
-        <span>
-          Full screen
-        </span>
-      </button>
-    </div>
-  </div>
-</div>
+  </div>,
+  "",
+]
 `;

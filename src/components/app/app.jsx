@@ -7,26 +7,31 @@ import {connect} from "react-redux";
 import Main from '../main/main.jsx';
 import FilmDetails from '../film-details/film-details.jsx';
 import PlayerScreen from '../player-screen/player-screen.jsx';
-import withVideo from '../../hocs/with-video/with-video.js';
+import AlertError from '../alert-error/alert-error.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 
 import {filmProp} from '../../props.js';
 import {ScreenType} from '../../consts.js';
-import {ActionCreator} from '../../reducer/application/application.js';
-import {getScreen, getCurrentFilm} from '../../reducer/application/selectors.js';
+import withVideo from '../../hocs/with-video/with-video.js';
+import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application.js';
+import {getScreen, getCurrentFilm, getError} from '../../reducer/application/selectors.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 
 const PlayerScreenWithVideo = withVideo(PlayerScreen);
 
 
 class App extends PureComponent {
   _renderApp() {
-    const {screen, currentFilm, onExit} = this.props;
+    const {screen, currentFilm, onExit, onAuthSubmit} = this.props;
 
     switch (screen) {
       case ScreenType.MAIN:
         return (
           <Main
             promoFilm = {currentFilm}
-          />);
+          />
+        );
+
       case ScreenType.DETAILS:
         return (
           <FilmDetails currentFilm = {currentFilm}/>
@@ -41,17 +46,25 @@ class App extends PureComponent {
             onExit = {onExit}
           />
         );
+
+      case ScreenType.SIGN:
+        return (
+          <SignIn onAuthSubmit = {onAuthSubmit}/>
+        );
     }
 
     return null;
   }
 
   render() {
+    const {error, onClose} = this.props;
+
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
+            <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -63,16 +76,29 @@ App.propTypes = {
   screen: PropTypes.string.isRequired,
   currentFilm: filmProp,
   onExit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onAuthSubmit: PropTypes.func.isRequired,
+  error: PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   screen: getScreen(state),
   currentFilm: getCurrentFilm(state),
+  error: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onExit: () => {
-    dispatch(ActionCreator.changeScreen(ScreenType.MAIN));
+    dispatch(ApplicationActionCreator.changeScreen(ScreenType.MAIN));
+  },
+  onClose: () => {
+    dispatch(ApplicationActionCreator.showError(``, ``));
+  },
+  onAuthSubmit: (login, password) => {
+    dispatch(UserOperation.sendAuth(login, password));
   }
 });
 

@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import Header from './header.jsx';
+import NameSpace from '../../reducer/namespace.js';
 
 const middlewares = [];
 
@@ -52,7 +53,11 @@ const commonProps = {
 
 describe(`Render Header component`, () => {
   it(`Render full Header component`, () => {
-    const initialState = {};
+    const initialState = {
+      [NameSpace.USER]: {
+        authStatus: `NO_AUTH`,
+      },
+    };
     const store = mockStore(initialState);
 
 
@@ -71,7 +76,11 @@ describe(`Render Header component`, () => {
   });
 
   it(`Render short Header component`, () => {
-    const initialState = {};
+    const initialState = {
+      [NameSpace.USER]: {
+        authStatus: `NO_AUTH`,
+      },
+    };
     const store = mockStore(initialState);
 
 
