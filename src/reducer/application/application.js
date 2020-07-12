@@ -8,6 +8,7 @@ const ActionType = {
   SET_CURRENT_FILM: `setCurrentFilm`,
   ADD_VISIBLE_CARDS: `addVisibleCards`,
   RESET_VISIBLE_CARDS: `resetVisibleCards`,
+  SHOW_ERROR: `showError`,
 };
 
 const DEFAULT_FILM = {
@@ -36,6 +37,10 @@ const initialState = {
   currentFilm: DEFAULT_FILM,
   currentGenre: GenreType.ALL.id,
   visibleCards: STEP_VISIBLE_CARDS,
+  error: {
+    message: ``,
+    code: ``,
+  }
 };
 
 const ActionCreator = {
@@ -59,6 +64,13 @@ const ActionCreator = {
     type: ActionType.RESET_VISIBLE_CARDS,
     payload: null,
   }),
+  showError: (message, code) => ({
+    type: ActionType.SHOW_ERROR,
+    payload: {
+      message,
+      code,
+    }
+  })
 };
 
 
@@ -78,6 +90,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.RESET_VISIBLE_CARDS:
       return extend(state, {visibleCards: STEP_VISIBLE_CARDS});
+
+    case ActionType.SHOW_ERROR:
+      return extend(state, {error: action.payload});
 
     default:
       return state;

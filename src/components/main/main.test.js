@@ -114,7 +114,10 @@ it(`Render Main component`, () => {
     },
     [NameSpace.DATA]: {
       films,
-    }
+    },
+    [NameSpace.USER]: {
+      authStatus: `NO_AUTH`,
+    },
   };
   const store = mockStore(initialState);
 

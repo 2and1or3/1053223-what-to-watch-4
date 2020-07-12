@@ -4,11 +4,19 @@ import {connect} from "react-redux";
 
 import {filmProp} from '../../props.js';
 import {ActionCreator} from '../../reducer/application/application.js';
-import {ScreenType} from '../../consts.js';
+import {ScreenType, UserStatus} from '../../consts.js';
+import {getUserStatus} from '../../reducer/user/selectors.js';
+
 
 const Header = (props) => {
-  const {film, isFull, children, onPlayClick} = props;
+  const {film, isFull, children, onPlayClick, authStatus, onSignIn} = props;
   const {title, background, genre, release, cover, backgroundColor} = film;
+
+  const userElement = authStatus === UserStatus.NO_AUTH ?
+    (<a className="user-block__sign-in" href="#" onClick={onSignIn} style={{color: `#dfcf77`, textDecoration: `none`}}>Sign In</a>) :
+    (<div className="user-block__avatar">
+      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+    </div>);
 
   return (
     <section className={`movie-card ${isFull ? `movie-card--full` : ``}`}>
@@ -30,9 +38,7 @@ const Header = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            {userElement}
           </div>
         </header>
 
@@ -85,16 +91,25 @@ Header.propTypes = {
     PropTypes.node,
   ]),
   onPlayClick: PropTypes.func.isRequired,
+  authStatus: PropTypes.string.isRequired,
+  onSignIn: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  authStatus: getUserStatus(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onPlayClick: () => {
     dispatch(ActionCreator.changeScreen(ScreenType.PLAYER));
   },
+  onSignIn: () => {
+    dispatch(ActionCreator.changeScreen(ScreenType.SIGN));
+  }
 });
 
 
-const ConnectedHeader = connect(null, mapDispatchToProps)(Header);
+const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
 
 export {Header};
 export default ConnectedHeader;

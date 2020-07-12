@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render AlertError component Render AlertError with error 1`] = `
+<div
+  className="error"
+  style={
+    Object {
+      "backgroundColor": "rgba(0, 0, 0, 0.7)",
+      "border": "solid 2px #dfcf77",
+      "borderRadius": "10px",
+      "boxShadow": "0 0 8px 0 rgba(223, 207, 119, 0.7)",
+      "color": "#dfcf77",
+      "fontFamily": "Arial",
+      "left": "30%",
+      "padding": "0.5em 1em",
+      "position": "absolute",
+      "right": "30%",
+      "top": "1%",
+      "zIndex": "5",
+    }
+  }
+>
+  <button
+    className="error__close"
+    onClick={[Function]}
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "border": "1px dashed #dfcf77",
+        "borderRadius": "20px",
+        "boxShadow": "none",
+        "color": "#dfcf77",
+        "fontSize": "18px",
+        "padding": "3px 10px",
+        "position": "absolute",
+        "right": "15px",
+        "top": "15px",
+      }
+    }
+    type="button"
+  >
+    Close
+  </button>
+  <h2
+    className="error__title"
+    style={
+      Object {
+        "marginBottom": "1em",
+        "textAlign": "center",
+      }
+    }
+  >
+    Something goes wrong :(
+  </h2>
+  <p
+    className="error__message"
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    Server is unavailable
+    : 
+    <span>
+      503
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Render AlertError component Render AlertError without error 1`] = `""`;

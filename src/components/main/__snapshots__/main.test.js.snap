@@ -56,16 +56,19 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__sign-in"
+            href="#"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#dfcf77",
+                "textDecoration": "none",
+              }
+            }
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
-          </div>
+            Sign In
+          </a>
         </div>
       </header>
       <div

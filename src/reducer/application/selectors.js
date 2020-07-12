@@ -13,6 +13,8 @@ const getCurrentGenre = (state) => state[NAME_SPACE].currentGenre;
 
 const getVisibleCards = (state) => state[NAME_SPACE].visibleCards;
 
+const getError = (state) => state[NAME_SPACE].error;
+
 const getFilteredFilms = createSelector(
     getCurrentGenre,
     getFilms,
@@ -20,4 +22,4 @@ const getFilteredFilms = createSelector(
       return films.filter((film) => genre === film.genre);
     });
 
-export {getScreen, getCurrentFilm, getCurrentGenre, getVisibleCards, getFilteredFilms};
+export {getScreen, getCurrentFilm, getCurrentGenre, getVisibleCards, getFilteredFilms, getError};
