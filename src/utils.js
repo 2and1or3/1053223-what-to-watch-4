@@ -6,6 +6,7 @@ const createVideoMock = (element) => {
   return null;
 };
 
+
 const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
