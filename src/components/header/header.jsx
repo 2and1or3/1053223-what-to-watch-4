@@ -1,24 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 import {filmProp} from '../../props.js';
 import {ActionCreator} from '../../reducer/application/application.js';
-import {ScreenType, UserStatus} from '../../consts.js';
+import {Operation} from '../../reducer/data/data.js';
+import {ScreenType, UserStatus, AppRoute} from '../../consts.js';
 import {getUserStatus} from '../../reducer/user/selectors.js';
 
 
+const AddListIcon = {
+  ADD: `#add`,
+  IN_LIST: `#in-list`,
+};
+
 const Header = (props) => {
-  const {film, isFull, children, onPlayClick, authStatus, onSignIn} = props;
-  const {title, background, genre, release, cover, backgroundColor} = film;
+  const {film, isFull, children, onPlayClick, authStatus, onSignIn, onFavoriteToggle} = props;
+  const {title, background, genre, release, cover, backgroundColor, isFavorite} = film;
+
+
+  const addListIcon = isFavorite ? AddListIcon.IN_LIST : AddListIcon.ADD;
+  const toggleStatus = isFavorite ? 0 : 1;
 
   const userElement = authStatus === UserStatus.NO_AUTH ?
-    (<a className="user-block__sign-in" href="#" onClick={onSignIn} style={{color: `#dfcf77`, textDecoration: `none`}}>Sign In</a>) :
+    (<Link className="user-block__sign-in" to = {AppRoute.LOGIN} onClick={onSignIn} style={{color: `#dfcf77`, textDecoration: `none`}}>Sign In</Link>) :
     (<div className="user-block__avatar">
-      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+      <Link to = {AppRoute.LIST}>
+        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+      </Link>
     </div>);
 
   const reviewLinkElement = authStatus === UserStatus.AUTH ? <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``;
+
+  const addListElement = authStatus === UserStatus.AUTH ?
+    (<button className="btn btn--list movie-card__button" type="button" onClick={() => {
+      onFavoriteToggle(film.id, toggleStatus);
+    }}>
+      <svg viewBox="0 0 19 20" width="19" height="20">
+        <use xlinkHref={addListIcon}></use>
+      </svg>
+      <span>My list</span>
+    </button>) : (
+      <Link className="btn btn--list movie-card__button" to={AppRoute.LOGIN}>
+        <svg viewBox="0 0 19 20" width="19" height="20">
+          <use xlinkHref={addListIcon}></use>
+        </svg>
+        <span>My list</span>
+      </Link>
+    );
 
   return (
     <section className={`movie-card ${isFull ? `movie-card--full` : ``}`}>
@@ -66,12 +96,7 @@ const Header = (props) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                {addListElement}
                 {isFull ? reviewLinkElement : ``}
               </div>
             </div>
@@ -95,6 +120,7 @@ Header.propTypes = {
   onPlayClick: PropTypes.func.isRequired,
   authStatus: PropTypes.string.isRequired,
   onSignIn: PropTypes.func.isRequired,
+  onFavoriteToggle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -107,6 +133,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSignIn: () => {
     dispatch(ActionCreator.changeScreen(ScreenType.SIGN));
+  },
+  onFavoriteToggle: (filmId, satus) => {
+    dispatch(Operation.togggleFavorite(filmId, satus));
   }
 });
 

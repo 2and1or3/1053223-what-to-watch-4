@@ -157,4 +157,29 @@ describe(`Operation works correctly`, () => {
         throw err;
       });
   });
+
+  it(`togggleFavorite should toggle is_favorite on server and set updated film in currentFilm`, () => {
+    const filmId = `1`;
+    const status = 1;
+    const dispatch = jest.fn();
+    const toggle = Operation.togggleFavorite(filmId, status);
+    const mockApi = new MockAdapter(api);
+
+    mockApi
+    .onPost(`/favorite/1/1`)
+    .reply(200, SERVER_FILM);
+
+    return toggle(dispatch, null, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ApplicationActionType.SET_CURRENT_FILM,
+          payload: adapterToLocalFilms([SERVER_FILM])[0],
+        });
+      })
+      .catch((err) => {
+        throw err;
+      });
+
+  });
 });

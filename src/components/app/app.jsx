@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import {PureComponent} from "react";
 import {connect} from "react-redux";
 
@@ -12,7 +12,7 @@ import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
 
 import {filmProp} from '../../props.js';
-import {ScreenType} from '../../consts.js';
+import {ScreenType, AppRoute} from '../../consts.js';
 import withVideo from '../../hocs/with-video/with-video.js';
 import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application.js';
 import {getScreen, getCurrentFilm, getError} from '../../reducer/application/selectors.js';
@@ -23,7 +23,7 @@ const PlayerScreenWithVideo = withVideo(PlayerScreen);
 
 class App extends PureComponent {
   _renderApp() {
-    const {screen, currentFilm, onExit, onAuthSubmit} = this.props;
+    const {screen, currentFilm, onExit} = this.props;
 
     switch (screen) {
       case ScreenType.MAIN:
@@ -49,23 +49,24 @@ class App extends PureComponent {
         );
 
       case ScreenType.SIGN:
-        return (
-          <SignIn onAuthSubmit = {onAuthSubmit}/>
-        );
+        return <Redirect to = {AppRoute.LOGIN}/>;
     }
 
     return null;
   }
 
   render() {
-    const {error, onClose, onCommentSend} = this.props;
+    const {error, onClose, onCommentSend, onAuthSubmit} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             {this._renderApp()}
             <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
+          </Route>
+          <Route exact path={AppRoute.LOGIN}>
+            <SignIn onAuthSubmit = {onAuthSubmit}/>
           </Route>
           <Route exact path="/dev-review">
             <AddReview onCommentSend = {onCommentSend}/>

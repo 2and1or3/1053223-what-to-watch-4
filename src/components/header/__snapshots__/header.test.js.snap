@@ -57,7 +57,7 @@ exports[`Render Header component Render full Header component 1`] = `
       >
         <a
           className="user-block__sign-in"
-          href="#"
+          href="/login"
           onClick={[Function]}
           style={
             Object {
@@ -120,9 +120,10 @@ exports[`Render Header component Render full Header component 1`] = `
                 Play
               </span>
             </button>
-            <button
+            <a
               className="btn btn--list movie-card__button"
-              type="button"
+              href="/login"
+              onClick={[Function]}
             >
               <svg
                 height="20"
@@ -136,7 +137,7 @@ exports[`Render Header component Render full Header component 1`] = `
               <span>
                 My list
               </span>
-            </button>
+            </a>
             
           </div>
         </div>
@@ -204,7 +205,7 @@ exports[`Render Header component Render short Header component 1`] = `
       >
         <a
           className="user-block__sign-in"
-          href="#"
+          href="/login"
           onClick={[Function]}
           style={
             Object {
@@ -276,9 +277,10 @@ exports[`Render Header component Render short Header component 1`] = `
                 Play
               </span>
             </button>
-            <button
+            <a
               className="btn btn--list movie-card__button"
-              type="button"
+              href="/login"
+              onClick={[Function]}
             >
               <svg
                 height="20"
@@ -292,7 +294,7 @@ exports[`Render Header component Render short Header component 1`] = `
               <span>
                 My list
               </span>
-            </button>
+            </a>
             
           </div>
         </div>

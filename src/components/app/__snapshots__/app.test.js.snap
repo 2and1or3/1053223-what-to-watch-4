@@ -60,7 +60,7 @@ Array [
         >
           <a
             className="user-block__sign-in"
-            href="#"
+            href="/login"
             onClick={[Function]}
             style={
               Object {
@@ -132,9 +132,10 @@ Array [
                   Play
                 </span>
               </button>
-              <button
+              <a
                 className="btn btn--list movie-card__button"
-                type="button"
+                href="/login"
+                onClick={[Function]}
               >
                 <svg
                   height="20"
@@ -148,7 +149,7 @@ Array [
                 <span>
                   My list
                 </span>
-              </button>
+              </a>
               
             </div>
           </div>

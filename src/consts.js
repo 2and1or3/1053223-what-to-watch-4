@@ -9,6 +9,14 @@ const UserStatus = {
   AUTH: `AUTH`,
 };
 
+const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  LIST: `/mylist`,
+  FILM: `/films/`,
+  PLAYER: `/player/`,
+};
+
 const GenreType = {
   ALL: {
     id: `all`,
@@ -58,7 +66,8 @@ const URL = {
   LOAD: `/films`,
   PROMO: `/films/promo`,
   LOGIN: `/login`,
-  COMMENT: `/comments/`
+  COMMENT: `/comments/`,
+  FAVORITE: `/favorite/`,
 };
 
-export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS, URL, UserStatus};
+export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS, URL, UserStatus, AppRoute};

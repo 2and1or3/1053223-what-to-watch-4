@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {BrowserRouter} from "react-router-dom";
 
 import Header from './header.jsx';
 import NameSpace from '../../reducer/namespace.js';
@@ -64,11 +65,13 @@ describe(`Render Header component`, () => {
     const tree = renderer
       .create(
           <Provider store = {store}>
-            <Header
-              {...commonProps}
-              isFull = {true}>
-              {children}
-            </Header>
+            <BrowserRouter>
+              <Header
+                {...commonProps}
+                isFull = {true}>
+                {children}
+              </Header>
+            </BrowserRouter>
           </Provider>)
       .toJSON();
 
@@ -87,11 +90,13 @@ describe(`Render Header component`, () => {
     const tree = renderer
       .create(
           <Provider store = {store}>
-            <Header
-              {...commonProps}
-              isFull = {false}>
-              {children}
-            </Header>
+            <BrowserRouter>
+              <Header
+                {...commonProps}
+                isFull = {false}>
+                {children}
+              </Header>
+            </BrowserRouter>
           </Provider>)
       .toJSON();
 

@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {BrowserRouter} from "react-router-dom";
 
 import Main from './main.jsx';
 import {createVideoMock} from '../../utils.js';
@@ -124,9 +125,11 @@ it(`Render Main component`, () => {
   const tree = renderer
     .create(
         <Provider store = {store}>
-          <Main
-            promoFilm = {films[0]}
-          />
+          <BrowserRouter>
+            <Main
+              promoFilm = {films[0]}
+            />
+          </BrowserRouter>
         </Provider>, {
           createNodeMock: createVideoMock})
     .toJSON();

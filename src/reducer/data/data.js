@@ -46,6 +46,16 @@ const Operation = {
       .catch((err) => {
         throw err;
       });
+  },
+
+  togggleFavorite: (filmId, status) => (dispatch, getState, api) => {
+
+    return api.post(`${URL.FAVORITE}${filmId}/${status}`)
+    .then((response) => adapterToLocalFilms([response.data]))
+    .then(([localFilm]) => dispatch(ApplicationActionCreator.setCurrentFilm(localFilm)))
+    .catch((err) => {
+      throw err;
+    });
   }
 };
 
