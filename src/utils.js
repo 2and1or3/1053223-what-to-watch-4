@@ -34,10 +34,24 @@ const adapterToLocalFilms = (films) => {
       duration: film.run_time,
       director: film.director,
       actors: film.starring.slice(),
-      // commentIds: ['0', '1'],
     }));
 
   return localFilms;
 };
 
-export {createVideoMock, adapterToLocalFilms, extend};
+const adapterToLocalComments = (comments) => {
+
+  const localComments =
+  comments
+  .map((comment) => ({
+    id: comment.id.toString(),
+    author: comment.user.name,
+    date: comment.date,
+    description: comment.comment,
+    rate: comment.rating.toString(),
+  }));
+
+  return localComments;
+};
+
+export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments};

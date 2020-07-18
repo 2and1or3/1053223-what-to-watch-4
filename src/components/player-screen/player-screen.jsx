@@ -15,7 +15,7 @@ const getWatchTimeFormat = (seconds) => {
 
 const PlayerScreen = (props) => {
   const {
-    film,
+    currentFilm,
     children,
     onPlayClick,
     progress,
@@ -27,7 +27,7 @@ const PlayerScreen = (props) => {
     onToggleMove,
     togglerPosition} = props;
 
-  const {duration} = film;
+  const {duration} = currentFilm;
   const timeToWatch = getWatchTimeFormat(duration - progress);
 
   const playControl = isPlaying ? <>
@@ -76,7 +76,7 @@ const PlayerScreen = (props) => {
 };
 
 PlayerScreen.propTypes = {
-  film: filmProp,
+  currentFilm: filmProp,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

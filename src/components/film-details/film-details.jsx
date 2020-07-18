@@ -6,8 +6,7 @@ import Tabs from '../tabs/tabs.jsx';
 import FilmList from '../film-list/film-list.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import Header from '../header/header.jsx';
-
-import {comments} from '../../mocks/comments.js';
+import {ListType} from '../../consts.js';
 
 
 const FilmListWithActiveItem = withActiveItem(FilmList);
@@ -18,10 +17,10 @@ const FilmDetails = (props) => {
 
   return (
     <React.Fragment>
-      <Header film = {currentFilm} isFull = {true}>
-        <TabsWithActiveItem film = {currentFilm} comments = {comments}/>
+      <Header film = {currentFilm} isFull>
+        <TabsWithActiveItem film = {currentFilm}/>
       </Header>
-      <FilmListWithActiveItem isFull = {false}/>
+      <FilmListWithActiveItem listType = {ListType.LOOK_LIKE}/>
     </React.Fragment>
   );
 };

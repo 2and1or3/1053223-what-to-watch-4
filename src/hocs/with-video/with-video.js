@@ -44,8 +44,8 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {film, isMuted} = this.props;
-      const {preview, poster, duration} = film;
+      const {currentFilm, isMuted} = this.props;
+      const {preview, poster, duration} = currentFilm;
       const video = this._videoRef.current;
 
       video.poster = poster;
@@ -122,8 +122,8 @@ const withVideo = (Component) => {
     _handleToggleMove(downEvt) {
       const progressElement = this._progressRef.current;
       const video = this._videoRef.current;
-      const {film} = this.props;
-      const {duration} = film;
+      const {currentFilm} = this.props;
+      const {duration} = currentFilm;
 
       const handleMove = (moveEvt) => {
         const currentTogglerPosition = getLeftfromElement(moveEvt, progressElement);
@@ -191,7 +191,7 @@ const withVideo = (Component) => {
 
   WithVideo.propTypes = {
     isPlaying: PropTypes.bool.isRequired,
-    film: filmProp,
+    currentFilm: filmProp,
     isMuted: PropTypes.bool.isRequired,
   };
 

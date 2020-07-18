@@ -52,13 +52,6 @@ const GenreType = {
   },
 };
 
-const ScreenType = {
-  MAIN: `main`,
-  DETAILS: `details`,
-  PLAYER: `player`,
-  SIGN: `sign`,
-};
-
 const STEP_VISIBLE_CARDS = 8;
 
 const URL = {
@@ -70,4 +63,31 @@ const URL = {
   FAVORITE: `/favorite/`,
 };
 
-export {TabType, GenreType, ScreenType, STEP_VISIBLE_CARDS, URL, UserStatus, AppRoute};
+const DEFAULT_FILM = {
+  id: `default`,
+  title: `default`,
+  poster: `default`,
+  preview: `default`,
+  src: `default`,
+  isFavorite: false,
+  background: `default`,
+  backgroundColor: `default`,
+  cover: `default`,
+  genre: `default`,
+  release: `default`,
+  description: `default`,
+  rating: 8.9,
+  voiceCount: 240,
+  duration: 33,
+  director: `default`,
+  actors: [`default`],
+  commentIds: [`default`],
+};
+
+const ListType = {
+  FAVORIE: `FAVORIE`,
+  LOOK_LIKE: `LOOK_LIKE`,
+  FULL: `FULL`,
+};
+
+export {TabType, GenreType, STEP_VISIBLE_CARDS, URL, UserStatus, AppRoute, DEFAULT_FILM, ListType};

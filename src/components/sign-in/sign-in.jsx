@@ -2,6 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {PureComponent} from "react";
 
+import history from '../../history.js';
+
+import Footer from '../footer/footer.jsx';
+import Head from '../head/head.jsx';
+
+const SIGN_IN_TITLE = `Sign in`;
+
 class SignIn extends PureComponent {
   constructor(props) {
     super(props);
@@ -10,6 +17,11 @@ class SignIn extends PureComponent {
     this._passwordRef = React.createRef();
 
     this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleSubmitSuccess = this._handleSubmitSuccess.bind(this);
+  }
+
+  _handleSubmitSuccess() {
+    history.push(`/`);
   }
 
   _handleSubmit(evt) {
@@ -19,24 +31,14 @@ class SignIn extends PureComponent {
     const login = this._loginRef.current.value;
     const password = this._passwordRef.current.value;
 
-    onAuthSubmit(login, password);
+    onAuthSubmit(login, password, this._handleSubmitSuccess);
   }
 
   render() {
 
     return (
       <div className="user-page">
-        <header className="page-header user-page__head">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <h1 className="page-title user-page__title">Sign in</h1>
-        </header>
+        <Head authStatus = {false} hasTitle = {SIGN_IN_TITLE}/>
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={this._handleSubmit}>
@@ -56,19 +58,7 @@ class SignIn extends PureComponent {
           </form>
         </div>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     );
   }

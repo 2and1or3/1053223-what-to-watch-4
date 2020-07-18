@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import {PureComponent} from "react";
 import {connect} from "react-redux";
 
@@ -10,77 +10,87 @@ import PlayerScreen from '../player-screen/player-screen.jsx';
 import AlertError from '../alert-error/alert-error.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
+import MyList from '../my-list/my-list.jsx';
+
 
 import {filmProp} from '../../props.js';
-import {ScreenType, AppRoute} from '../../consts.js';
+import {AppRoute} from '../../consts.js';
 import withVideo from '../../hocs/with-video/with-video.js';
 import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application.js';
-import {getScreen, getCurrentFilm, getError} from '../../reducer/application/selectors.js';
+import {getError} from '../../reducer/application/selectors.js';
+import {getPromoFilm} from '../../reducer/data/selectors.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
+import history from '../../history.js';
+import withFindId from '../../hocs/with-find-id/with-find-id.js';
+
 
 const PlayerScreenWithVideo = withVideo(PlayerScreen);
+const PlayerScreenWithVideoWithFindId = withFindId(PlayerScreenWithVideo);
+
+const FilmDetailsWithFindId = withFindId(FilmDetails);
+const AddReviewWithFindId = withFindId(AddReview);
 
 
 class App extends PureComponent {
-  _renderApp() {
-    const {screen, currentFilm, onExit} = this.props;
-
-    switch (screen) {
-      case ScreenType.MAIN:
-        return (
-          <Main
-            promoFilm = {currentFilm}
-          />
-        );
-
-      case ScreenType.DETAILS:
-        return (
-          <FilmDetails currentFilm = {currentFilm}/>
-        );
-
-      case ScreenType.PLAYER:
-        return (
-          <PlayerScreenWithVideo
-            film = {currentFilm}
-            isPlaying = {true}
-            isMuted = {false}
-            onExit = {onExit}
-          />
-        );
-
-      case ScreenType.SIGN:
-        return <Redirect to = {AppRoute.LOGIN}/>;
-    }
-
-    return null;
-  }
 
   render() {
-    const {error, onClose, onCommentSend, onAuthSubmit} = this.props;
+    const {error, onClose, onCommentSend, onAuthSubmit, onExit, promoFilm} = this.props;
 
     return (
-      <BrowserRouter>
+      <Router history = {history}>
         <Switch>
-          <Route exact path={AppRoute.ROOT}>
-            {this._renderApp()}
-            <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
-          </Route>
-          <Route exact path={AppRoute.LOGIN}>
-            <SignIn onAuthSubmit = {onAuthSubmit}/>
-          </Route>
-          <Route exact path="/dev-review">
-            <AddReview onCommentSend = {onCommentSend}/>
-            <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
-          </Route>
+          <Route
+            exact path = {AppRoute.ROOT}
+            render = {() => {
+              return <Main promoFilm = {promoFilm}/>;
+            }}/>
+
+          <Route
+            exact path = {`/login`}
+            render = {() => {
+              return <SignIn onAuthSubmit = {onAuthSubmit}/>;
+            }}/>
+
+          <Route
+            exact path = {`/films/:id/review`}
+            render = {(props) => {
+              return <AddReviewWithFindId {...props} onCommentSend = {onCommentSend}/>;
+            }}/>
+
+          <Route
+            exact path = {`/films/:id/player`}
+            render = {(props) => {
+
+              return (<PlayerScreenWithVideoWithFindId
+                {...props}
+                isPlaying = {true}
+                isMuted = {false}
+                onExit = {onExit}
+              />);
+            }}/>
+
+          <Route
+            exact path = {`/films/:id`}
+            render = {(props) => {
+
+              return <FilmDetailsWithFindId {...props}/>;
+            }}/>
+
+          <Route
+            exact path = {`/mylist`}
+            render = {() => {
+
+              return (<MyList />);
+            }}/>
         </Switch>
-      </BrowserRouter>
+        <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
+      </Router>
     );
   }
 }
 
 App.propTypes = {
-  screen: PropTypes.string.isRequired,
-  currentFilm: filmProp,
+  promoFilm: filmProp,
   onExit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onAuthSubmit: PropTypes.func.isRequired,
@@ -92,20 +102,16 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  screen: getScreen(state),
-  currentFilm: getCurrentFilm(state),
   error: getError(state),
+  promoFilm: getPromoFilm(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onExit: () => {
-    dispatch(ApplicationActionCreator.changeScreen(ScreenType.MAIN));
-  },
   onClose: () => {
     dispatch(ApplicationActionCreator.showError(``, ``));
   },
-  onAuthSubmit: (login, password) => {
-    dispatch(UserOperation.sendAuth(login, password));
+  onAuthSubmit: (login, password, onSuccess) => {
+    dispatch(UserOperation.sendAuth(login, password, onSuccess));
   },
   onCommentSend: (review, id, enableForm) => {
     dispatch(UserOperation.sendComment(review, id, enableForm));

@@ -5,6 +5,7 @@ import Header from '../header/header.jsx';
 import {filmProp} from '../../props.js';
 
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
+import {ListType} from '../../consts.js';
 
 
 const FilmListWithActiveItem = withActiveItem(FilmList);
@@ -13,8 +14,8 @@ const Main = (props) => {
   const {promoFilm} = props;
 
   return <React.Fragment>
-    <Header film = {promoFilm} isFull = {false}/>
-    <FilmListWithActiveItem isFull = {true}/>
+    <Header film = {promoFilm} hasCommonPoster/>
+    <FilmListWithActiveItem hasMoreButton hasGenresList listType = {ListType.FULL}/>
   </React.Fragment>;
 };
 

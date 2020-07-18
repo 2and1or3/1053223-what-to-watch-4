@@ -1,49 +1,64 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {PureComponent} from "react";
 
 import Card from '../card/card.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
+import Footer from '../footer/footer.jsx';
 
 import {filmProp} from '../../props.js';
-import {ScreenType, GenreType} from '../../consts.js';
+import {GenreType, ListType} from '../../consts.js';
 import {ActionCreator} from '../../reducer/application/application.js';
 import withVideo from '../../hocs/with-video/with-video.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
-import {getCurrentGenre, getVisibleCards, getFilteredFilms} from '../../reducer/application/selectors.js';
+import {getCurrentGenre, getVisibleCards, getFilteredFilms, getFavoriteFilms} from '../../reducer/application/selectors.js';
 import {getFilms} from '../../reducer/data/selectors.js';
+import history from '../../history.js';
 
 const LOOK_LIKE_LIST_COUNT = 4;
 
 const CardWithVideo = withVideo(Card);
 const GenresListWithActiveItem = withActiveItem(GenresList);
 
-const FilmList = (props) => {
-  const {isFull, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, isNoMore, activeItem} = props;
-  let {filmsToRender} = props;
+class FilmList extends PureComponent {
 
-
-  if (!isFull) {
-    filmsToRender = filmsToRender.slice(0, LOOK_LIKE_LIST_COUNT);
+  componentDidMount() {
+    const {listType, setDefaultFilter} = this.props;
+    if (listType === ListType.FULL) {
+      setDefaultFilter();
+    }
   }
 
-  return (
-    <div className="page-content">
-      <section className={`catalog ${isFull ? `` : `catalog--like-this`}`}>
-        <h2 className={`catalog__title ${isFull ? `visually-hidden` : ``}`}>{isFull ? `Catalog` : `More like this`}</h2>
+  render() {
+    const {listType, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, isNoMore, activeItem, hasMoreButton, hasGenresList} = this.props;
+    let {filmsToRender} = this.props;
 
-        {isFull ? <GenresListWithActiveItem onLinkClick = {onLinkClick}/> : ``}
+    const isLookLike = listType === ListType.LOOK_LIKE;
+    const isFull = listType === ListType.FULL;
+    const isFavorite = listType === ListType.FAVORIE;
 
-        <div className="catalog__movies-list">
-          {filmsToRender
+
+    return (
+      <div className="page-content">
+        <section className={`catalog ${isLookLike ? `` : `catalog--like-this`}`}>
+          <h2 className={`catalog__title ${isFull || isFavorite ? `visually-hidden` : ``}`}>{isFull || isFavorite ? `Catalog` : `More like this`}</h2>
+
+          {hasGenresList ? <GenresListWithActiveItem onLinkClick = {onLinkClick}/> : ``}
+
+          <div className="catalog__movies-list">
+            {filmsToRender
           .map((film, i) => {
             return (
               <CardWithVideo
                 key = {film.title + i}
-                film = {film}
-                onCardClick = {onCardClick}
+                currentFilm = {film}
+                onCardClick = {(clickedFilm) => {
+                  history.push(`/films/:${clickedFilm.id}`);
+                  onCardClick(clickedFilm);
+                }}
                 onCardHover = {onTargetHover}
                 onCardLeave = {onTargetLeave}
                 isMuted = {true}
@@ -51,55 +66,63 @@ const FilmList = (props) => {
               />
             );
           })}
-        </div>
+          </div>
 
-        {isFull ? <ShowMore hide = {isNoMore} onMoreClick = {onMoreClick}/> : ``}
-      </section>
+          {hasMoreButton ? <ShowMore hide = {isNoMore} onMoreClick = {onMoreClick}/> : ``}
+        </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
-    </div>
-  );
-};
+        <Footer />
+      </div>
+    );
+  }
+}
 
 FilmList.propTypes = {
   filmsToRender: PropTypes.arrayOf(filmProp).isRequired,
   onCardClick: PropTypes.func.isRequired,
   onTargetHover: PropTypes.func.isRequired,
   onTargetLeave: PropTypes.func.isRequired,
-  isFull: PropTypes.bool.isRequired,
   onLinkClick: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
   isNoMore: PropTypes.bool.isRequired,
   activeItem: PropTypes.any.isRequired,
+  listType: PropTypes.string.isRequired,
+  setDefaultFilter: PropTypes.func.isRequired,
+  hasGenresList: PropTypes.bool,
+  hasMoreButton: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const {listType} = ownProps;
+
   const currentGenre = getCurrentGenre(state);
   const visibleCards = getVisibleCards(state);
-
   let filmsToRender = [];
+  let endOfFilms = 0;
 
-  if (currentGenre !== GenreType.ALL.id) {
-    filmsToRender = getFilteredFilms(state);
-  } else {
-    filmsToRender = getFilms(state);
+  switch (listType) {
+    case (ListType.FULL):
+
+      if (currentGenre !== GenreType.ALL.id) {
+        filmsToRender = getFilteredFilms(state);
+      } else {
+        filmsToRender = getFilms(state);
+      }
+
+      endOfFilms = filmsToRender.length;
+      filmsToRender = filmsToRender.slice(0, visibleCards);
+      break;
+
+    case (ListType.LOOK_LIKE):
+      filmsToRender = getFilteredFilms(state);
+      // remove copy
+      filmsToRender = filmsToRender.slice(0, LOOK_LIKE_LIST_COUNT);
+      break;
+
+    case (ListType.FAVORIE):
+      filmsToRender = getFavoriteFilms(state);
+      break;
   }
-
-  const endOfFilms = filmsToRender.length;
-
-  filmsToRender = filmsToRender.slice(0, visibleCards);
 
   const isNoMore = filmsToRender.length >= endOfFilms;
 
@@ -111,7 +134,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onCardClick: (film) => {
-    dispatch(ActionCreator.changeScreen(ScreenType.DETAILS));
     dispatch(ActionCreator.setCurrentFilm(film));
     dispatch(ActionCreator.setFilter(film.genre));
   },
@@ -121,6 +143,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onMoreClick: () => {
     dispatch(ActionCreator.addVisibleCards());
+  },
+  setDefaultFilter: () => {
+    dispatch(ActionCreator.setFilter(GenreType.ALL.id));
   }
 });
 

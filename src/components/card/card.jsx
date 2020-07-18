@@ -18,14 +18,14 @@ class Card extends PureComponent {
   }
 
   render() {
-    const {film, onCardClick, onCardHover, onCardLeave, children} = this.props;
+    const {currentFilm, onCardClick, onCardHover, onCardLeave, children} = this.props;
 
     return (
       <article
         className="small-movie-card catalog__movies-card"
         onMouseEnter={() => {
           this._timerId = setTimeout(() => {
-            onCardHover(film);
+            onCardHover(currentFilm);
           }, PREVIEW_DELAY);
         }}
         onMouseLeave={() => {
@@ -36,7 +36,7 @@ class Card extends PureComponent {
           className="small-movie-card__image"
           onClick={(evt) => {
             evt.preventDefault();
-            onCardClick(film);
+            onCardClick(currentFilm);
           }}>
           {children}
         </div>
@@ -46,8 +46,8 @@ class Card extends PureComponent {
             href="movie-page.html"
             onClick={(evt) => {
               evt.preventDefault();
-              onCardClick(film);
-            }}>{film.title}</a>
+              onCardClick(currentFilm);
+            }}>{currentFilm.title}</a>
         </h3>
       </article>
     );
@@ -55,7 +55,7 @@ class Card extends PureComponent {
 }
 
 Card.propTypes = {
-  film: filmProp,
+  currentFilm: filmProp,
   onCardClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onCardLeave: PropTypes.func.isRequired,

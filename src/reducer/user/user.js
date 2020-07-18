@@ -1,6 +1,5 @@
 import {extend} from '../../utils.js';
-import {URL, UserStatus, ScreenType} from '../../consts.js';
-import {ActionCreator as ApplicationActionCreator} from '../application/application.js';
+import {URL, UserStatus} from '../../consts.js';
 
 
 const initialState = {
@@ -38,7 +37,7 @@ const Operation = {
       });
   },
 
-  sendAuth: (login, password) => (dispatch, getState, api) => {
+  sendAuth: (login, password, onSuccess) => (dispatch, getState, api) => {
     const body = {
       email: login,
       password,
@@ -46,7 +45,7 @@ const Operation = {
 
     return api.post(URL.LOGIN, body)
       .then(() => dispatch(ActionCreator.checkAuthStatus(UserStatus.AUTH)))
-      .then(() => dispatch(ApplicationActionCreator.changeScreen(ScreenType.MAIN)))
+      .then(() => onSuccess())
       .catch((err) => {
         throw err;
       });

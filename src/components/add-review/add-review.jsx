@@ -2,25 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {PureComponent} from "react";
 
-const localFilm = {
-  actors: [`Robert De Niro`, `James Woods`, `Elizabeth McGovern`],
-  background: `https://htmlacademy-react-3.appspot.com/wtw/static/film/background/ones_upon_a_time_in_america.jpg`,
-  backgroundColor: `#CBAC79`,
-  cover: `https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Once_Upon_a_Time_in_America.jpg`,
-  description: `A former Prohibition-era Jewish gangster returns to the Lower East Side of Manhattan over thirty years later, where he once again must confront the ghosts and regrets of his old life.`,
-  director: `Sergio Leone`,
-  duration: 229,
-  genre: `crime`,
-  id: `1`,
-  isFavorite: false,
-  poster: `https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/Once_Upon_a_Time_in_America.jpg`,
-  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-  rating: 9.9,
-  release: `1984`,
-  src: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
-  title: `Once Upon a Time in America`,
-  voiceCount: 276395,
-};
+import Logo from '../logo/logo.jsx';
+import BreadCrumbs from '../breadcrumbs/breadcrumbs.jsx';
+import UserBlock from '../user-block/user-block.jsx';
+
+import {filmProp} from '../../props.js';
 
 const PostLimit = {
   MIN_LENGTH: 50,
@@ -112,8 +98,8 @@ class AddReview extends PureComponent {
   }
 
   render() {
-    const film = localFilm;
-    const {background, title, cover} = film;
+    const {currentFilm} = this.props;
+    const {background, title, cover} = currentFilm;
 
     return (
       <section className="movie-card movie-card--full">
@@ -125,30 +111,9 @@ class AddReview extends PureComponent {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">{title}</a>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </div>
+            <Logo />
+            <BreadCrumbs title = {title}/>
+            <UserBlock />
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
@@ -182,11 +147,9 @@ class AddReview extends PureComponent {
               <div className="add-review__submit">
                 <button ref={this._sendRef} className="add-review__btn" type="submit">Post</button>
               </div>
-
             </div>
           </form>
         </div>
-
       </section>
     );
   }
@@ -194,6 +157,7 @@ class AddReview extends PureComponent {
 
 AddReview.propTypes = {
   onCommentSend: PropTypes.func.isRequired,
+  currentFilm: filmProp,
 };
 
 export default AddReview;
