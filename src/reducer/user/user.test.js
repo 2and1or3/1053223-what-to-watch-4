@@ -3,7 +3,6 @@ import MockAdatper from "axios-mock-adapter";
 import {reducer, ActionType, Operation} from './user.js';
 import createApi from '../../api.js';
 import {URL} from '../../consts.js';
-import {ActionType as ApplicationActionType} from '../application/application.js';
 
 const api = createApi({});
 
@@ -55,9 +54,10 @@ describe(`Operation works correctly`, () => {
         });
   });
 
-  it(`Successful post request on /login updates authStatus in "AUTH" and changes screen on "main"`, () => {
+  it(`Successful post request on /login updates authStatus in "AUTH" and redirect to root page`, () => {
     const dispatch = jest.fn();
-    const sendAuth = Operation.sendAuth(`login@gmail.com`, `sdfa2ada2`);
+    const onSuccess = jest.fn();
+    const sendAuth = Operation.sendAuth(`login@gmail.com`, `sdfa2ada2`, onSuccess);
 
     const mockApi = new MockAdatper(api);
     mockApi
@@ -66,14 +66,11 @@ describe(`Operation works correctly`, () => {
 
     return sendAuth(dispatch, null, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(onSuccess).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
           type: ActionType.CHECK_AUTH_STATUS,
           payload: `AUTH`,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ApplicationActionType.CHANGE_SCREEN,
-          payload: `main`,
         });
       })
         .catch((err) => {
@@ -105,3 +102,5 @@ describe(`Operation works correctly`, () => {
         });
   });
 });
+
+// npm run test.jest -- reducer/user/user.test.js

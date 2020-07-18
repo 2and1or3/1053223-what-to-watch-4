@@ -48,7 +48,7 @@ describe(`VideoPlayer component`, () => {
   it(`VideoPlayer has playback state`, () => {
     const wrapper = shallow(<MockComponentWithVideo
       isPlaying = {true}
-      film = {film}
+      currentFilm = {film}
       isMuted = {true}/>,
     {disableLifecycleMethods: true});
 
@@ -58,7 +58,7 @@ describe(`VideoPlayer component`, () => {
   it(`VideoPlayer has pause state`, () => {
     const wrapper = shallow(<MockComponentWithVideo
       isPlaying = {false}
-      film = {film}
+      currentFilm = {film}
       isMuted = {true}/>,
     {disableLifecycleMethods: true});
 

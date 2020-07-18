@@ -10,3 +10,5 @@ it(`Render GenresList component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/genres-list/genres-list.test.js

@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App component Redner details screen 1`] = `""`;
-
-exports[`Render App component Redner main screen 1`] = `
+exports[`Render App component Redner details screen 1`] = `
 Array [
   <section
     className="movie-card "
@@ -29,14 +27,14 @@ Array [
         WTW
       </h1>
       <header
-        className="page-header movie-card__head"
+        className="page-header  movie-card__head"
       >
         <div
           className="logo"
         >
           <a
-            className="logo__link"
-            href="main.html"
+            className="logo__link "
+            href=""
           >
             <span
               className="logo__letter logo__letter--1"
@@ -132,10 +130,10 @@ Array [
                   Play
                 </span>
               </button>
-              <a
+              <button
                 className="btn btn--list movie-card__button"
-                href="/login"
                 onClick={[Function]}
+                type="button"
               >
                 <svg
                   height="20"
@@ -149,7 +147,7 @@ Array [
                 <span>
                   My list
                 </span>
-              </a>
+              </button>
               
             </div>
           </div>
@@ -162,7 +160,7 @@ Array [
     className="page-content"
   >
     <section
-      className="catalog "
+      className="catalog catalog--like-this"
     >
       <h2
         className="catalog__title visually-hidden"
@@ -363,6 +361,400 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
+          href=""
+        >
+          <span
+            className="logo__letter logo__letter--1"
+          >
+            W
+          </span>
+          <span
+            className="logo__letter logo__letter--2"
+          >
+            T
+          </span>
+          <span
+            className="logo__letter logo__letter--3"
+          >
+            W
+          </span>
+        </a>
+      </div>
+      <div
+        className="copyright"
+      >
+        <p>
+          © 2019 What to watch Ltd.
+        </p>
+      </div>
+    </footer>
+  </div>,
+  "",
+]
+`;
+
+exports[`Render App component Redner main screen 1`] = `
+Array [
+  <section
+    className="movie-card "
+  >
+    <div
+      className=""
+    >
+      <div
+        className="movie-card__bg"
+        style={
+          Object {
+            "backgroundColor": undefined,
+          }
+        }
+      >
+        <img
+          alt="Fantastic Beasts: The Crimes of Grindelwald"
+          src="img/bg-the-grand-budapest-hotel.jpg"
+        />
+      </div>
+      <h1
+        className="visually-hidden"
+      >
+        WTW
+      </h1>
+      <header
+        className="page-header  movie-card__head"
+      >
+        <div
+          className="logo"
+        >
+          <a
+            className="logo__link "
+            href=""
+          >
+            <span
+              className="logo__letter logo__letter--1"
+            >
+              W
+            </span>
+            <span
+              className="logo__letter logo__letter--2"
+            >
+              T
+            </span>
+            <span
+              className="logo__letter logo__letter--3"
+            >
+              W
+            </span>
+          </a>
+        </div>
+        <div
+          className="user-block"
+        >
+          <a
+            className="user-block__sign-in"
+            href="/login"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#dfcf77",
+                "textDecoration": "none",
+              }
+            }
+          >
+            Sign In
+          </a>
+        </div>
+      </header>
+      <div
+        className="movie-card__wrap"
+      >
+        <div
+          className="movie-card__info"
+        >
+          <div
+            className="movie-card__poster"
+          >
+            <img
+              alt="Fantastic Beasts: The Crimes of Grindelwald poster"
+              height="327"
+              src="img/the-grand-budapest-hotel-poster.jpg"
+              width="218"
+            />
+          </div>
+          <div
+            className="movie-card__desc"
+          >
+            <h2
+              className="movie-card__title"
+            >
+              Fantastic Beasts: The Crimes of Grindelwald
+            </h2>
+            <p
+              className="movie-card__meta"
+            >
+              <span
+                className="movie-card__genre"
+              >
+                Drama
+              </span>
+              <span
+                className="movie-card__year"
+              >
+                2014
+              </span>
+            </p>
+            <div
+              className="movie-card__buttons"
+            >
+              <button
+                className="btn btn--play movie-card__button"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  height="19"
+                  viewBox="0 0 19 19"
+                  width="19"
+                >
+                  <use
+                    xlinkHref="#play-s"
+                  />
+                </svg>
+                <span>
+                  Play
+                </span>
+              </button>
+              <button
+                className="btn btn--list movie-card__button"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  height="20"
+                  viewBox="0 0 19 20"
+                  width="19"
+                >
+                  <use
+                    xlinkHref="#add"
+                  />
+                </svg>
+                <span>
+                  My list
+                </span>
+              </button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>,
+  <div
+    className="page-content"
+  >
+    <section
+      className="catalog catalog--like-this"
+    >
+      <h2
+        className="catalog__title visually-hidden"
+      >
+        Catalog
+      </h2>
+      <ul
+        className="catalog__genres-list"
+      >
+        <li
+          className="catalog__genres-item catalog__genres-item--active"
+          id="all"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            All genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="comedy"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Comedies
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="crime"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Crime
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="drama"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Dramas
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="thriller"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Thrillers
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="adventure"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Adventure
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="action"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Action
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="fantasy"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Fantasy
+          </a>
+        </li>
+      </ul>
+      <div
+        className="catalog__movies-list"
+      >
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              Fantastic Beasts: The Crimes of Grindelwald
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              the Grand Budapest Hotel
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+      </div>
+    </section>
+    <footer
+      className="page-footer"
+    >
+      <div
+        className="logo"
+      >
+        <a
+          className="logo__link logo__link--light"
+          href=""
         >
           <span
             className="logo__letter logo__letter--1"
@@ -396,99 +788,392 @@ Array [
 
 exports[`Render App component Redner player screen 1`] = `
 Array [
-  <div
-    className="player"
+  <section
+    className="movie-card "
   >
-    <video
-      className="player__video"
-      height="175"
-      width="280"
-    />
-    <button
-      className="player__exit"
-      onClick={[Function]}
-      type="button"
-    >
-      Exit
-    </button>
     <div
-      className="player__controls"
+      className=""
     >
       <div
-        className="player__controls-row"
+        className="movie-card__bg"
+        style={
+          Object {
+            "backgroundColor": undefined,
+          }
+        }
+      >
+        <img
+          alt="Fantastic Beasts: The Crimes of Grindelwald"
+          src="img/bg-the-grand-budapest-hotel.jpg"
+        />
+      </div>
+      <h1
+        className="visually-hidden"
+      >
+        WTW
+      </h1>
+      <header
+        className="page-header  movie-card__head"
       >
         <div
-          className="player__time"
-          onMouseDown={[Function]}
+          className="logo"
         >
-          <progress
-            className="player__progress"
-            max="100"
-            value={0}
-          />
-          <div
-            className="player__toggler"
+          <a
+            className="logo__link "
+            href=""
+          >
+            <span
+              className="logo__letter logo__letter--1"
+            >
+              W
+            </span>
+            <span
+              className="logo__letter logo__letter--2"
+            >
+              T
+            </span>
+            <span
+              className="logo__letter logo__letter--3"
+            >
+              W
+            </span>
+          </a>
+        </div>
+        <div
+          className="user-block"
+        >
+          <a
+            className="user-block__sign-in"
+            href="/login"
+            onClick={[Function]}
             style={
               Object {
-                "left": "0%",
+                "color": "#dfcf77",
+                "textDecoration": "none",
               }
             }
           >
-            Toggler
+            Sign In
+          </a>
+        </div>
+      </header>
+      <div
+        className="movie-card__wrap"
+      >
+        <div
+          className="movie-card__info"
+        >
+          <div
+            className="movie-card__poster"
+          >
+            <img
+              alt="Fantastic Beasts: The Crimes of Grindelwald poster"
+              height="327"
+              src="img/the-grand-budapest-hotel-poster.jpg"
+              width="218"
+            />
+          </div>
+          <div
+            className="movie-card__desc"
+          >
+            <h2
+              className="movie-card__title"
+            >
+              Fantastic Beasts: The Crimes of Grindelwald
+            </h2>
+            <p
+              className="movie-card__meta"
+            >
+              <span
+                className="movie-card__genre"
+              >
+                Drama
+              </span>
+              <span
+                className="movie-card__year"
+              >
+                2014
+              </span>
+            </p>
+            <div
+              className="movie-card__buttons"
+            >
+              <button
+                className="btn btn--play movie-card__button"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  height="19"
+                  viewBox="0 0 19 19"
+                  width="19"
+                >
+                  <use
+                    xlinkHref="#play-s"
+                  />
+                </svg>
+                <span>
+                  Play
+                </span>
+              </button>
+              <button
+                className="btn btn--list movie-card__button"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  height="20"
+                  viewBox="0 0 19 20"
+                  width="19"
+                >
+                  <use
+                    xlinkHref="#add"
+                  />
+                </svg>
+                <span>
+                  My list
+                </span>
+              </button>
+              
+            </div>
           </div>
         </div>
-        <div
-          className="player__time-value"
-        >
-          0:1:39
-        </div>
-      </div>
-      <div
-        className="player__controls-row"
-      >
-        <button
-          className="player__play"
-          onClick={[Function]}
-          type="button"
-        >
-          <svg
-            height="21"
-            viewBox="0 0 14 21"
-            width="14"
-          >
-            <use
-              xlinkHref="#pause"
-            />
-          </svg>
-          <span>
-            Pause
-          </span>
-        </button>
-        <div
-          className="player__name"
-        >
-          Transpotting
-        </div>
-        <button
-          className="player__full-screen"
-          onClick={[Function]}
-          type="button"
-        >
-          <svg
-            height="27"
-            viewBox="0 0 27 27"
-            width="27"
-          >
-            <use
-              xlinkHref="#full-screen"
-            />
-          </svg>
-          <span>
-            Full screen
-          </span>
-        </button>
       </div>
     </div>
+    
+  </section>,
+  <div
+    className="page-content"
+  >
+    <section
+      className="catalog catalog--like-this"
+    >
+      <h2
+        className="catalog__title visually-hidden"
+      >
+        Catalog
+      </h2>
+      <ul
+        className="catalog__genres-list"
+      >
+        <li
+          className="catalog__genres-item catalog__genres-item--active"
+          id="all"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            All genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="comedy"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Comedies
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="crime"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Crime
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="drama"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Dramas
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="thriller"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Thrillers
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="adventure"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Adventure
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="action"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Action
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="fantasy"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Fantasy
+          </a>
+        </li>
+      </ul>
+      <div
+        className="catalog__movies-list"
+      >
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              Fantastic Beasts: The Crimes of Grindelwald
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              the Grand Budapest Hotel
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+      </div>
+    </section>
+    <footer
+      className="page-footer"
+    >
+      <div
+        className="logo"
+      >
+        <a
+          className="logo__link logo__link--light"
+          href=""
+        >
+          <span
+            className="logo__letter logo__letter--1"
+          >
+            W
+          </span>
+          <span
+            className="logo__letter logo__letter--2"
+          >
+            T
+          </span>
+          <span
+            className="logo__letter logo__letter--3"
+          >
+            W
+          </span>
+        </a>
+      </div>
+      <div
+        className="copyright"
+      >
+        <p>
+          © 2019 What to watch Ltd.
+        </p>
+      </div>
+    </footer>
   </div>,
   "",
 ]

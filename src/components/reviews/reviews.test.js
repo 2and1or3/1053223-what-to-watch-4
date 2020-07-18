@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Reviews from './reviews.jsx';
+import {Reviews} from './reviews.jsx';
 
 const comments = [{
   id: `0`,
@@ -25,10 +25,13 @@ const comments = [{
   rate: `7,4`,
 }];
 
+
 it(`Render Reviews component`, () => {
   const tree = renderer
-    .create(<Reviews comments = {comments}/>)
+    .create(<Reviews comments = {comments} filmId = {`1`} loadComments = {() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/reviews/reviews.test.js

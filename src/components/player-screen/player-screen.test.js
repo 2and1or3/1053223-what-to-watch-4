@@ -32,17 +32,15 @@ const film = {
     `Adrien Brody`,
     `Ralph Fiennes`,
     `Jeff Goldblum`],
-  commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
 const children = <div/>;
 
 const commonProps = {
-  film,
+  currentFilm: film,
   onPlayClick: () => {},
   progress: 5,
   isPlaying: false,
-  onExit: () => {},
   onFullScreen: () => {},
   onToggleMove: () => {},
   togglerPosition: 5,
@@ -61,3 +59,5 @@ it(`Render PlayerScreen component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/player-screen/player-screen.test.js

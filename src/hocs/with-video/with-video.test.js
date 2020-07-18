@@ -34,7 +34,6 @@ const film = {
     `Adrien Brody`,
     `Ralph Fiennes`,
     `Jeff Goldblum`],
-  commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
 const MockComponent = (props) => {
@@ -59,7 +58,7 @@ it(`Render Component with video`, () => {
   const tree = renderer
   .create(
       <MockComponentWithVideo
-        film = {film}
+        currentFilm = {film}
         isMuted = {true}
         isPlaying = {false}
       />, {

@@ -10,3 +10,5 @@ it(`Render SignIn component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/sign-in/sign-in.test.js

@@ -27,14 +27,14 @@ Array [
         WTW
       </h1>
       <header
-        className="page-header movie-card__head"
+        className="page-header  movie-card__head"
       >
         <div
           className="logo"
         >
           <a
-            className="logo__link"
-            href="main.html"
+            className="logo__link "
+            href=""
           >
             <span
               className="logo__letter logo__letter--1"
@@ -130,10 +130,10 @@ Array [
                   Play
                 </span>
               </button>
-              <a
+              <button
                 className="btn btn--list movie-card__button"
-                href="/login"
                 onClick={[Function]}
+                type="button"
               >
                 <svg
                   height="20"
@@ -147,7 +147,7 @@ Array [
                 <span>
                   My list
                 </span>
-              </a>
+              </button>
               
             </div>
           </div>
@@ -160,7 +160,7 @@ Array [
     className="page-content"
   >
     <section
-      className="catalog "
+      className="catalog catalog--like-this"
     >
       <h2
         className="catalog__title visually-hidden"
@@ -361,6 +361,7 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
+          href=""
         >
           <span
             className="logo__letter logo__letter--1"

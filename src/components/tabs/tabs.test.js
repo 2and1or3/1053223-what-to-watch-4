@@ -65,3 +65,5 @@ it(`Render Tabs component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/tabs/tabs.test.js

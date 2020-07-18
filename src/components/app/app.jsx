@@ -15,6 +15,7 @@ import MyList from '../my-list/my-list.jsx';
 
 import {filmProp} from '../../props.js';
 import {AppRoute} from '../../consts.js';
+import {GetPath} from '../../utils';
 import withVideo from '../../hocs/with-video/with-video.js';
 import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application.js';
 import {getError} from '../../reducer/application/selectors.js';
@@ -34,7 +35,7 @@ const AddReviewWithFindId = withFindId(AddReview);
 class App extends PureComponent {
 
   render() {
-    const {error, onClose, onCommentSend, onAuthSubmit, onExit, promoFilm} = this.props;
+    const {error, onClose, onCommentSend, onAuthSubmit, promoFilm} = this.props;
 
     return (
       <Router history = {history}>
@@ -46,38 +47,37 @@ class App extends PureComponent {
             }}/>
 
           <Route
-            exact path = {`/login`}
+            exact path = {AppRoute.LOGIN}
             render = {() => {
               return <SignIn onAuthSubmit = {onAuthSubmit}/>;
             }}/>
 
           <Route
-            exact path = {`/films/:id/review`}
+            exact path = {GetPath.filmReview(`id`)}
             render = {(props) => {
               return <AddReviewWithFindId {...props} onCommentSend = {onCommentSend}/>;
             }}/>
 
           <Route
-            exact path = {`/films/:id/player`}
+            exact path = {GetPath.filmPlayer(`id`)}
             render = {(props) => {
 
               return (<PlayerScreenWithVideoWithFindId
                 {...props}
                 isPlaying = {true}
                 isMuted = {false}
-                onExit = {onExit}
               />);
             }}/>
 
           <Route
-            exact path = {`/films/:id`}
+            exact path = {GetPath.filmDetails(`id`)}
             render = {(props) => {
 
               return <FilmDetailsWithFindId {...props}/>;
             }}/>
 
           <Route
-            exact path = {`/mylist`}
+            exact path = {AppRoute.LIST}
             render = {() => {
 
               return (<MyList />);
@@ -91,7 +91,6 @@ class App extends PureComponent {
 
 App.propTypes = {
   promoFilm: filmProp,
-  onExit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onAuthSubmit: PropTypes.func.isRequired,
   onCommentSend: PropTypes.func.isRequired,

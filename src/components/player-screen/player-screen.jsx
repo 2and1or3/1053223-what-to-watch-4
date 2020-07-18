@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import {filmProp, refProp} from '../../props.js';
+import history from '../../history.js';
+import {AppRoute} from '../../consts.js';
 
 const getWatchTimeFormat = (seconds) => {
 
@@ -20,7 +22,6 @@ const PlayerScreen = (props) => {
     onPlayClick,
     progress,
     isPlaying,
-    onExit,
     onFullScreen,
     containerRef,
     progressRef,
@@ -46,7 +47,10 @@ const PlayerScreen = (props) => {
     <div className="player" ref={containerRef}>
       {children}
 
-      <button type="button" className="player__exit" onClick={onExit}>Exit</button>
+      <button type="button" className="player__exit" onClick={(evt) => {
+        evt.preventDefault();
+        history.push(AppRoute.ROOT);
+      }}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -84,7 +88,6 @@ PlayerScreen.propTypes = {
   onPlayClick: PropTypes.func.isRequired,
   progress: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  onExit: PropTypes.func.isRequired,
   onFullScreen: PropTypes.func.isRequired,
   containerRef: refProp,
   progressRef: refProp,

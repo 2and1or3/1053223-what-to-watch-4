@@ -14,7 +14,8 @@ const AppRoute = {
   LOGIN: `/login`,
   LIST: `/mylist`,
   FILM: `/films/`,
-  PLAYER: `/player/`,
+  PLAYER: `/player`,
+  REVIEW: `/review`,
 };
 
 const GenreType = {
@@ -81,7 +82,6 @@ const DEFAULT_FILM = {
   duration: 33,
   director: `default`,
   actors: [`default`],
-  commentIds: [`default`],
 };
 
 const ListType = {

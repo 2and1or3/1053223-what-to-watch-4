@@ -1,15 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
-import {App} from './app.jsx';
-import {createVideoMock} from '../../utils.js';
+import MyList from './my-list.jsx';
 import NameSpace from '../../reducer/namespace.js';
 
-const middlewares = [];
-
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore();
 
 const films = [
   {
@@ -23,6 +21,7 @@ const films = [
     src: `path`,
     genre: `Drama`,
     release: `2014`,
+
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
     rating: 8.9,
     voiceCount: 240,
@@ -72,7 +71,6 @@ const films = [
       `Ralph Fiennes`,
       `Jeff Goldblum`],
   },
-
   {
     id: `2`,
     title: `Macbeth`,
@@ -104,112 +102,31 @@ const films = [
       `Jeff Goldblum`],
   }];
 
+it(`Render MyList component`, () => {
+  const initialState = {
+    [NameSpace.DATA]: {
+      films,
+    },
+    [NameSpace.APPLICATION]: {
+      currentGenre: `all`,
+    },
+    [NameSpace.USER]: {
+      authStatus: `AUTH`,
+    }
+  };
 
-const commonProps = {
-  films,
-  screen: `main`,
-  promoFilm: films[0],
-  onExit: () => {},
-  error: {
-    message: ``,
-    code: ``,
-  },
-  onClose: () => {},
-  onAuthSubmit: () => {},
-  onCommentSend: () => {},
-};
+  const store = mockStore(initialState);
 
+  const tree = renderer
+    .create(
+        <Provider store = {store}>
+          <BrowserRouter>
+            <MyList />
+          </BrowserRouter>
+        </Provider>
+    ).toJSON();
 
-describe(`Render App component`, () => {
-  it(`Redner main screen`, () => {
-    const initialState = {
-      [NameSpace.APPLICATION]: {
-        currentFilm: films[0],
-        currentGenre: `all`,
-      },
-      [NameSpace.DATA]: {
-        films,
-      },
-      [NameSpace.USER]: {
-        authStatus: `NO_AUTH`,
-      },
-    };
-
-    const store = mockStore(initialState);
-
-    const tree = renderer
-      .create(
-          <Provider store = {store}>
-            <App
-              {...commonProps}
-              screen = {`main`}
-            />
-          </Provider>, {
-            createNodeMock: createVideoMock})
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Redner details screen`, () => {
-    const initialState = {
-      [NameSpace.APPLICATION]: {
-        currentFilm: films[0],
-        currentGenre: `all`,
-      },
-      [NameSpace.DATA]: {
-        films,
-      },
-      [NameSpace.USER]: {
-        authStatus: `NO_AUTH`,
-      },
-    };
-
-    const store = mockStore(initialState);
-
-    const tree = renderer
-      .create(
-          <Provider store = {store}>
-            <App
-              {...commonProps}
-              screen = {`detials`}
-            />
-          </Provider>, {
-            createNodeMock: createVideoMock})
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Redner player screen`, () => {
-    const initialState = {
-      [NameSpace.APPLICATION]: {
-        currentFilm: films[0],
-        currentGenre: `all`,
-      },
-      [NameSpace.DATA]: {
-        films,
-      },
-      [NameSpace.USER]: {
-        authStatus: `NO_AUTH`,
-      },
-    };
-
-    const store = mockStore(initialState);
-
-    const tree = renderer
-      .create(
-          <Provider store = {store}>
-            <App
-              {...commonProps}
-              screen = {`player`}
-            />
-          </Provider>, {
-            createNodeMock: createVideoMock})
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
+  expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/app/app.test.js
+// npm run test.jest -- components/my-list/my-list.test.js

@@ -41,7 +41,6 @@ const film = {
     `Adrien Brody`,
     `Ralph Fiennes`,
     `Jeff Goldblum`],
-  commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
 const children = <div/>;
@@ -103,3 +102,5 @@ describe(`Render Header component`, () => {
     expect(tree).toMatchSnapshot();
   });
 });
+
+// npm run test.jest -- components/header/header.test.js

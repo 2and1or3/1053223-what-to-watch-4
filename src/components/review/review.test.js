@@ -18,3 +18,5 @@ it(`Render Review component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/review/review.test.js

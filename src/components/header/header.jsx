@@ -9,6 +9,7 @@ import {Operation} from '../../reducer/data/data.js';
 import {UserStatus, AppRoute} from '../../consts.js';
 import {getUserStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
+import {GetPath} from '../../utils.js';
 
 
 const AddListIcon = {
@@ -31,7 +32,7 @@ const Header = (props) => {
         evt.preventDefault();
 
         if (isAuth) {
-          history.push(`/films/:${film.id}/review`);
+          history.push(GetPath.filmReview(film.id));
         }
       }}>Add review</a>);
 
@@ -81,7 +82,7 @@ const Header = (props) => {
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button" onClick={(evt) => {
                   evt.preventDefault();
-                  history.push(`/films/:${film.id}/player`);
+                  history.push(GetPath.filmPlayer(film.id));
                 }}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>

@@ -1,3 +1,5 @@
+import {AppRoute} from './consts.js';
+
 const createVideoMock = (element) => {
   if (element.type === `video`) {
     return element;
@@ -54,4 +56,10 @@ const adapterToLocalComments = (comments) => {
   return localComments;
 };
 
-export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments};
+const GetPath = {
+  filmReview: (id) => `${AppRoute.FILM}:${id}${AppRoute.REVIEW}`,
+  filmPlayer: (id) => `${AppRoute.FILM}:${id}${AppRoute.PLAYER}`,
+  filmDetails: (id) => `${AppRoute.FILM}:${id}`,
+};
+
+export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments, GetPath};

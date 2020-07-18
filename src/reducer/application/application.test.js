@@ -32,7 +32,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   },
 ];
 
@@ -54,14 +53,12 @@ const DEFAULT_FILM = {
   duration: 33,
   director: `default`,
   actors: [`default`],
-  commentIds: [`default`],
 };
 
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer should return initial state in default case`, () => {
     const initialState = {
-      screen: `main`,
       currentFilm: DEFAULT_FILM,
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
@@ -76,7 +73,6 @@ describe(`Reducer works correctly`, () => {
 
   it(`Reducer should return changed state with new current genre`, () => {
     const stateBefore = {
-      screen: `main`,
       currentFilm: null,
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
@@ -86,7 +82,6 @@ describe(`Reducer works correctly`, () => {
       payload: `comedy`,
     };
     const stateAfter = {
-      screen: `main`,
       currentFilm: null,
       currentGenre: `comedy`,
       visibleCards: STEP_VISIBLE_CARDS,
@@ -95,30 +90,8 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it(`Reducer should return changed state with details screen`, () => {
-    const stateBefore = {
-      screen: `main`,
-      currentFilm: null,
-      currentGenre: `all`,
-      visibleCards: STEP_VISIBLE_CARDS,
-    };
-    const action = {
-      type: ActionType.CHANGE_SCREEN,
-      payload: `details`,
-    };
-    const stateAfter = {
-      screen: `details`,
-      currentFilm: null,
-      currentGenre: `all`,
-      visibleCards: STEP_VISIBLE_CARDS,
-    };
-
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
   it(`Reducer should return changed state with current film`, () => {
     const stateBefore = {
-      screen: `main`,
       currentFilm: null,
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
@@ -128,7 +101,6 @@ describe(`Reducer works correctly`, () => {
       payload: films[0],
     };
     const stateAfter = {
-      screen: `main`,
       currentFilm: films[0],
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
@@ -137,9 +109,27 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
+  it(`Reducer should return changed state with increased visibleCards`, () => {
+    const stateBefore = {
+      currentFilm: null,
+      currentGenre: `all`,
+      visibleCards: STEP_VISIBLE_CARDS,
+    };
+    const action = {
+      type: ActionType.ADD_VISIBLE_CARDS,
+      payload: STEP_VISIBLE_CARDS,
+    };
+    const stateAfter = {
+      currentFilm: null,
+      currentGenre: `all`,
+      visibleCards: 2 * STEP_VISIBLE_CARDS,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
   it(`Reducer should return changed state with reseted visibleCards field`, () => {
     const stateBefore = {
-      screen: `main`,
       currentFilm: null,
       currentGenre: `all`,
       visibleCards: 100,
@@ -149,10 +139,39 @@ describe(`Reducer works correctly`, () => {
       payload: null,
     };
     const stateAfter = {
-      screen: `main`,
       currentFilm: null,
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it(`Reducer should return changed state with error object`, () => {
+    const stateBefore = {
+      currentFilm: null,
+      currentGenre: `all`,
+      visibleCards: STEP_VISIBLE_CARDS,
+      error: {
+        message: ``,
+        code: ``,
+      }
+    };
+    const action = {
+      type: ActionType.SHOW_ERROR,
+      payload: {
+        message: `not found`,
+        code: `404`,
+      },
+    };
+    const stateAfter = {
+      currentFilm: null,
+      currentGenre: `all`,
+      visibleCards: STEP_VISIBLE_CARDS,
+      error: {
+        message: `not found`,
+        code: `404`,
+      },
     };
 
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
@@ -168,16 +187,6 @@ describe(`Action creators work correctly`, () => {
     };
 
     expect(ActionCreator.setFilter(filter)).toEqual(resultAction);
-  });
-
-  it(`Action creator should return correct action for changeScreen`, () => {
-    const nextScreen = `details`;
-    const resultAction = {
-      type: ActionType.CHANGE_SCREEN,
-      payload: nextScreen,
-    };
-
-    expect(ActionCreator.changeScreen(nextScreen)).toEqual(resultAction);
   });
 
   it(`Action creator should return correct action for setCurrentFilm`, () => {
@@ -207,4 +216,20 @@ describe(`Action creators work correctly`, () => {
 
     expect(ActionCreator.resetVisibleCards()).toEqual(resultAction);
   });
+
+  it(`Action creator should return correct action for showError`, () => {
+    const error = {
+      message: `not found`,
+      code: `404`,
+    };
+
+    const resultAction = {
+      type: ActionType.SHOW_ERROR,
+      payload: error,
+    };
+
+    expect(ActionCreator.showError(error.message, error.code)).toEqual(resultAction);
+  });
 });
+
+// npm run test.jest -- reducer/application/application.test.js

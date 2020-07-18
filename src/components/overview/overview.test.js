@@ -32,7 +32,6 @@ const film = {
     `Adrien Brody`,
     `Ralph Fiennes`,
     `Jeff Goldblum`],
-  commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
 it(`Render Overview component`, () => {
@@ -42,3 +41,5 @@ it(`Render Overview component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/overview/overview.test.js

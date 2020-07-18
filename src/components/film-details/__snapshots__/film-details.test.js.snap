@@ -27,14 +27,14 @@ Array [
         WTW
       </h1>
       <header
-        className="page-header movie-card__head"
+        className="page-header  movie-card__head"
       >
         <div
           className="logo"
         >
           <a
-            className="logo__link"
-            href="main.html"
+            className="logo__link "
+            href=""
           >
             <span
               className="logo__letter logo__letter--1"
@@ -121,10 +121,10 @@ Array [
                   Play
                 </span>
               </button>
-              <a
+              <button
                 className="btn btn--list movie-card__button"
-                href="/login"
                 onClick={[Function]}
+                type="button"
               >
                 <svg
                   height="20"
@@ -138,7 +138,7 @@ Array [
                 <span>
                   My list
                 </span>
-              </a>
+              </button>
               
             </div>
           </div>
@@ -261,7 +261,7 @@ Array [
     className="page-content"
   >
     <section
-      className="catalog catalog--like-this"
+      className="catalog "
     >
       <h2
         className="catalog__title "
@@ -271,89 +271,7 @@ Array [
       
       <div
         className="catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              className="player__video"
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Fantastic Beasts: The Crimes of Grindelwald
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              className="player__video"
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              the Grand Budapest Hotel
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              className="player__video"
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Macbeth
-            </a>
-          </h3>
-        </article>
-      </div>
+      />
       
     </section>
     <footer
@@ -364,6 +282,7 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
+          href=""
         >
           <span
             className="logo__letter logo__letter--1"

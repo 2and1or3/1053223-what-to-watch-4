@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {PureComponent} from "react";
 
 import history from '../../history.js';
+import {AppRoute} from '../../consts.js';
 
 import Footer from '../footer/footer.jsx';
 import Head from '../head/head.jsx';
@@ -21,7 +22,7 @@ class SignIn extends PureComponent {
   }
 
   _handleSubmitSuccess() {
-    history.push(`/`);
+    history.push(AppRoute.ROOT);
   }
 
   _handleSubmit(evt) {

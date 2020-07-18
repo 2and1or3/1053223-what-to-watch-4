@@ -5,14 +5,14 @@ exports[`Render SignIn component 1`] = `
   className="user-page"
 >
   <header
-    className="page-header user-page__head"
+    className="page-header user-page__head "
   >
     <div
       className="logo"
     >
       <a
-        className="logo__link"
-        href="main.html"
+        className="logo__link "
+        href=""
       >
         <span
           className="logo__letter logo__letter--1"
@@ -103,7 +103,7 @@ exports[`Render SignIn component 1`] = `
     >
       <a
         className="logo__link logo__link--light"
-        href="main.html"
+        href=""
       >
         <span
           className="logo__letter logo__letter--1"

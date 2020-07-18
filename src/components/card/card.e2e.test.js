@@ -35,7 +35,7 @@ describe(`Card component`, () => {
 
     const wrapper = shallow(
         <Card
-          film = {film}
+          currentFilm = {film}
           onCardClick = {onClick}
           onCardHover = {() => {}}
           onCardLeave = {() => {}}>[]
@@ -60,7 +60,7 @@ describe(`Card component`, () => {
 
     const wrapper = shallow(
         <Card
-          film = {film}
+          currentFilm = {film}
           onCardClick = {() => {}}
           onCardHover = {onCardHover}
           onCardLeave = {() => {}}>[]

@@ -32,14 +32,13 @@ const film = {
     `Adrien Brody`,
     `Ralph Fiennes`,
     `Jeff Goldblum`],
-  commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
 it(`Render Card component`, () => {
   const tree = renderer
     .create(
         <Card
-          film = {film}
+          currentFilm = {film}
           onCardClick = {() => {}}
           onCardHover = {() => {}}
           onCardLeave = {() => {}}>[]
@@ -48,3 +47,5 @@ it(`Render Card component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/card/card.test.js

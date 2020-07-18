@@ -11,8 +11,8 @@ exports[`Render AddReview component 1`] = `
       className="movie-card__bg"
     >
       <img
-        alt="Once Upon a Time in America"
-        src="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/ones_upon_a_time_in_america.jpg"
+        alt="Fantastic Beasts: The Crimes of Grindelwald"
+        src="img/bg-the-grand-budapest-hotel.jpg"
       />
     </div>
     <h1
@@ -27,8 +27,8 @@ exports[`Render AddReview component 1`] = `
         className="logo"
       >
         <a
-          className="logo__link"
-          href="main.html"
+          className="logo__link "
+          href=""
         >
           <span
             className="logo__letter logo__letter--1"
@@ -60,7 +60,7 @@ exports[`Render AddReview component 1`] = `
               className="breadcrumbs__link"
               href="movie-page.html"
             >
-              Once Upon a Time in America
+              Fantastic Beasts: The Crimes of Grindelwald
             </a>
           </li>
           <li
@@ -77,25 +77,28 @@ exports[`Render AddReview component 1`] = `
       <div
         className="user-block"
       >
-        <div
-          className="user-block__avatar"
+        <a
+          className="user-block__sign-in"
+          href="/login"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#dfcf77",
+              "textDecoration": "none",
+            }
+          }
         >
-          <img
-            alt="User avatar"
-            height="63"
-            src="img/avatar.jpg"
-            width="63"
-          />
-        </div>
+          Sign In
+        </a>
       </div>
     </header>
     <div
       className="movie-card__poster movie-card__poster--small"
     >
       <img
-        alt="Once Upon a Time in America"
+        alt="Fantastic Beasts: The Crimes of Grindelwald"
         height="327"
-        src="https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Once_Upon_a_Time_in_America.jpg"
+        src="img/the-grand-budapest-hotel-poster.jpg"
         width="218"
       />
     </div>

@@ -26,14 +26,14 @@ exports[`Render Header component Render full Header component 1`] = `
       WTW
     </h1>
     <header
-      className="page-header movie-card__head"
+      className="page-header  movie-card__head"
     >
       <div
         className="logo"
       >
         <a
-          className="logo__link"
-          href="main.html"
+          className="logo__link "
+          href=""
         >
           <span
             className="logo__letter logo__letter--1"
@@ -120,10 +120,10 @@ exports[`Render Header component Render full Header component 1`] = `
                 Play
               </span>
             </button>
-            <a
+            <button
               className="btn btn--list movie-card__button"
-              href="/login"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 height="20"
@@ -137,7 +137,7 @@ exports[`Render Header component Render full Header component 1`] = `
               <span>
                 My list
               </span>
-            </a>
+            </button>
             
           </div>
         </div>
@@ -174,14 +174,14 @@ exports[`Render Header component Render short Header component 1`] = `
       WTW
     </h1>
     <header
-      className="page-header movie-card__head"
+      className="page-header  movie-card__head"
     >
       <div
         className="logo"
       >
         <a
-          className="logo__link"
-          href="main.html"
+          className="logo__link "
+          href=""
         >
           <span
             className="logo__letter logo__letter--1"
@@ -224,16 +224,7 @@ exports[`Render Header component Render short Header component 1`] = `
       <div
         className="movie-card__info"
       >
-        <div
-          className="movie-card__poster"
-        >
-          <img
-            alt="the Grand Budapest Hotel poster"
-            height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
-            width="218"
-          />
-        </div>
+        
         <div
           className="movie-card__desc"
         >
@@ -277,10 +268,10 @@ exports[`Render Header component Render short Header component 1`] = `
                 Play
               </span>
             </button>
-            <a
+            <button
               className="btn btn--list movie-card__button"
-              href="/login"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 height="20"
@@ -294,13 +285,13 @@ exports[`Render Header component Render short Header component 1`] = `
               <span>
                 My list
               </span>
-            </a>
+            </button>
             
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+  <div />
 </section>
 `;

@@ -27,7 +27,7 @@ const Head = (props) => {
 
 Head.propTypes = {
   hasUser: PropTypes.bool,
-  hasTitle: PropTypes.bool,
+  hasTitle: PropTypes.string,
 };
 
 

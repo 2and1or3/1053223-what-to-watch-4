@@ -1,9 +1,9 @@
 import MockAdapter from "axios-mock-adapter";
 
 import {reducer, ActionType, Operation} from './data.js';
-import {ActionType as ApplicationActionType} from '../application/application.js';
 import createApi from '../../api.js';
 import {adapterToLocalFilms} from '../../utils.js';
+import {DEFAULT_FILM} from '../../consts.js';
 
 const films = [
   {
@@ -35,7 +35,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   },
   {
     id: `1`,
@@ -66,9 +65,23 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   }
 ];
+
+const comments = [{
+  id: `0`,
+  author: `Kate Muir`,
+  date: `Month dd, yyyy`,
+  description: `The mannered, madcap proceedings are often delightful`,
+  rate: `8.9`,
+},
+{
+  id: `1`,
+  author: `Bill Goodykoontz`,
+  date: `Month dd, yyyy`,
+  description: `The mannered, madcap proceedings are often delightful`,
+  rate: `8.9`,
+}];
 
 const SERVER_FILM = {
   "id": 1,
@@ -90,11 +103,40 @@ const SERVER_FILM = {
   "is_favorite": false
 };
 
+const SERVER_COMMENTS = [
+  {
+    "id": `0`,
+    "user": {
+      "id": `4`,
+      "name": `Kate Muir`
+    },
+    "rating": `8.9`,
+    "comment": `The mannered, madcap proceedings are often delightful`,
+    "date": `Month dd, yyyy`
+  },
+  {
+    "id": `1`,
+    "user": {
+      "id": `5`,
+      "name": `Bill Goodykoontz`
+    },
+    "rating": `8.9`,
+    "comment": `The mannered, madcap proceedings are often delightful`,
+    "date": `Month dd, yyyy`
+  }
+];
+
 const api = createApi(() => {});
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer should return initial state in default case`, () => {
-    expect(reducer(void 0, {})).toEqual({films: []});
+    const initialState = {
+      films: [],
+      commentsById: [],
+      promoFilm: DEFAULT_FILM,
+    };
+
+    expect(reducer(void 0, {})).toEqual(initialState);
   });
 
   it(`Reducer should return state with new films`, () => {
@@ -107,6 +149,36 @@ describe(`Reducer works correctly`, () => {
     };
     const stateAfter = {
       films,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it(`Reducer should return state with promo film`, () => {
+    const stateBefore = {
+      promoFilm: DEFAULT_FILM,
+    };
+    const action = {
+      type: ActionType.SET_PROMO_FILM,
+      payload: films[0],
+    };
+    const stateAfter = {
+      promoFilm: films[0],
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it(`Reducer should return state with comments`, () => {
+    const stateBefore = {
+      commentsById: [],
+    };
+    const action = {
+      type: ActionType.SET_COMMENTS_BY_ID,
+      payload: comments,
+    };
+    const stateAfter = {
+      commentsById: comments,
     };
 
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
@@ -149,13 +221,37 @@ describe(`Operation works correctly`, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
-          type: ApplicationActionType.SET_CURRENT_FILM,
+          type: ActionType.SET_PROMO_FILM,
           payload: adapterToLocalFilms([SERVER_FILM])[0],
         });
       })
       .catch((err) => {
         throw err;
       });
+  });
+
+  it(`loadComments should load comments from /comments/:id`, () => {
+    const dispatch = jest.fn();
+    const filmId = 0;
+    const loader = Operation.loadComments(filmId);
+    const mockApi = new MockAdapter(api);
+
+    mockApi
+    .onGet(`/comments/0`)
+    .reply(200, SERVER_COMMENTS);
+
+    return loader(dispatch, null, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.SET_COMMENTS_BY_ID,
+          payload: comments,
+        });
+      })
+      .catch((err) => {
+        throw err;
+      });
+
   });
 
   it(`togggleFavorite should toggle is_favorite on server and set updated film in currentFilm`, () => {
@@ -173,7 +269,7 @@ describe(`Operation works correctly`, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
-          type: ApplicationActionType.SET_CURRENT_FILM,
+          type: ActionType.UPDATE_FILMS,
           payload: adapterToLocalFilms([SERVER_FILM])[0],
         });
       })
@@ -183,3 +279,5 @@ describe(`Operation works correctly`, () => {
 
   });
 });
+
+// npm run test.jest -- reducer/data/data.test.js

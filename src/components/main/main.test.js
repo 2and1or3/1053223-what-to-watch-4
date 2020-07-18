@@ -42,7 +42,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   },
   {
     id: `1`,
@@ -73,7 +72,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   },
   {
     id: `2`,
@@ -104,7 +102,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   }];
 
 it(`Render Main component`, () => {
@@ -136,3 +133,5 @@ it(`Render Main component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/main/main.test.js

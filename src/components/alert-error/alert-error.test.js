@@ -20,3 +20,5 @@ describe(`Render AlertError component`, () => {
     expect(tree).toMatchSnapshot();
   });
 });
+
+// npm run test.jest -- components/alert-error/alert-error.test.js

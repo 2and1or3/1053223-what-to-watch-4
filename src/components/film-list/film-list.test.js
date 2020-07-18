@@ -39,7 +39,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   },
   {
     id: `1`,
@@ -70,7 +69,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   },
   {
     id: `2`,
@@ -101,7 +99,6 @@ const films = [
       `Adrien Brody`,
       `Ralph Fiennes`,
       `Jeff Goldblum`],
-    commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
   }];
 
 const commonProps = {
@@ -109,11 +106,11 @@ const commonProps = {
   onCardClick: () => {},
   onTargetHover: () => {},
   onTargetLeave: () => {},
-  isFull: true,
   onLinkClick: () => {},
   onMoreClick: () => {},
   isNoMore: false,
   activeItem: ``,
+  setDefaultFilter: () => {},
 };
 
 
@@ -130,7 +127,9 @@ describe(`Render FilmList component`, () => {
           <Provider store = {store}>
             <FilmList
               {...commonProps}
-              isFull = {true}
+              listType = {`FULL`}
+              hasGenresList
+              hasMoreButton
             />
           </Provider>, {
             createNodeMock: createVideoMock})
@@ -139,7 +138,7 @@ describe(`Render FilmList component`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render short FilmList component`, () => {
+  it(`Render "look like" FilmList component`, () => {
     const initialState = {
       currentFilm: films[0],
     };
@@ -151,7 +150,28 @@ describe(`Render FilmList component`, () => {
           <Provider store = {store}>
             <FilmList
               {...commonProps}
-              isFull = {false}
+              listType = {`LOOK_LIKE`}
+            />
+          </Provider>, {
+            createNodeMock: createVideoMock})
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render "favorite" FilmList component`, () => {
+    const initialState = {
+      currentFilm: films[0],
+    };
+
+    const store = mockStore(initialState);
+
+    const tree = renderer
+      .create(
+          <Provider store = {store}>
+            <FilmList
+              {...commonProps}
+              listType = {`FAVORIE`}
             />
           </Provider>, {
             createNodeMock: createVideoMock})
@@ -160,3 +180,5 @@ describe(`Render FilmList component`, () => {
     expect(tree).toMatchSnapshot();
   });
 });
+
+// npm run test.jest -- components/film-list/film-list.test.js

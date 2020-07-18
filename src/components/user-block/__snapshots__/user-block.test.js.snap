@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render UserBlock component With auth 1`] = `
+<div
+  className="user-block"
+>
+  <div
+    className="user-block__avatar"
+  >
+    <a
+      href="/mylist"
+      onClick={[Function]}
+    >
+      <img
+        alt="User avatar"
+        height="63"
+        src="img/avatar.jpg"
+        width="63"
+      />
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Render UserBlock component Without auth 1`] = `
+<div
+  className="user-block"
+>
+  <a
+    className="user-block__sign-in"
+    href="/login"
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#dfcf77",
+        "textDecoration": "none",
+      }
+    }
+  >
+    Sign In
+  </a>
+</div>
+`;

@@ -10,3 +10,5 @@ it(`Render ShowMore component`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// npm run test.jest -- components/show-more/show-more.test.js

@@ -17,6 +17,7 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import {getCurrentGenre, getVisibleCards, getFilteredFilms, getFavoriteFilms} from '../../reducer/application/selectors.js';
 import {getFilms} from '../../reducer/data/selectors.js';
 import history from '../../history.js';
+import {GetPath} from '../../utils.js';
 
 const LOOK_LIKE_LIST_COUNT = 4;
 
@@ -56,7 +57,7 @@ class FilmList extends PureComponent {
                 key = {film.title + i}
                 currentFilm = {film}
                 onCardClick = {(clickedFilm) => {
-                  history.push(`/films/:${clickedFilm.id}`);
+                  history.push(GetPath.filmDetails(clickedFilm.id));
                   onCardClick(clickedFilm);
                 }}
                 onCardHover = {onTargetHover}

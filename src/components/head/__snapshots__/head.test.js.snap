@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render full Head component Render full Head component with auth 1`] = `
+<header
+  className="page-header user-page__head movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link "
+      href=""
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  <h1
+    className="page-title user-page__title"
+  >
+    some title
+  </h1>
+  <div
+    className="user-block"
+  >
+    <div
+      className="user-block__avatar"
+    >
+      <a
+        href="/mylist"
+        onClick={[Function]}
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </a>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Render full Head component Render full Head component without auth 1`] = `
+<header
+  className="page-header user-page__head movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link "
+      href=""
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  <h1
+    className="page-title user-page__title"
+  >
+    some title
+  </h1>
+  <div
+    className="user-block"
+  >
+    <a
+      className="user-block__sign-in"
+      href="/login"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "#dfcf77",
+          "textDecoration": "none",
+        }
+      }
+    >
+      Sign In
+    </a>
+  </div>
+</header>
+`;
