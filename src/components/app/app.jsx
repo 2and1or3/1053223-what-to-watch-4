@@ -11,6 +11,7 @@ import AlertError from '../alert-error/alert-error.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
 import MyList from '../my-list/my-list.jsx';
+import PrivateRoute from '../private-route/private-route.jsx';
 
 
 import {filmProp} from '../../props.js';
@@ -52,7 +53,7 @@ class App extends PureComponent {
               return <SignIn onAuthSubmit = {onAuthSubmit}/>;
             }}/>
 
-          <Route
+          <PrivateRoute
             exact path = {GetPath.filmReview(`id`)}
             render = {(props) => {
               return <AddReviewWithFindId {...props} onCommentSend = {onCommentSend}/>;
@@ -76,12 +77,9 @@ class App extends PureComponent {
               return <FilmDetailsWithFindId {...props}/>;
             }}/>
 
-          <Route
+          <PrivateRoute
             exact path = {AppRoute.LIST}
-            render = {() => {
-
-              return (<MyList />);
-            }}/>
+            render = {() => <MyList />}/>
         </Switch>
         <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
       </Router>

@@ -35,9 +35,9 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
+store.dispatch(UserOperation.checkAuthStatus());
 store.dispatch(DataOperation.getPromoFilm());
 store.dispatch(DataOperation.loadFilms());
-store.dispatch(UserOperation.checkAuthStatus());
 
 
 ReactDOM.render(
