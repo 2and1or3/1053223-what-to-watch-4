@@ -1,4 +1,4 @@
-import {AppRoute} from './consts.js';
+import {AppRoute, MONTHS} from './consts.js';
 
 const createVideoMock = (element) => {
   if (element.type === `video`) {
@@ -57,9 +57,61 @@ const adapterToLocalComments = (comments) => {
 };
 
 const GetPath = {
-  filmReview: (id) => `${AppRoute.FILM}:${id}${AppRoute.REVIEW}`,
-  filmPlayer: (id) => `${AppRoute.FILM}:${id}${AppRoute.PLAYER}`,
-  filmDetails: (id) => `${AppRoute.FILM}:${id}`,
+  filmReview: (id) => `${AppRoute.FILM}${id}${AppRoute.REVIEW}`,
+  filmPlayer: (id) => `${AppRoute.FILM}${id}${AppRoute.PLAYER}`,
+  filmDetails: (id) => `${AppRoute.FILM}${id}`,
 };
 
-export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments, GetPath};
+const getDateFormat = (date) => {
+  const data = new Date(date);
+  const month = data.getMonth();
+  const day = data.getDate();
+  const year = data.getFullYear();
+
+  return `${MONTHS[month]} ${day} ${year}`;
+};
+
+const getWatchTimeFormat = (seconds) => {
+
+  let hours = Math.floor(seconds / 3600);
+  let min = Math.floor((seconds - hours * 3600) / 60);
+  let sec = seconds - hours * 3600 - min * 60;
+
+  hours = hours.toString();
+  min = min.toString().padStart(2, `0`);
+  sec = sec.toString().padStart(2, `0`);
+
+  return `${hours}:${min}:${sec}`;
+};
+
+const capitalize = (str) => {
+  str = str.toLowerCase();
+  let words = str.split(` `);
+
+  words = words.map((word) => word[0].toUpperCase() + word.slice(1));
+  str = words.join(` `);
+
+  return str;
+};
+
+const getUniqueGenres = (genres) => {
+  let uniqueGenres = [];
+
+  genres.forEach((genre) => {
+    const isRepeated = uniqueGenres.some((uniqueGenre) => uniqueGenre === genre);
+
+    if (!isRepeated) {
+      uniqueGenres.push(genre);
+    }
+  });
+
+
+  const localUniqueGenres = uniqueGenres.map((uniqueGenre) => ({
+    id: uniqueGenre,
+    title: capitalize(uniqueGenre),
+  }));
+
+  return localUniqueGenres;
+};
+
+export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments, GetPath, getDateFormat, getWatchTimeFormat, getUniqueGenres};

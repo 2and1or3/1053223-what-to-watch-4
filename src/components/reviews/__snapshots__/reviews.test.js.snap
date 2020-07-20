@@ -30,7 +30,7 @@ exports[`Render Reviews component 1`] = `
             className="review__date"
             dateTime="2016-12-24"
           >
-            Month dd, yyyy
+            undefined NaN NaN
           </time>
         </footer>
       </blockquote>
@@ -63,7 +63,7 @@ exports[`Render Reviews component 1`] = `
             className="review__date"
             dateTime="2016-12-24"
           >
-            Month dd, yyyy
+            undefined NaN NaN
           </time>
         </footer>
       </blockquote>
@@ -100,7 +100,7 @@ exports[`Render Reviews component 1`] = `
             className="review__date"
             dateTime="2016-12-24"
           >
-            Month dd, yyyy
+            undefined NaN NaN
           </time>
         </footer>
       </blockquote>

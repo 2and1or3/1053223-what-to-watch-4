@@ -4,22 +4,20 @@ import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {getUserStatus} from '../../reducer/user/selectors.js';
-import {UserStatus, AppRoute} from '../../consts.js';
 
 const PrivateRoute = (props) => {
-  const {exact, path, render, userStatus} = props;
-
-  const isAllow = userStatus === UserStatus.AUTH;
+  const {exact, path, render, userStatus, allowForUserStatus, redirectTo} = props;
+  const isAllow = userStatus === allowForUserStatus;
 
   return (
     <Route
       exact = {exact}
       path = {path}
-      render = {() => {
+      render = {(routeProps) => {
 
         return (
-          isAllow ? render() :
-            <Redirect to = {AppRoute.LOGIN}/>
+          isAllow ? render(routeProps) :
+            <Redirect to = {redirectTo}/>
         );
       }}
 
@@ -32,6 +30,8 @@ PrivateRoute.propTypes = {
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
   userStatus: PropTypes.string.isRequired,
+  allowForUserStatus: PropTypes.string.isRequired,
+  redirectTo: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

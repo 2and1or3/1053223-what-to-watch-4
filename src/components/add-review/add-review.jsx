@@ -7,6 +7,8 @@ import BreadCrumbs from '../breadcrumbs/breadcrumbs.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 
 import {filmProp} from '../../props.js';
+import history from '../../history.js';
+import {AppRoute} from '../../consts.js';
 
 const PostLimit = {
   MIN_LENGTH: 50,
@@ -27,6 +29,17 @@ class AddReview extends PureComponent {
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleTextInput = this._handleTextInput.bind(this);
     this._enableForm = this._enableForm.bind(this);
+
+    this._handleResponse = {
+      onSuccess: () => {
+        this._enableForm();
+        history.push(AppRoute.ROOT);
+      },
+
+      onError: () => {
+        this._enableForm();
+      },
+    };
   }
 
   _addRef(ref) {
@@ -53,7 +66,7 @@ class AddReview extends PureComponent {
         comment,
       };
 
-      onCommentSend(review, 1, this._enableForm);
+      onCommentSend(review, 1, this._handleResponse);
       this._disableForm();
     }
   }
@@ -73,7 +86,6 @@ class AddReview extends PureComponent {
     });
 
     this._textRef.current.disabled = false;
-    this._textRef.current.value = ``;
   }
 
   _handleTextInput() {

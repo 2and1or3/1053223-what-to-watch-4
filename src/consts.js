@@ -16,40 +16,15 @@ const AppRoute = {
   FILM: `/films/`,
   PLAYER: `/player`,
   REVIEW: `/review`,
+  FILM_BY_ID: `/films/:id`,
+  PLAYER_BY_ID: `/films/:id/player`,
+  REVIEW_BY_ID: `/films/:id/review`,
 };
 
 const GenreType = {
   ALL: {
     id: `all`,
     title: `All genres`,
-  },
-  COMEDY: {
-    id: `comedy`,
-    title: `Comedies`,
-  },
-  CRIME: {
-    id: `crime`,
-    title: `Crime`,
-  },
-  DRAMA: {
-    id: `drama`,
-    title: `Dramas`,
-  },
-  THRILLER: {
-    id: `thriller`,
-    title: `Thrillers`,
-  },
-  ADVENTURE: {
-    id: `adventure`,
-    title: `Adventure`,
-  },
-  ACTION: {
-    id: `action`,
-    title: `Action`,
-  },
-  FANTASY: {
-    id: `fantasy`,
-    title: `Fantasy`,
   },
 };
 
@@ -90,4 +65,19 @@ const ListType = {
   FULL: `FULL`,
 };
 
-export {TabType, GenreType, STEP_VISIBLE_CARDS, URL, UserStatus, AppRoute, DEFAULT_FILM, ListType};
+const MONTHS = [
+  `January`,
+  `February`,
+  `March`,
+  `April`,
+  `May`,
+  `June`,
+  `July`,
+  `August`,
+  `September`,
+  `October`,
+  `November`,
+  `December`,
+];
+
+export {TabType, GenreType, STEP_VISIBLE_CARDS, URL, UserStatus, AppRoute, DEFAULT_FILM, ListType, MONTHS};

@@ -15,8 +15,7 @@ import PrivateRoute from '../private-route/private-route.jsx';
 
 
 import {filmProp} from '../../props.js';
-import {AppRoute} from '../../consts.js';
-import {GetPath} from '../../utils';
+import {AppRoute, UserStatus} from '../../consts.js';
 import withVideo from '../../hocs/with-video/with-video.js';
 import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application.js';
 import {getError} from '../../reducer/application/selectors.js';
@@ -47,20 +46,24 @@ class App extends PureComponent {
               return <Main promoFilm = {promoFilm}/>;
             }}/>
 
-          <Route
+          <PrivateRoute
+            allowForUserStatus = {UserStatus.NO_AUTH}
+            redirectTo = {AppRoute.ROOT}
             exact path = {AppRoute.LOGIN}
             render = {() => {
               return <SignIn onAuthSubmit = {onAuthSubmit}/>;
             }}/>
 
           <PrivateRoute
-            exact path = {GetPath.filmReview(`id`)}
+            allowForUserStatus = {UserStatus.AUTH}
+            redirectTo = {AppRoute.LOGIN}
+            exact path = {AppRoute.REVIEW_BY_ID}
             render = {(props) => {
               return <AddReviewWithFindId {...props} onCommentSend = {onCommentSend}/>;
             }}/>
 
           <Route
-            exact path = {GetPath.filmPlayer(`id`)}
+            exact path = {AppRoute.PLAYER_BY_ID}
             render = {(props) => {
 
               return (<PlayerScreenWithVideoWithFindId
@@ -71,13 +74,15 @@ class App extends PureComponent {
             }}/>
 
           <Route
-            exact path = {GetPath.filmDetails(`id`)}
+            exact path = {AppRoute.FILM_BY_ID}
             render = {(props) => {
 
               return <FilmDetailsWithFindId {...props}/>;
             }}/>
 
           <PrivateRoute
+            allowForUserStatus = {UserStatus.AUTH}
+            redirectTo = {AppRoute.LOGIN}
             exact path = {AppRoute.LIST}
             render = {() => <MyList />}/>
         </Switch>
@@ -110,9 +115,9 @@ const mapDispatchToProps = (dispatch) => ({
   onAuthSubmit: (login, password, onSuccess) => {
     dispatch(UserOperation.sendAuth(login, password, onSuccess));
   },
-  onCommentSend: (review, id, enableForm) => {
-    dispatch(UserOperation.sendComment(review, id, enableForm));
-  }
+  onCommentSend: (review, id, handleResponse) => {
+    dispatch(UserOperation.sendComment(review, id, handleResponse));
+  },
 });
 
 const ConectedApp = connect(mapStateToProps, mapDispatchToProps)(App);

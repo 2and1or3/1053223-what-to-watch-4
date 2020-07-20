@@ -86,7 +86,11 @@ describe(`Operation works correctly`, () => {
     const id = 1;
 
     const enableForm = jest.fn();
-    const sendComment = Operation.sendComment(review, id, enableForm);
+    const handleResponse = {
+      onSuccess: enableForm,
+    };
+
+    const sendComment = Operation.sendComment(review, id, handleResponse);
 
     const mockApi = new MockAdatper(api);
     mockApi

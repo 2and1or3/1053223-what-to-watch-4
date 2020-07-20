@@ -28,7 +28,16 @@ const errorHandlers = {
   }
 };
 
-const api = createApi(errorHandlers);
+const initApp = () => {
+  ReactDOM.render(
+      <Provider store = {store}>
+        <App />
+      </Provider>,
+      rootContainer
+  );
+};
+
+const api = createApi(errorHandlers, initApp);
 
 const store = createStore(
     reducer,
@@ -38,11 +47,3 @@ const store = createStore(
 store.dispatch(UserOperation.checkAuthStatus());
 store.dispatch(DataOperation.getPromoFilm());
 store.dispatch(DataOperation.loadFilms());
-
-
-ReactDOM.render(
-    <Provider store = {store}>
-      <App />
-    </Provider>,
-    rootContainer
-);

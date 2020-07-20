@@ -62,6 +62,12 @@ describe(`Reducer works correctly`, () => {
       currentFilm: DEFAULT_FILM,
       currentGenre: `all`,
       visibleCards: STEP_VISIBLE_CARDS,
+      genres: [
+        {
+          id: `all`,
+          title: `All genres`,
+        }
+      ],
       error: {
         message: ``,
         code: ``,

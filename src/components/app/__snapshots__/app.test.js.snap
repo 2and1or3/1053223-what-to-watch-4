@@ -171,99 +171,27 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
-          id="all"
+          className="catalog__genres-item "
+          id="id1"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            All genres
+            id1
           </a>
         </li>
         <li
           className="catalog__genres-item "
-          id="comedy"
+          id="id2"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            Comedies
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="crime"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="drama"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="thriller"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Thrillers
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="adventure"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Adventure
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="action"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Action
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="fantasy"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Fantasy
+            id2
           </a>
         </li>
       </ul>
@@ -290,7 +218,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               Fantastic Beasts: The Crimes of Grindelwald
@@ -317,7 +245,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               the Grand Budapest Hotel
@@ -344,7 +272,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               Macbeth
@@ -564,99 +492,27 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
-          id="all"
+          className="catalog__genres-item "
+          id="id1"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            All genres
+            id1
           </a>
         </li>
         <li
           className="catalog__genres-item "
-          id="comedy"
+          id="id2"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            Comedies
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="crime"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="drama"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="thriller"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Thrillers
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="adventure"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Adventure
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="action"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Action
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="fantasy"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Fantasy
+            id2
           </a>
         </li>
       </ul>
@@ -683,7 +539,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               Fantastic Beasts: The Crimes of Grindelwald
@@ -710,7 +566,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               the Grand Budapest Hotel
@@ -737,7 +593,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               Macbeth
@@ -957,99 +813,27 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
-          id="all"
+          className="catalog__genres-item "
+          id="id1"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            All genres
+            id1
           </a>
         </li>
         <li
           className="catalog__genres-item "
-          id="comedy"
+          id="id2"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            Comedies
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="crime"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="drama"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="thriller"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Thrillers
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="adventure"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Adventure
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="action"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Action
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-          id="fantasy"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Fantasy
+            id2
           </a>
         </li>
       </ul>
@@ -1076,7 +860,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               Fantastic Beasts: The Crimes of Grindelwald
@@ -1103,7 +887,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               the Grand Budapest Hotel
@@ -1130,7 +914,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href=""
               onClick={[Function]}
             >
               Macbeth

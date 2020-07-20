@@ -4,16 +4,7 @@ import PropTypes from "prop-types";
 import {filmProp, refProp} from '../../props.js';
 import history from '../../history.js';
 import {AppRoute} from '../../consts.js';
-
-const getWatchTimeFormat = (seconds) => {
-
-  const hours = Math.floor(seconds / 3600);
-  const min = Math.floor((seconds - hours * 3600) / 60);
-  const sec = seconds - hours * 3600 - min * 60;
-
-  return `${hours}:${min}:${sec}`;
-};
-
+import {getWatchTimeFormat} from '../../utils.js';
 
 const PlayerScreen = (props) => {
   const {
@@ -29,7 +20,8 @@ const PlayerScreen = (props) => {
     togglerPosition} = props;
 
   const {duration} = currentFilm;
-  const timeToWatch = getWatchTimeFormat(duration - progress);
+  const durationInSeconds = duration * 60;
+  const timeToWatch = getWatchTimeFormat(durationInSeconds - progress);
 
   const playControl = isPlaying ? <>
       <svg viewBox="0 0 14 21" width="14" height="21">

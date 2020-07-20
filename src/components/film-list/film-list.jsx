@@ -14,7 +14,7 @@ import {ActionCreator} from '../../reducer/application/application.js';
 import withVideo from '../../hocs/with-video/with-video.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
-import {getCurrentGenre, getVisibleCards, getFilteredFilms, getFavoriteFilms} from '../../reducer/application/selectors.js';
+import {getCurrentGenre, getVisibleCards, getFilteredFilms, getFavoriteFilms, getAllGenres} from '../../reducer/application/selectors.js';
 import {getFilms} from '../../reducer/data/selectors.js';
 import history from '../../history.js';
 import {GetPath} from '../../utils.js';
@@ -34,7 +34,7 @@ class FilmList extends PureComponent {
   }
 
   render() {
-    const {listType, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, isNoMore, activeItem, hasMoreButton, hasGenresList} = this.props;
+    const {listType, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, isNoMore, activeItem, hasMoreButton, hasGenresList, allGenres} = this.props;
     let {filmsToRender} = this.props;
 
     const isLookLike = listType === ListType.LOOK_LIKE;
@@ -47,7 +47,7 @@ class FilmList extends PureComponent {
         <section className={`catalog ${isLookLike ? `` : `catalog--like-this`}`}>
           <h2 className={`catalog__title ${isFull || isFavorite ? `visually-hidden` : ``}`}>{isFull || isFavorite ? `Catalog` : `More like this`}</h2>
 
-          {hasGenresList ? <GenresListWithActiveItem onLinkClick = {onLinkClick}/> : ``}
+          {hasGenresList ? <GenresListWithActiveItem onLinkClick = {onLinkClick} genres = {allGenres}/> : ``}
 
           <div className="catalog__movies-list">
             {filmsToRender
@@ -91,10 +91,16 @@ FilmList.propTypes = {
   setDefaultFilter: PropTypes.func.isRequired,
   hasGenresList: PropTypes.bool,
   hasMoreButton: PropTypes.bool,
+  allGenres: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })),
 };
 
 const mapStateToProps = (state, ownProps) => {
   const {listType} = ownProps;
+
+  const allGenres = getAllGenres(state);
 
   const currentGenre = getCurrentGenre(state);
   const visibleCards = getVisibleCards(state);
@@ -130,6 +136,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     isNoMore,
     filmsToRender,
+    allGenres,
   };
 };
 

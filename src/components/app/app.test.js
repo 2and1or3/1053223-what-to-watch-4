@@ -126,6 +126,16 @@ describe(`Render App component`, () => {
       [NameSpace.APPLICATION]: {
         currentFilm: films[0],
         currentGenre: `all`,
+        genres: [
+          {
+            id: `id1`,
+            title: `id1`,
+          },
+          {
+            id: `id2`,
+            title: `id2`,
+          },
+        ]
       },
       [NameSpace.DATA]: {
         films,
@@ -156,6 +166,16 @@ describe(`Render App component`, () => {
       [NameSpace.APPLICATION]: {
         currentFilm: films[0],
         currentGenre: `all`,
+        genres: [
+          {
+            id: `id1`,
+            title: `id1`,
+          },
+          {
+            id: `id2`,
+            title: `id2`,
+          },
+        ]
       },
       [NameSpace.DATA]: {
         films,
@@ -186,6 +206,16 @@ describe(`Render App component`, () => {
       [NameSpace.APPLICATION]: {
         currentFilm: films[0],
         currentGenre: `all`,
+        genres: [
+          {
+            id: `id1`,
+            title: `id1`,
+          },
+          {
+            id: `id2`,
+            title: `id2`,
+          },
+        ]
       },
       [NameSpace.DATA]: {
         films,

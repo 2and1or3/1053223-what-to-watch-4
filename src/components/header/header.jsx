@@ -30,9 +30,10 @@ const Header = (props) => {
     <a href="add-review.html" className="btn movie-card__button"
       onClick={(evt) => {
         evt.preventDefault();
-
         if (isAuth) {
           history.push(GetPath.filmReview(film.id));
+        } else {
+          history.push(AppRoute.LOGIN);
         }
       }}>Add review</a>);
 
@@ -90,7 +91,7 @@ const Header = (props) => {
                   <span>Play</span>
                 </button>
                 {addListElement}
-                {isFull && isAuth ? reviewLinkElement : ``}
+                {isFull ? reviewLinkElement : ``}
               </div>
             </div>
           </div>

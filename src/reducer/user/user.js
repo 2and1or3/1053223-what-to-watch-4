@@ -51,12 +51,12 @@ const Operation = {
       });
   },
 
-  sendComment: (review, id, enableForm) => (dispatch, getState, api) => {
+  sendComment: (review, id, handleResponse) => (dispatch, getState, api) => {
 
     return api.post(URL.COMMENT + id, review)
-      .then(() => enableForm())
+      .then(() => handleResponse.onSuccess())
       .catch((err) => {
-        enableForm();
+
         throw err;
       });
   }

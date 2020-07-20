@@ -111,6 +111,16 @@ const commonProps = {
   isNoMore: false,
   activeItem: ``,
   setDefaultFilter: () => {},
+  allGenres: [
+    {
+      id: `id1`,
+      title: `id1`,
+    },
+    {
+      id: `id2`,
+      title: `id2`,
+    },
+  ],
 };
 
 

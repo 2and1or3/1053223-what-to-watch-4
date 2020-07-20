@@ -1,7 +1,6 @@
-import {URL} from '../../consts.js';
-import {adapterToLocalFilms, adapterToLocalComments, extend} from '../../utils.js';
-
-import {DEFAULT_FILM} from '../../consts.js';
+import {URL, DEFAULT_FILM} from '../../consts.js';
+import {adapterToLocalFilms, adapterToLocalComments, extend, getUniqueGenres} from '../../utils.js';
+import {ActionCreator as ApplicationActionCreator} from '../application/application.js';
 
 const ActionType = {
   LOAD_FILMS: `loadFilms`,
@@ -66,7 +65,14 @@ const Operation = {
 
     return api.get(URL.LOAD)
       .then((response) => adapterToLocalFilms(response.data))
-      .then((localFilms) => dispatch(ActionCreator.loadFilms(localFilms)))
+      .then((localFilms) => {
+
+        const genres = localFilms.map((localFilm) => localFilm.genre);
+        const uniqueGenres = getUniqueGenres(genres);
+
+        dispatch(ActionCreator.loadFilms(localFilms));
+        dispatch(ApplicationActionCreator.setGenres(uniqueGenres));
+      })
       .catch((err) => {
         throw err;
       });

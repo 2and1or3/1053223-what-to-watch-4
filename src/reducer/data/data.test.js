@@ -197,8 +197,8 @@ describe(`Operation works correctly`, () => {
 
     return loadFilms(dispatch, null, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
           payload: adapterToLocalFilms([SERVER_FILM]),
         });

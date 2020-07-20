@@ -13,6 +13,8 @@ it(`Render PrivateRoute component`, () => {
             path = {`some path`}
             render = {() => {}}
             userStatus = {`AUTH`}
+            allowForUserStatus = {`AUTH`}
+            redirectTo = {`/login`}
           />
         </BrowserRouter>
     ).toJSON();

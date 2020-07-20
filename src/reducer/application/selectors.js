@@ -14,7 +14,9 @@ const getVisibleCards = (state) => state[NAME_SPACE].visibleCards;
 
 const getError = (state) => state[NAME_SPACE].error;
 
-const getUrlId = (state, ownProps) => ownProps.match && ownProps.match.params.id.slice(1);
+const getAllGenres = (state) => state[NAME_SPACE].genres;
+
+const getUrlId = (state, ownProps) => ownProps.match && ownProps.match.params.id;
 
 const getFilteredFilms = createSelector(
     getCurrentGenre,
@@ -38,4 +40,4 @@ const getFavoriteFilms = createSelector(
 );
 
 
-export {getCurrentFilm, getCurrentGenre, getVisibleCards, getFilteredFilms, getError, getFilmById, getFavoriteFilms};
+export {getCurrentFilm, getCurrentGenre, getVisibleCards, getFilteredFilms, getError, getFilmById, getFavoriteFilms, getAllGenres};

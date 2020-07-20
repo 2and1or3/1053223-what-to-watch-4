@@ -43,7 +43,7 @@ class Card extends PureComponent {
         <h3 className="small-movie-card__title">
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href=""
             onClick={(evt) => {
               evt.preventDefault();
               onCardClick(currentFilm);

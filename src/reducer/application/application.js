@@ -8,11 +8,18 @@ const ActionType = {
   ADD_VISIBLE_CARDS: `addVisibleCards`,
   RESET_VISIBLE_CARDS: `resetVisibleCards`,
   SHOW_ERROR: `showError`,
+  SET_GENRES: `setGenres`,
 };
 
 const initialState = {
   currentFilm: DEFAULT_FILM,
   currentGenre: GenreType.ALL.id,
+  genres: [
+    {
+      id: GenreType.ALL.id,
+      title: GenreType.ALL.title,
+    }
+  ],
   visibleCards: STEP_VISIBLE_CARDS,
   error: {
     message: ``,
@@ -43,6 +50,10 @@ const ActionCreator = {
       message,
       code,
     }
+  }),
+  setGenres: (genres) => ({
+    type: ActionType.SET_GENRES,
+    payload: genres,
   })
 };
 
@@ -63,6 +74,10 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.SHOW_ERROR:
       return extend(state, {error: action.payload});
+
+    case ActionType.SET_GENRES:
+      const newGenres = [...initialState.genres].concat(action.payload);
+      return extend(state, {genres: newGenres});
 
     default:
       return state;

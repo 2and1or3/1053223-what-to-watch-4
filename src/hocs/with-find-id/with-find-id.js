@@ -9,6 +9,9 @@ import {filmProp} from '../../props.js';
 
 const withFindId = (Component) => {
   class WithFindId extends PureComponent {
+    constructor(props) {
+      super(props);
+    }
     componentDidUpdate(prevProps) {
       const {filmById: before} = prevProps;
       const {filmById: after, setFilterByFilm} = this.props;
