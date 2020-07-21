@@ -45,7 +45,12 @@ const film = {
 };
 
 describe(`AddReview component works correctly`, () => {
-  it(`AddReview`, () => {
+  it(`AddReview component pass review object and film id into onCommentSend func`, () => {
+    const review = {
+      comment: `some very very very long long long long review text for film`,
+      rating: `1`,
+    };
+
     const initialState = {
       [NameSpace.USER]: {
         authStatus: `AUTH`,
@@ -55,7 +60,6 @@ describe(`AddReview component works correctly`, () => {
     const mockSend = jest.fn();
     const formSendPrevention = jest.fn();
 
-
     const wrapper = Enzyme.mount(
         <Provider store = {store}>
           <Router history = {history}>
@@ -64,13 +68,12 @@ describe(`AddReview component works correctly`, () => {
         </Provider>
         , {disableLifecycleMethods: true});
 
-
     const form = wrapper.find(`.add-review__form`);
     const textarea = wrapper.find(`.add-review__textarea`);
-    const ratingInput = wrapper.find(`.rating__input`).at(0);
+    const ratingInput = wrapper.find(`.rating__input`).at(review.rating - 1);
 
-    ratingInput.checked = true;
-    textarea.value = `some very very very long long long long review text for film`;
+    ratingInput.instance().checked = true;
+    textarea.instance().value = review.comment;
 
     form.simulate(`submit`, {
       preventDefault: formSendPrevention,
@@ -78,6 +81,7 @@ describe(`AddReview component works correctly`, () => {
 
     expect(formSendPrevention).toHaveBeenCalledTimes(1);
     expect(mockSend).toHaveBeenCalledTimes(1);
+    expect(mockSend).toHaveBeenNthCalledWith(1, review, film.id, expect.anything());
   });
 });
 

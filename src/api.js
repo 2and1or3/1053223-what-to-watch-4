@@ -22,18 +22,20 @@ const createApi = (errorHandlers) => {
   const onError = (err) => {
     const {response} = err;
 
-    switch (response.status) {
-      case ErrorStatus.UNAUTH:
-        errorHandlers.onUnAuthorized();
-        throw err;
+    if (response) {
+      switch (response.status) {
+        case ErrorStatus.UNAUTH:
+          errorHandlers.onUnAuthorized();
+          throw err;
 
-      case ErrorStatus.SERVER_UNAVAILABLE:
-        errorHandlers.showError(response.statusText, response.status);
-        throw err;
+        case ErrorStatus.SERVER_UNAVAILABLE:
+          errorHandlers.showError(response.statusText, response.status);
+          throw err;
 
-      case ErrorStatus.BAD_REQUEST:
-        errorHandlers.showError(response.statusText, response.status);
-        throw err;
+        case ErrorStatus.BAD_REQUEST:
+          errorHandlers.showError(response.statusText, response.status);
+          throw err;
+      }
     }
 
     throw err;
