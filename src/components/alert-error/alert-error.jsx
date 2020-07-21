@@ -58,7 +58,7 @@ const AlertError = (props) => {
 
 AlertError.propTypes = {
   message: PropTypes.string.isRequired,
-  code: PropTypes.string.isRequired,
+  code: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

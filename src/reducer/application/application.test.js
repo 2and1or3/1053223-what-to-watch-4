@@ -182,6 +182,63 @@ describe(`Reducer works correctly`, () => {
 
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
+
+  it(`Reducer should return changed state with unique genres and default genre "all"`, () => {
+    const stateBefore = {
+      currentFilm: null,
+      currentGenre: `all`,
+      visibleCards: STEP_VISIBLE_CARDS,
+      genres: [
+        {
+          id: `all`,
+          title: `All genres`,
+        }
+      ],
+      error: {
+        message: ``,
+        code: ``,
+      }
+    };
+    const uniqueGenres = [
+      {
+        id: `id1`,
+        title: `id1`,
+      },
+      {
+        id: `id2`,
+        title: `id2`,
+      },
+    ];
+    const action = {
+      type: ActionType.SET_GENRES,
+      payload: uniqueGenres,
+    };
+    const stateAfter = {
+      currentFilm: null,
+      currentGenre: `all`,
+      visibleCards: STEP_VISIBLE_CARDS,
+      genres: [
+        {
+          id: `all`,
+          title: `All genres`,
+        },
+        {
+          id: `id1`,
+          title: `id1`,
+        },
+        {
+          id: `id2`,
+          title: `id2`,
+        },
+      ],
+      error: {
+        message: ``,
+        code: ``,
+      },
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
 });
 
 describe(`Action creators work correctly`, () => {
@@ -235,6 +292,26 @@ describe(`Action creators work correctly`, () => {
     };
 
     expect(ActionCreator.showError(error.message, error.code)).toEqual(resultAction);
+  });
+
+  it(`Action creator should return correct action for setGenres`, () => {
+    const uniqueGenres = [
+      {
+        id: `id1`,
+        title: `id1`,
+      },
+      {
+        id: `id2`,
+        title: `id2`,
+      },
+    ];
+
+    const resultAction = {
+      type: ActionType.SET_GENRES,
+      payload: uniqueGenres,
+    };
+
+    expect(ActionCreator.setGenres(uniqueGenres)).toEqual(resultAction);
   });
 });
 

@@ -99,7 +99,7 @@ App.propTypes = {
   onCommentSend: PropTypes.func.isRequired,
   error: PropTypes.shape({
     message: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired,
+    code: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   }).isRequired,
 };
 

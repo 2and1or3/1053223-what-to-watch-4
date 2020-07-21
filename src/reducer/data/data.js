@@ -109,4 +109,4 @@ const Operation = {
   }
 };
 
-export {reducer, Operation, ActionType};
+export {reducer, Operation, ActionType, ActionCreator};

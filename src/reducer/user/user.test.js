@@ -1,10 +1,22 @@
 import MockAdatper from "axios-mock-adapter";
 
-import {reducer, ActionType, Operation} from './user.js';
+import {reducer, ActionType, Operation, ActionCreator} from './user.js';
 import createApi from '../../api.js';
 import {URL} from '../../consts.js';
 
 const api = createApi({});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator should return correct action for checkAuthStatus`, () => {
+    const status = `AUTH`;
+    const resultAction = {
+      type: ActionType.CHECK_AUTH_STATUS,
+      payload: status,
+    };
+
+    expect(ActionCreator.checkAuthStatus(status)).toEqual(resultAction);
+  });
+});
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer should return initial state in default case`, () => {

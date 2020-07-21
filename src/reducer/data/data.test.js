@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 
-import {reducer, ActionType, Operation} from './data.js';
+import {reducer, ActionType, Operation, ActionCreator} from './data.js';
 import createApi from '../../api.js';
 import {adapterToLocalFilms} from '../../utils.js';
 import {DEFAULT_FILM} from '../../consts.js';
@@ -128,6 +128,46 @@ const SERVER_COMMENTS = [
 
 const api = createApi(() => {});
 
+describe(`Action creators work correctly`, () => {
+  it(`Action creator should return correct action for loadFilms`, () => {
+    const resultAction = {
+      type: ActionType.LOAD_FILMS,
+      payload: films,
+    };
+
+    expect(ActionCreator.loadFilms(films)).toEqual(resultAction);
+  });
+
+  it(`Action creator should return correct action for setPromoFilm`, () => {
+    const film = {id: `1`};
+    const resultAction = {
+      type: ActionType.SET_PROMO_FILM,
+      payload: film,
+    };
+
+    expect(ActionCreator.setPromoFilm(film)).toEqual(resultAction);
+  });
+
+  it(`Action creator should return correct action for setCommentsById`, () => {
+    const resultAction = {
+      type: ActionType.SET_COMMENTS_BY_ID,
+      payload: comments,
+    };
+
+    expect(ActionCreator.setCommentsById(comments)).toEqual(resultAction);
+  });
+
+  it(`Action creator should return correct action for updateFilms`, () => {
+    const film = {id: `1`};
+    const resultAction = {
+      type: ActionType.UPDATE_FILMS,
+      payload: film,
+    };
+
+    expect(ActionCreator.updateFilms(film)).toEqual(resultAction);
+  });
+});
+
 describe(`Reducer works correctly`, () => {
   it(`Reducer should return initial state in default case`, () => {
     const initialState = {
@@ -179,6 +219,21 @@ describe(`Reducer works correctly`, () => {
     };
     const stateAfter = {
       commentsById: comments,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it(`Reducer should return state with updated films field by given film`, () => {
+    const stateBefore = {
+      films: [{id: `1`, isFavorite: false}, {id: `2`, isFavorite: false}],
+    };
+    const action = {
+      type: ActionType.UPDATE_FILMS,
+      payload: {id: `2`, isFavorite: true},
+    };
+    const stateAfter = {
+      films: [{id: `1`, isFavorite: false}, {id: `2`, isFavorite: true}],
     };
 
     expect(reducer(stateBefore, action)).toEqual(stateAfter);

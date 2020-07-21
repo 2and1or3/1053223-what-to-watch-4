@@ -37,13 +37,18 @@ const initApp = () => {
   );
 };
 
-const api = createApi(errorHandlers, initApp);
+const api = createApi(errorHandlers);
 
 const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-store.dispatch(UserOperation.checkAuthStatus());
-store.dispatch(DataOperation.getPromoFilm());
-store.dispatch(DataOperation.loadFilms());
+Promise.allSettled([
+  store.dispatch(UserOperation.checkAuthStatus()),
+  store.dispatch(DataOperation.getPromoFilm()),
+  store.dispatch(DataOperation.loadFilms())])
+  .then(() => initApp())
+  .catch((err) => {
+    throw err;
+  });

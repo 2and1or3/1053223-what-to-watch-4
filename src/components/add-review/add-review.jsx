@@ -8,7 +8,6 @@ import UserBlock from '../user-block/user-block.jsx';
 
 import {filmProp} from '../../props.js';
 import history from '../../history.js';
-import {AppRoute} from '../../consts.js';
 
 const PostLimit = {
   MIN_LENGTH: 50,
@@ -33,7 +32,7 @@ class AddReview extends PureComponent {
     this._handleResponse = {
       onSuccess: () => {
         this._enableForm();
-        history.push(AppRoute.ROOT);
+        history.goBack();
       },
 
       onError: () => {
@@ -48,7 +47,7 @@ class AddReview extends PureComponent {
 
   _handleSubmit(evt) {
     evt.preventDefault();
-    const {onCommentSend} = this.props;
+    const {onCommentSend, currentFilm} = this.props;
     let rating = 0;
     let comment = ``;
 
@@ -66,7 +65,7 @@ class AddReview extends PureComponent {
         comment,
       };
 
-      onCommentSend(review, 1, this._handleResponse);
+      onCommentSend(review, currentFilm.id, this._handleResponse);
       this._disableForm();
     }
   }

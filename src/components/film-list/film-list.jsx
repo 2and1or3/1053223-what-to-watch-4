@@ -122,7 +122,6 @@ const mapStateToProps = (state, ownProps) => {
 
     case (ListType.LOOK_LIKE):
       filmsToRender = getFilteredFilms(state);
-      // remove copy
       filmsToRender = filmsToRender.slice(0, LOOK_LIKE_LIST_COUNT);
       break;
 

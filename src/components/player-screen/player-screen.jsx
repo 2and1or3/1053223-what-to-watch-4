@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import {filmProp, refProp} from '../../props.js';
 import history from '../../history.js';
-import {AppRoute} from '../../consts.js';
 import {getWatchTimeFormat} from '../../utils.js';
 
 const PlayerScreen = (props) => {
@@ -41,7 +40,7 @@ const PlayerScreen = (props) => {
 
       <button type="button" className="player__exit" onClick={(evt) => {
         evt.preventDefault();
-        history.push(AppRoute.ROOT);
+        history.goBack();
       }}>Exit</button>
 
       <div className="player__controls">

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render component with film found by id or default film 1`] = `
+<div>
+  {"id":"default","title":"default","poster":"default","preview":"default","src":"default","isFavorite":false,"background":"default","backgroundColor":"default","cover":"default","genre":"default","release":"default","description":"default","rating":8.9,"voiceCount":240,"duration":33,"director":"default","actors":["default"]}
+</div>
+`;

@@ -10,20 +10,14 @@ const ErrorStatus = {
 
 const TIMEOUT = 5000;
 
-const createApi = (errorHandlers, initApp) => {
+const createApi = (errorHandlers) => {
   const api = axios.create({
     baseURL: URL.BASE,
     timeout: TIMEOUT,
     withCredentials: true,
   });
 
-  const onSuccess = (response) => {
-    setTimeout(() => {
-      initApp();
-    });
-
-    return response;
-  };
+  const onSuccess = (response) => response;
 
   const onError = (err) => {
     const {response} = err;
@@ -42,9 +36,6 @@ const createApi = (errorHandlers, initApp) => {
         throw err;
     }
 
-    setTimeout(() => {
-      initApp();
-    });
     throw err;
   };
 
