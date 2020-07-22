@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import ShowMore from './show-more.jsx';
+import ShowMore from './show-more';
 
 it(`Render ShowMore component`, () => {
   const tree = renderer
@@ -11,4 +11,4 @@ it(`Render ShowMore component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/show-more/show-more.test.js
+// npm run test.jest -- components/show-more/show-more.test

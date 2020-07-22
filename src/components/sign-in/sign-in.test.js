@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import SignIn from './sign-in.jsx';
+import SignIn from './sign-in';
 
 it(`Render SignIn component`, () => {
   const tree = renderer
@@ -11,4 +11,4 @@ it(`Render SignIn component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/sign-in/sign-in.test.js
+// npm run test.jest -- components/sign-in/sign-in.test

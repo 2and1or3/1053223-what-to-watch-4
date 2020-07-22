@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Card from './card.jsx';
+import Card from './card';
 
 const film = {
   id: `1`,
@@ -48,4 +48,4 @@ it(`Render Card component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/card/card.test.js
+// npm run test.jest -- components/card/card.test

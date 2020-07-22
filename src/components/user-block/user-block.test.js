@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import {UserBlock} from './user-block.jsx';
+import {UserBlock} from './user-block';
 
 
 describe(`Render UserBlock component`, () => {
@@ -31,4 +31,4 @@ describe(`Render UserBlock component`, () => {
   });
 });
 
-// npm run test.jest -- components/user-block/user-block.test.js
+// npm run test.jest -- components/user-block/user-block.test

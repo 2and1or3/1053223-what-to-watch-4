@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import BreadCrumbs from './breadcrumbs.jsx';
+import BreadCrumbs from './breadcrumbs';
 
 it(`Render BreadCrumbs component`, () => {
   const tree = renderer
@@ -12,4 +12,4 @@ it(`Render BreadCrumbs component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/breadcrumbs/breadcrumbs.test.js
+// npm run test.jest -- components/breadcrumbs/breadcrumbs.test

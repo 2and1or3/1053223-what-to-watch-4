@@ -4,9 +4,9 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
 
-import FilmDetails from './film-details.jsx';
-import {createVideoMock} from '../../utils.js';
-import NameSpace from '../../reducer/namespace.js';
+import FilmDetails from './film-details';
+import {createVideoMock} from '../../utils';
+import NameSpace from '../../reducer/namespace';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
@@ -134,4 +134,4 @@ it(`Render FilmDetails component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/film-details/film-details.test.js
+// npm run test.jest -- components/film-details/film-details.test

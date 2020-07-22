@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {PureComponent} from "react";
+import * as React from "react";
+import {Subtract} from "utility-types";
 
-import {filmProp} from '../../props.js';
+import {FilmType, RefType} from '../../types';
 
 const getLeftfromElement = (evt, element) =>{
   return evt.clientX - element.getBoundingClientRect().x;
@@ -17,17 +16,51 @@ const getProgressInSeconds = (togglerPositionInPercent, fullTime) => {
   return Math.round((togglerPositionInPercent * fullTime) / 100);
 };
 
-const getProgressInPercent = (progress, fullTime) => {
+const getProgressInPercent = (progress: number, fullTime: number) => {
   return Math.round((progress / fullTime) * 100);
 };
 
+interface State {
+  isPlaying: boolean;
+  isLoading: boolean;
+  progress: number;
+  togglerPosition: number;
+}
+
+interface Props {
+  isPlaying: boolean;
+  currentFilm: FilmType;
+  isMuted: boolean;
+}
+
+interface InjectedProps {
+  onPlayClick: () => void;
+  progress: number;
+  isPlaying: boolean;
+  onFullScreen: () => void;
+  containerRef: RefType;
+  progressRef: RefType;
+  onToggleMove: (downEvt: React.SyntheticEvent) => void;
+  togglerPosition: number;
+  children: React.ReactNode;
+}
+
 const withVideo = (Component) => {
-  class WithVideo extends PureComponent {
+  type WrappedComponentProps = React.ComponentProps<typeof Component>;
+
+  type Self = Props & Subtract<WrappedComponentProps, InjectedProps>
+
+  class WithVideo extends React.PureComponent<Self, State> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+    private containerRef: React.RefObject<HTMLDivElement>;
+    private progressRef: React.RefObject<HTMLProgressElement>;
+    private videoElement: React.ReactNode;
+
     constructor(props) {
       super(props);
-      this._videoRef = React.createRef();
-      this._containerRef = React.createRef();
-      this._progressRef = React.createRef();
+      this.videoRef = React.createRef();
+      this.containerRef = React.createRef();
+      this.progressRef = React.createRef();
 
       this.state = {
         isPlaying: this.props.isPlaying,
@@ -40,13 +73,13 @@ const withVideo = (Component) => {
       this._handleFullScreen = this._handleFullScreen.bind(this);
       this._handleToggleMove = this._handleToggleMove.bind(this);
 
-      this._videoElement = <video ref={this._videoRef} width="280" height="175" className="player__video"/>;
+      this.videoElement = <video ref={this.videoRef} width="280" height="175" className="player__video"/>;
     }
 
     componentDidMount() {
       const {currentFilm, isMuted} = this.props;
       const {preview, poster, duration} = currentFilm;
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.poster = poster;
       video.src = preview;
@@ -73,7 +106,7 @@ const withVideo = (Component) => {
     }
 
     componentDidUpdate() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       if (this.props.isMuted) {
         if (this.props.isPlaying) {
@@ -91,7 +124,7 @@ const withVideo = (Component) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       video.oncanplaythrough = null;
       video.onplay = null;
       video.onpause = null;
@@ -107,7 +140,7 @@ const withVideo = (Component) => {
     }
 
     _handleFullScreen() {
-      const container = this._containerRef.current;
+      const container = this.containerRef.current;
 
       if (!document.fullscreenElement) {
         container.requestFullscreen()
@@ -120,8 +153,8 @@ const withVideo = (Component) => {
     }
 
     _handleToggleMove(downEvt) {
-      const progressElement = this._progressRef.current;
-      const video = this._videoRef.current;
+      const progressElement = this.progressRef.current;
+      const video = this.videoRef.current;
       const {currentFilm} = this.props;
       const {duration} = currentFilm;
 
@@ -178,22 +211,16 @@ const withVideo = (Component) => {
           progress = {progress}
           isPlaying = {isPlaying}
           onFullScreen = {this._handleFullScreen}
-          containerRef = {this._containerRef}
-          progressRef = {this._progressRef}
+          containerRef = {this.containerRef}
+          progressRef = {this.progressRef}
           onToggleMove = {this._handleToggleMove}
           togglerPosition = {togglerPosition}
         >
-          {this._videoElement}
+          {this.videoElement}
         </Component>
       );
     }
   }
-
-  WithVideo.propTypes = {
-    isPlaying: PropTypes.bool.isRequired,
-    currentFilm: filmProp,
-    isMuted: PropTypes.bool.isRequired,
-  };
 
   return WithVideo;
 };

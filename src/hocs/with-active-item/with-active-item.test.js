@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PropTypes from "prop-types";
 
-import withActiveItem from './with-active-item.js';
+import withActiveItem from './with-active-item';
 
 const MockComponent = (props) => {
   const {activeItem} = props;
@@ -24,4 +24,4 @@ it(`Render component with active item`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- hocs/with-active-item/with-active-item.test.js
+// npm run test.jest -- hocs/with-active-item/with-active-item.test

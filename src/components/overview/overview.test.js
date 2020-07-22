@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Overview from './overview.jsx';
+import Overview from './overview';
 
 const film = {
   id: `1`,
@@ -42,4 +42,4 @@ it(`Render Overview component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/overview/overview.test.js
+// npm run test.jest -- components/overview/overview.test

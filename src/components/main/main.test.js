@@ -4,9 +4,9 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
 
-import Main from './main.jsx';
-import {createVideoMock} from '../../utils.js';
-import NameSpace from '../../reducer/namespace.js';
+import Main from './main';
+import {createVideoMock} from '../../utils';
+import NameSpace from '../../reducer/namespace';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
@@ -144,4 +144,4 @@ it(`Render Main component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/main/main.test.js
+// npm run test.jest -- components/main/main.test

@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import ShowMore from './show-more.jsx';
+import ShowMore from './show-more';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -16,4 +16,4 @@ it(`ShowMore button is clickable`, () => {
   expect(mockClick).toHaveBeenCalledTimes(1);
 });
 
-// npm run test.jest -- components/show-more/show-more.e2e.test.js
+// npm run test.jest -- components/show-more/show-more.e2e.test

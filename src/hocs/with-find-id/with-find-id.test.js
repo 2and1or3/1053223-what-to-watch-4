@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
-import withFindId from './with-find-id.js';
-import {filmProp} from '../../props.js';
-import NameSpace from '../../reducer/namespace.js';
+import withFindId from './with-find-id';
+import {filmProp} from '../../props';
+import NameSpace from '../../reducer/namespace';
 
 const mockStore = configureStore();
 
@@ -44,4 +44,4 @@ it(`Render component with film found by id or default film`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- hocs/with-find-id/with-find-id.test.js
+// npm run test.jest -- hocs/with-find-id/with-find-id.test

@@ -1,8 +1,8 @@
 import {createSelector} from "reselect";
 
-import NameSpace from '../namespace.js';
-import {getFilms} from '../data/selectors.js';
-import {DEFAULT_FILM} from '../../consts.js';
+import NameSpace from '../namespace';
+import {getFilms} from '../data/selectors';
+import {DEFAULT_FILM} from '../../consts';
 
 const NAME_SPACE = NameSpace.APPLICATION;
 

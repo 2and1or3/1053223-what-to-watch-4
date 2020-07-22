@@ -1,15 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import Logo from '../logo/logo.jsx';
-import UserBlock from '../user-block/user-block.jsx';
+import Logo from '../logo/logo';
+import UserBlock from '../user-block/user-block';
 
 const HeadClass = {
   MOVIE_CARD: `movie-card__head`,
   USER_PAGE: `user-page__head`
 };
 
-const Head = (props) => {
+interface Props {
+  hasUser?: boolean;
+  hasTitle?: string;
+}
+
+const Head: React.FunctionComponent<Props> = (props: Props) => {
   const {hasUser, hasTitle} = props;
 
   const headClass = `page-header ${hasTitle ? HeadClass.USER_PAGE : ``} ${ hasUser ? HeadClass.MOVIE_CARD : ``}`;
@@ -24,11 +28,5 @@ const Head = (props) => {
     </header>
   );
 };
-
-Head.propTypes = {
-  hasUser: PropTypes.bool,
-  hasTitle: PropTypes.string,
-};
-
 
 export default Head;

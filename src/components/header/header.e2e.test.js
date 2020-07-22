@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import {Header} from './header.jsx';
+import {Header} from './header';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -49,4 +49,4 @@ it(`onFavoriteToggle recieves film id and toggle status`, () => {
   expect(mockToggle).toHaveBeenCalledWith(film.id, +!film.isFavorite);
 });
 
-// npm run test.jest -- components/header/header.e2e.test.js
+// npm run test.jest -- components/header/header.e2e.test

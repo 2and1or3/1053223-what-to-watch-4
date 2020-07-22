@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
-import {App} from './app.jsx';
-import {createVideoMock} from '../../utils.js';
-import NameSpace from '../../reducer/namespace.js';
+import {App} from './app';
+import {createVideoMock} from '../../utils';
+import NameSpace from '../../reducer/namespace';
 
 const middlewares = [];
 
@@ -242,4 +242,4 @@ describe(`Render App component`, () => {
   });
 });
 
-// npm run test.jest -- components/app/app.test.js
+// npm run test.jest -- components/app/app.test

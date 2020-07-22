@@ -1,18 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import Overview from '../overview/overview.jsx';
-import Details from '../details/details.jsx';
-import Reviews from '../reviews/reviews.jsx';
+import Overview from '../overview/overview';
+import Details from '../details/details';
+import Reviews from '../reviews/reviews';
 
-import {filmProp, commentProp} from '../../props.js';
-import {TabType} from '../../consts.js';
+import {FilmType, CommentType} from '../../types';
+import {TabType} from '../../consts';
 
 const ACTIVE_CLASS = `movie-nav__item--active`;
 const DEFAULT_CURRENT_TAB = TabType.OVERVIEW;
 
+interface Props {
+  film: FilmType;
+  comments: CommentType[];
+  activeItem: string | number | React.ReactNode | {};
+  onTargetClick: (subject: string) => void;
+}
 
-const Tabs = (props) => {
+const Tabs: React.FunctionComponent<Props> = (props: Props) => {
 
   const {film, onTargetClick} = props;
   let {activeItem} = props;
@@ -69,13 +74,6 @@ const Tabs = (props) => {
       </div>
     </div>
   );
-};
-
-Tabs.propTypes = {
-  film: filmProp,
-  comments: PropTypes.arrayOf(commentProp),
-  activeItem: PropTypes.any.isRequired,
-  onTargetClick: PropTypes.func.isRequired,
 };
 
 export default Tabs;

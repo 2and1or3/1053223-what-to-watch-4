@@ -4,7 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import {shallow} from "enzyme";
 import PropTypes from "prop-types";
 
-import withVideo from './with-video.js';
+import withVideo from './with-video';
 
 Enzyme.configure({adapter: new Adapter()});
 

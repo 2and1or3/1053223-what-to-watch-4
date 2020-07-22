@@ -4,8 +4,8 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 
-import MyList from './my-list.jsx';
-import NameSpace from '../../reducer/namespace.js';
+import MyList from './my-list';
+import NameSpace from '../../reducer/namespace';
 
 const mockStore = configureStore();
 
@@ -129,4 +129,4 @@ it(`Render MyList component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/my-list/my-list.test.js
+// npm run test.jest -- components/my-list/my-list.test

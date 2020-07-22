@@ -1,9 +1,9 @@
 import MockAdapter from "axios-mock-adapter";
 
-import {reducer, ActionType, Operation, ActionCreator} from './data.js';
-import createApi from '../../api.js';
-import {adapterToLocalFilms} from '../../utils.js';
-import {DEFAULT_FILM} from '../../consts.js';
+import {reducer, ActionType, Operation, ActionCreator} from './data';
+import createApi from '../../api';
+import {adapterToLocalFilms} from '../../utils';
+import {DEFAULT_FILM} from '../../consts';
 
 const films = [
   {
@@ -335,4 +335,4 @@ describe(`Operation works correctly`, () => {
   });
 });
 
-// npm run test.jest -- reducer/data/data.test.js
+// npm run test.jest -- reducer/data/data.test

@@ -1,18 +1,22 @@
-import React from "react";
+import * as React from "react";
 
-import {filmProp} from '../../props.js';
+import {FilmType} from '../../types';
 
-import Tabs from '../tabs/tabs.jsx';
-import FilmList from '../film-list/film-list.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
-import Header from '../header/header.jsx';
-import {ListType} from '../../consts.js';
+import Tabs from '../tabs/tabs';
+import FilmList from '../film-list/film-list';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import Header from '../header/header';
+import {ListType} from '../../consts';
 
 
 const FilmListWithActiveItem = withActiveItem(FilmList);
 const TabsWithActiveItem = withActiveItem(Tabs);
 
-const FilmDetails = (props) => {
+interface Props {
+  currentFilm: FilmType;
+}
+
+const FilmDetails: React.FunctionComponent<Props> = (props: Props) => {
   const {currentFilm} = props;
 
   return (
@@ -23,10 +27,6 @@ const FilmDetails = (props) => {
       <FilmListWithActiveItem listType = {ListType.LOOK_LIKE}/>
     </React.Fragment>
   );
-};
-
-FilmDetails.propTypes = {
-  currentFilm: filmProp,
 };
 
 export default FilmDetails;

@@ -1,5 +1,5 @@
-import {reducer, ActionType, ActionCreator} from './application.js';
-import {STEP_VISIBLE_CARDS} from '../../consts.js';
+import {reducer, ActionType, ActionCreator} from './application';
+import {STEP_VISIBLE_CARDS} from '../../consts';
 
 
 const films = [
@@ -315,4 +315,4 @@ describe(`Action creators work correctly`, () => {
   });
 });
 
-// npm run test.jest -- reducer/application/application.test.js
+// npm run test.jest -- reducer/application/application.test

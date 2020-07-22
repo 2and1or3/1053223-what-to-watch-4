@@ -1,20 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {PureComponent} from "react";
+import * as React from "react";
 
-import {filmProp} from '../../props.js';
+import {FilmType} from '../../types';
 
 const PREVIEW_DELAY = 1000;
 
-class Card extends PureComponent {
+interface Props {
+  currentFilm: FilmType;
+  onCardClick: (film: FilmType) => void;
+  onCardHover: (subject: FilmType) => void;
+  onCardLeave: () => void;
+  children: React.ReactNode;
+}
+
+class Card extends React.PureComponent<Props> {
+  private timerId?: ReturnType<typeof setTimeout>;
+
   constructor(props) {
     super(props);
 
-    this._timerId = null;
+    this.timerId = null;
   }
 
   componentWillUnmount() {
-    clearTimeout(this._timerId);
+    clearTimeout(this.timerId);
   }
 
   render() {
@@ -24,12 +32,12 @@ class Card extends PureComponent {
       <article
         className="small-movie-card catalog__movies-card"
         onMouseEnter={() => {
-          this._timerId = setTimeout(() => {
+          this.timerId = setTimeout(() => {
             onCardHover(currentFilm);
           }, PREVIEW_DELAY);
         }}
         onMouseLeave={() => {
-          clearTimeout(this._timerId);
+          clearTimeout(this.timerId);
           onCardLeave();
         }}>
         <div
@@ -53,13 +61,5 @@ class Card extends PureComponent {
     );
   }
 }
-
-Card.propTypes = {
-  currentFilm: filmProp,
-  onCardClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired,
-  onCardLeave: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-};
 
 export default Card;

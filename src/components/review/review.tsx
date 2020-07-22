@@ -1,9 +1,13 @@
-import React from "react";
+import * as React from "react";
 
-import {commentProp} from '../../props.js';
-import {getDateFormat} from '../../utils.js';
+import {CommentType} from '../../types';
+import {getDateFormat} from '../../utils';
 
-const Review = (props) => {
+interface Props {
+  comment: CommentType;
+}
+
+const Review: React.FunctionComponent<Props> = (props: Props) => {
   const {description, author, date, rate} = props.comment;
   const formatedDate = getDateFormat(date);
 
@@ -21,10 +25,6 @@ const Review = (props) => {
       <div className="review__rating">{rate}</div>
     </div>
   );
-};
-
-Review.propTypes = {
-  comment: commentProp,
 };
 
 export default Review;

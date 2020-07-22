@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import PlayerScreen from './player-screen.jsx';
+import PlayerScreen from './player-screen';
 
 const film = {
   id: `1`,
@@ -60,4 +60,4 @@ it(`Render PlayerScreen component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/player-screen/player-screen.test.js
+// npm run test.jest -- components/player-screen/player-screen.test

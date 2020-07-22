@@ -1,16 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {connect} from "react-redux";
-import {PureComponent} from "react";
 
-import Review from '../review/review.jsx';
+import Review from '../review/review';
 
-import {commentProp} from '../../props.js';
-import {Operation} from '../../reducer/data/data.js';
-import {getComments} from '../../reducer/data/selectors.js';
+import {CommentType} from '../../types';
+import {Operation} from '../../reducer/data/data';
+import {getComments} from '../../reducer/data/selectors';
 
+interface Props {
+  comments: CommentType[];
+  filmId: string;
+  loadComments: (id: string) => void;
+}
 
-class Reviews extends PureComponent {
+class Reviews extends React.PureComponent<Props> {
 
   componentDidMount() {
     const {filmId, loadComments} = this.props;
@@ -47,12 +50,6 @@ class Reviews extends PureComponent {
     );
   }
 }
-
-Reviews.propTypes = {
-  comments: PropTypes.arrayOf(commentProp),
-  filmId: PropTypes.string.isRequired,
-  loadComments: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   comments: getComments(state),

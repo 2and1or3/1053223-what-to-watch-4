@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import AlertError from './alert-error.jsx';
+import AlertError from './alert-error';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -18,4 +18,4 @@ describe(`AlertError component`, () => {
   });
 });
 
-// npm run test.jest -- components/alert-error/alert-error.e2e.test.js
+// npm run test.jest -- components/alert-error/alert-error.e2e.test

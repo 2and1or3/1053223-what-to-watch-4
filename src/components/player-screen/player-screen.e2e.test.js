@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import PlayerScreen from './player-screen.jsx';
+import PlayerScreen from './player-screen';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -78,4 +78,4 @@ describe(`PlayerScreen component`, () => {
 
 });
 
-// npm run test.jest -- components/player-screen/player-screen.e2e.test.js
+// npm run test.jest -- components/player-screen/player-screen.e2e.test

@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Tabs from './tabs.jsx';
-import {TabType} from '../../consts.js';
+import Tabs from './tabs';
+import {TabType} from '../../consts';
 
 const film = {
   id: `1`,
@@ -66,4 +66,4 @@ it(`Render Tabs component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/tabs/tabs.test.js
+// npm run test.jest -- components/tabs/tabs.test

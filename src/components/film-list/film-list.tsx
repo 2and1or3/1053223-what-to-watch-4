@@ -1,30 +1,44 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {connect} from "react-redux";
-import {PureComponent} from "react";
 
-import Card from '../card/card.jsx';
-import GenresList from '../genres-list/genres-list.jsx';
-import ShowMore from '../show-more/show-more.jsx';
-import Footer from '../footer/footer.jsx';
+import Card from '../card/card';
+import GenresList from '../genres-list/genres-list';
+import ShowMore from '../show-more/show-more';
+import Footer from '../footer/footer';
 
-import {filmProp} from '../../props.js';
-import {GenreType, ListType} from '../../consts.js';
-import {ActionCreator} from '../../reducer/application/application.js';
-import withVideo from '../../hocs/with-video/with-video.js';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
+import {FilmType, GenreType} from '../../types';
+import {GenreType as DefaultGenreType, ListType} from '../../consts';
+import {ActionCreator} from '../../reducer/application/application';
+import withVideo from '../../hocs/with-video/with-video';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
-import {getCurrentGenre, getVisibleCards, getFilteredFilms, getFavoriteFilms, getAllGenres} from '../../reducer/application/selectors.js';
-import {getFilms} from '../../reducer/data/selectors.js';
-import history from '../../history.js';
-import {GetPath} from '../../utils.js';
+import {getCurrentGenre, getVisibleCards, getFilteredFilms, getFavoriteFilms, getAllGenres} from '../../reducer/application/selectors';
+import {getFilms} from '../../reducer/data/selectors';
+import history from '../../history';
+import {GetPath} from '../../utils';
 
 const LOOK_LIKE_LIST_COUNT = 4;
 
 const CardWithVideo = withVideo(Card);
 const GenresListWithActiveItem = withActiveItem(GenresList);
 
-class FilmList extends PureComponent {
+interface Props {
+  filmsToRender: FilmType[];
+  onCardClick: (film: FilmType) => void;
+  onTargetHover: (subject: FilmType) => void;
+  onTargetLeave: () => void;
+  onMoreClick: () => void;
+  onLinkClick: (currentGenreId: string) => void;
+  isNoMore: boolean;
+  activeItem: string | number | React.ReactNode | {};
+  listType: string;
+  setDefaultFilter: () => void;
+  hasGenresList?: boolean;
+  hasMoreButton?: boolean;
+  allGenres: GenreType[];
+}
+
+class FilmList extends React.PureComponent<Props> {
 
   componentDidMount() {
     const {listType, setDefaultFilter} = this.props;
@@ -35,7 +49,7 @@ class FilmList extends PureComponent {
 
   render() {
     const {listType, onCardClick, onTargetHover, onTargetLeave, onLinkClick, onMoreClick, isNoMore, activeItem, hasMoreButton, hasGenresList, allGenres} = this.props;
-    let {filmsToRender} = this.props;
+    const {filmsToRender} = this.props;
 
     const isLookLike = listType === ListType.LOOK_LIKE;
     const isFull = listType === ListType.FULL;
@@ -78,25 +92,6 @@ class FilmList extends PureComponent {
   }
 }
 
-FilmList.propTypes = {
-  filmsToRender: PropTypes.arrayOf(filmProp).isRequired,
-  onCardClick: PropTypes.func.isRequired,
-  onTargetHover: PropTypes.func.isRequired,
-  onTargetLeave: PropTypes.func.isRequired,
-  onLinkClick: PropTypes.func.isRequired,
-  onMoreClick: PropTypes.func.isRequired,
-  isNoMore: PropTypes.bool.isRequired,
-  activeItem: PropTypes.any.isRequired,
-  listType: PropTypes.string.isRequired,
-  setDefaultFilter: PropTypes.func.isRequired,
-  hasGenresList: PropTypes.bool,
-  hasMoreButton: PropTypes.bool,
-  allGenres: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  })),
-};
-
 const mapStateToProps = (state, ownProps) => {
   const {listType} = ownProps;
 
@@ -110,7 +105,7 @@ const mapStateToProps = (state, ownProps) => {
   switch (listType) {
     case (ListType.FULL):
 
-      if (currentGenre !== GenreType.ALL.id) {
+      if (currentGenre !== DefaultGenreType.ALL.id) {
         filmsToRender = getFilteredFilms(state);
       } else {
         filmsToRender = getFilms(state);
@@ -152,7 +147,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.addVisibleCards());
   },
   setDefaultFilter: () => {
-    dispatch(ActionCreator.setFilter(GenreType.ALL.id));
+    dispatch(ActionCreator.setFilter(DefaultGenreType.ALL.id));
   }
 });
 

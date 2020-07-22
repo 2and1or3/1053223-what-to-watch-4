@@ -1,11 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Route, Redirect} from "react-router-dom";
+import * as React from "react";
+import {Route, Redirect, RouteProps} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {getUserStatus} from '../../reducer/user/selectors.js';
+import {getUserStatus} from '../../reducer/user/selectors';
 
-const PrivateRoute = (props) => {
+type Props = RouteProps & {
+  exact: boolean;
+  path: string;
+  render: (routeProps: RouteProps) => React.ReactNode;
+  userStatus: string;
+  allowForUserStatus: string;
+  redirectTo: string;
+}
+
+const PrivateRoute: React.FunctionComponent<Props> = (props: Props) => {
   const {exact, path, render, userStatus, allowForUserStatus, redirectTo} = props;
   const isAllow = userStatus === allowForUserStatus;
 
@@ -23,15 +31,6 @@ const PrivateRoute = (props) => {
 
     />
   );
-};
-
-PrivateRoute.propTypes = {
-  exact: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
-  userStatus: PropTypes.string.isRequired,
-  allowForUserStatus: PropTypes.string.isRequired,
-  redirectTo: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

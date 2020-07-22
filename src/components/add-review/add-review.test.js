@@ -4,8 +4,8 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 
-import AddReview from './add-review.jsx';
-import NameSpace from '../../reducer/namespace.js';
+import AddReview from './add-review';
+import NameSpace from '../../reducer/namespace';
 
 const mockStore = configureStore();
 
@@ -64,4 +64,4 @@ it(`Render AddReview component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/add-review/add-review.test.js
+// npm run test.jest -- components/add-review/add-review.test

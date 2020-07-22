@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import GenresList from './genres-list.jsx';
+import GenresList from './genres-list';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -31,4 +31,4 @@ it(`onLinkClick recieves correct genre`, () => {
   expect(mockLinkClick).toHaveBeenCalledWith(genres[1].id);
 });
 
-// npm run test.jest -- components/genres-list/genres-list.e2e.test.js
+// npm run test.jest -- components/genres-list/genres-list.e2e.test

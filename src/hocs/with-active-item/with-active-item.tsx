@@ -1,9 +1,23 @@
-import React from "react";
-import {PureComponent} from "react";
+import * as React from "react";
+import {Subtract} from "utility-types";
 
+interface State {
+  activeItem: string | number | React.ReactNode | {};
+}
+
+interface InjectedProps {
+  activeItem: string | number | React.ReactNode | {};
+  onTargetClick: (subject: string | number | React.ReactNode | {}) => void;
+  onTargetHover: (subject: string | number | React.ReactNode | {}) => void;
+  onTargetLeave: () => void;
+}
 
 const withActiveItem = (Component) => {
-  class WithActiveItem extends PureComponent {
+  type WrappedComponentProps = React.ComponentProps<typeof Component>;
+
+  type Self = Subtract<WrappedComponentProps, InjectedProps>
+
+  class WithActiveItem extends React.PureComponent<Self, State> {
     constructor(props) {
       super(props);
 

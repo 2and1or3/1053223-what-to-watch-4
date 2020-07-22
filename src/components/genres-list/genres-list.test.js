@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import GenresList from './genres-list.jsx';
+import GenresList from './genres-list';
 
 const genres = [
   {
@@ -22,4 +22,4 @@ it(`Render GenresList component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/genres-list/genres-list.test.js
+// npm run test.jest -- components/genres-list/genres-list.test

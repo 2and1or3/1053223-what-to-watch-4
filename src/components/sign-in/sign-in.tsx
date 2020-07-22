@@ -1,21 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {PureComponent} from "react";
+import * as React from "react";
 
-import history from '../../history.js';
-import {AppRoute} from '../../consts.js';
+import history from '../../history';
+import {AppRoute} from '../../consts';
 
-import Footer from '../footer/footer.jsx';
-import Head from '../head/head.jsx';
+import Footer from '../footer/footer';
+import Head from '../head/head';
 
 const SIGN_IN_TITLE = `Sign in`;
 
-class SignIn extends PureComponent {
+interface Props {
+  onAuthSubmit: (login: string, password: string, onSuccess: () => void) => void;
+}
+
+class SignIn extends React.PureComponent<Props> {
+  private loginRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
 
-    this._loginRef = React.createRef();
-    this._passwordRef = React.createRef();
+    this.loginRef = React.createRef();
+    this.passwordRef = React.createRef();
 
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleSubmitSuccess = this._handleSubmitSuccess.bind(this);
@@ -29,8 +34,8 @@ class SignIn extends PureComponent {
     evt.preventDefault();
     const {onAuthSubmit} = this.props;
 
-    const login = this._loginRef.current.value;
-    const password = this._passwordRef.current.value;
+    const login = this.loginRef.current.value;
+    const password = this.passwordRef.current.value;
 
     onAuthSubmit(login, password, this._handleSubmitSuccess);
   }
@@ -39,17 +44,17 @@ class SignIn extends PureComponent {
 
     return (
       <div className="user-page">
-        <Head authStatus = {false} hasTitle = {SIGN_IN_TITLE}/>
+        <Head hasTitle = {SIGN_IN_TITLE}/>
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={this._handleSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
-                <input ref={this._loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
+                <input ref={this.loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
-                <input ref={this._passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" />
+                <input ref={this.passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
@@ -64,9 +69,5 @@ class SignIn extends PureComponent {
     );
   }
 }
-
-SignIn.propTypes = {
-  onAuthSubmit: PropTypes.func.isRequired,
-};
 
 export default SignIn;

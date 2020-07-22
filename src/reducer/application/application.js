@@ -1,5 +1,5 @@
-import {GenreType, STEP_VISIBLE_CARDS, DEFAULT_FILM} from '../../consts.js';
-import {extend} from '../../utils.js';
+import {GenreType, STEP_VISIBLE_CARDS, DEFAULT_FILM} from '../../consts';
+import {extend} from '../../utils';
 
 
 const ActionType = {

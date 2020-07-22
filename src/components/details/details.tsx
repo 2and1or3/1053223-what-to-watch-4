@@ -1,16 +1,20 @@
-import React from "react";
+import * as React from "react";
 
-import {filmProp} from '../../props.js';
+import {FilmType} from '../../types';
 
-const getRunTimeFormat = (minutes) => {
+const getRunTimeFormat = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
   const min = minutes - hours * 60;
 
   return `${hours}h ${min}m`;
 };
 
+interface Props {
+  film: FilmType;
+}
 
-const Details = (props) => {
+
+const Details: React.FunctionComponent<Props> = (props: Props) => {
   const {film} = props;
   const {director, actors, duration, genre, release} = film;
 
@@ -54,10 +58,6 @@ const Details = (props) => {
       </div>
     </div>
   );
-};
-
-Details.propTypes = {
-  film: filmProp,
 };
 
 export default Details;

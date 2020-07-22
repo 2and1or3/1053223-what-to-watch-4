@@ -1,6 +1,6 @@
-import {URL, DEFAULT_FILM} from '../../consts.js';
-import {adapterToLocalFilms, adapterToLocalComments, extend, getUniqueGenres} from '../../utils.js';
-import {ActionCreator as ApplicationActionCreator} from '../application/application.js';
+import {URL, DEFAULT_FILM} from '../../consts';
+import {adapterToLocalFilms, adapterToLocalComments, extend, getUniqueGenres} from '../../utils';
+import {ActionCreator as ApplicationActionCreator} from '../application/application';
 
 const ActionType = {
   LOAD_FILMS: `loadFilms`,

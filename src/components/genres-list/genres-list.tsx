@@ -1,13 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {GenreType} from '../../consts.js';
+import {GenreType as DefaultGenres} from '../../consts';
+import {GenreType} from '../../types';
 
 const ACTIVE_CLASS = `catalog__genres-item--active`;
 const MAX_GENRES_QUANTITY = 10;
-const DEFAULT_ACTIVE_GENRE = GenreType.ALL.id;
+const DEFAULT_ACTIVE_GENRE = DefaultGenres.ALL.id;
 
-const GenresList = (props) => {
+interface Props {
+  onLinkClick: (currentGenreId: string) => void;
+  activeItem: string | number | React.ReactNode | {};
+  onTargetClick: (subject: string) => void;
+  genres: GenreType[];
+}
+
+const GenresList: React.FunctionComponent<Props> = (props: Props) => {
   const {onLinkClick, onTargetClick, genres} = props;
 
   let {activeItem} = props;
@@ -31,14 +38,5 @@ const GenresList = (props) => {
   );
 };
 
-GenresList.propTypes = {
-  onLinkClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.any.isRequired,
-  onTargetClick: PropTypes.func.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }))
-};
 
 export default GenresList;

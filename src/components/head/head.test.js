@@ -4,8 +4,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
 
-import Head from './head.jsx';
-import NameSpace from '../../reducer/namespace.js';
+import Head from './head';
+import NameSpace from '../../reducer/namespace';
 
 const mockStore = configureStore();
 
@@ -53,4 +53,4 @@ describe(`Render full Head component`, () => {
   });
 });
 
-// npm run test.jest -- components/head/head.test.js
+// npm run test.jest -- components/head/head.test

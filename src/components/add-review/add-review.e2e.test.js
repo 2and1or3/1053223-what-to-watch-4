@@ -5,9 +5,9 @@ import configureStore from "redux-mock-store";
 import Adapter from "enzyme-adapter-react-16";
 import {Router} from "react-router-dom";
 
-import AddReview from './add-review.jsx';
-import NameSpace from '../../reducer/namespace.js';
-import history from '../../history.js';
+import AddReview from './add-review';
+import NameSpace from '../../reducer/namespace';
+import history from '../../history';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -85,4 +85,4 @@ describe(`AddReview component works correctly`, () => {
   });
 });
 
-// npm run test.jest -- components/add-review/add-review.e2e.test.js
+// npm run test.jest -- components/add-review/add-review.e2e.test

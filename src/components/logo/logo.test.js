@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Logo from './logo.jsx';
+import Logo from './logo';
 
 it(`Render Logo component`, () => {
   const tree = renderer
@@ -12,4 +12,4 @@ it(`Render Logo component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/logo/logo.test.js
+// npm run test.jest -- components/logo/logo.test

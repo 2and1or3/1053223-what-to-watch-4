@@ -2,8 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PropTypes from "prop-types";
 
-import {createVideoMock} from '../../utils.js';
-import withVideo from './with-video.js';
+import {createVideoMock} from '../../utils';
+import withVideo from './with-video';
 
 const film = {
   id: `0`,

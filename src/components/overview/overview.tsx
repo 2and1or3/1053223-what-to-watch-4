@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 
-import {filmProp} from '../../props.js';
+import {FilmType} from '../../types';
 
 const RatingTitles = {
   BAD: `bad`,
@@ -18,11 +18,11 @@ const RatingMinEdges = {
   10: RatingTitles.AWSOME,
 };
 
-const getRatingTitle = (rating) => {
+const getRatingTitle = (rating: number) => {
   let title = null;
 
   for (const edge in RatingMinEdges) {
-    if (rating >= edge) {
+    if (rating >= +edge) {
       title = RatingMinEdges[edge];
     }
   }
@@ -32,8 +32,11 @@ const getRatingTitle = (rating) => {
 
 const ACTORS_SHORT_LIST_COUNT = 4;
 
+interface Props {
+  film: FilmType;
+}
 
-const Overview = (props) => {
+const Overview: React.FunctionComponent<Props> = (props: Props) => {
   const {rating, voiceCount, description, director, actors} = props.film;
 
   const ratingTitle = getRatingTitle(rating);
@@ -56,10 +59,6 @@ const Overview = (props) => {
         <p className="movie-card__starring"><strong>Starring: {actors.slice(0, ACTORS_SHORT_LIST_COUNT).join(`, `)} and other</strong></p>
       </div>
     </React.Fragment>);
-};
-
-Overview.propTypes = {
-  film: filmProp,
 };
 
 export default Overview;

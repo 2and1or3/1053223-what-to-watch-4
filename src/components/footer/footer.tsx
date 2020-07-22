@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 
-import Logo from '../logo/logo.jsx';
+import Logo from '../logo/logo';
 
-const Footer = () => {
+const Footer: React.FunctionComponent = () => {
 
   return (
     <footer className="page-footer">

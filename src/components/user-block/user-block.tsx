@@ -1,12 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {UserStatus, AppRoute} from '../../consts.js';
-import {getUserStatus} from '../../reducer/user/selectors.js';
+import {UserStatus, AppRoute} from '../../consts';
+import {getUserStatus} from '../../reducer/user/selectors';
 
-const UserBlock = (props) => {
+interface Props {
+  authStatus: string;
+}
+
+const UserBlock: React.FunctionComponent<Props> = (props: Props) => {
   const {authStatus} = props;
 
   const userElement = authStatus === UserStatus.AUTH ?
@@ -28,10 +31,6 @@ const UserBlock = (props) => {
       {userElement}
     </div>
   );
-};
-
-UserBlock.propTypes = {
-  authStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

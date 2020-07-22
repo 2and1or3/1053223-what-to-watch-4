@@ -1,8 +1,8 @@
 import MockAdatper from "axios-mock-adapter";
 
-import {reducer, ActionType, Operation, ActionCreator} from './user.js';
-import createApi from '../../api.js';
-import {URL} from '../../consts.js';
+import {reducer, ActionType, Operation, ActionCreator} from './user';
+import createApi from '../../api';
+import {URL} from '../../consts';
 
 const api = createApi({});
 
@@ -119,4 +119,4 @@ describe(`Operation works correctly`, () => {
   });
 });
 
-// npm run test.jest -- reducer/user/user.test.js
+// npm run test.jest -- reducer/user/user.test

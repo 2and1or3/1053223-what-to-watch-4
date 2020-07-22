@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import AlertError from './alert-error.jsx';
+import AlertError from './alert-error';
 
 describe(`Render AlertError component`, () => {
   it(`Render AlertError with error`, () => {
@@ -21,4 +21,4 @@ describe(`Render AlertError component`, () => {
   });
 });
 
-// npm run test.jest -- components/alert-error/alert-error.test.js
+// npm run test.jest -- components/alert-error/alert-error.test

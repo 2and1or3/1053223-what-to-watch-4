@@ -1,15 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {connect} from "react-redux";
 
-import Head from '../head/head.jsx';
+import Head from '../head/head';
 
-import {filmProp} from '../../props.js';
-import {Operation} from '../../reducer/data/data.js';
-import {UserStatus, AppRoute} from '../../consts.js';
-import {getUserStatus} from '../../reducer/user/selectors.js';
-import history from '../../history.js';
-import {GetPath} from '../../utils.js';
+import {FilmType} from '../../types';
+import {Operation} from '../../reducer/data/data';
+import {UserStatus, AppRoute} from '../../consts';
+import {getUserStatus} from '../../reducer/user/selectors';
+import history from '../../history';
+import {GetPath} from '../../utils';
 
 
 const AddListIcon = {
@@ -17,7 +16,16 @@ const AddListIcon = {
   IN_LIST: `#in-list`,
 };
 
-const Header = (props) => {
+interface Props {
+  film: FilmType;
+  isFull?: boolean;
+  children: React.ReactNode;
+  authStatus: string;
+  onFavoriteToggle: (filmId: string | number, status: number) => void;
+  hasCommonPoster?: boolean;
+}
+
+const Header: React.FunctionComponent<Props> = (props: Props) => {
   const {film, isFull, children, authStatus, onFavoriteToggle, hasCommonPoster} = props;
   const {title, background, genre, release, cover, backgroundColor, isFavorite} = film;
 
@@ -101,18 +109,6 @@ const Header = (props) => {
       {children ? children : ``}
     </section>
   );
-};
-
-Header.propTypes = {
-  film: filmProp,
-  isFull: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  authStatus: PropTypes.string.isRequired,
-  onFavoriteToggle: PropTypes.func.isRequired,
-  hasCommonPoster: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

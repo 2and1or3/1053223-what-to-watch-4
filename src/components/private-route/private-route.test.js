@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import {PrivateRoute} from './private-route.jsx';
+import {PrivateRoute} from './private-route';
 
 it(`Render PrivateRoute component`, () => {
   const tree = renderer
@@ -22,4 +22,4 @@ it(`Render PrivateRoute component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/private-route/private-route.test.js
+// npm run test.jest -- components/private-route/private-route.test

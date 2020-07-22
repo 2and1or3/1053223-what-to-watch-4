@@ -1,7 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const BreadCrumbs = (props) => {
+interface Props {
+  title: string;
+}
+
+const BreadCrumbs: React.FunctionComponent<Props> = (props: Props) => {
   const {title} = props;
 
   return (
@@ -16,10 +19,6 @@ const BreadCrumbs = (props) => {
       </ul>
     </nav>
   );
-};
-
-BreadCrumbs.propTypes = {
-  title: PropTypes.string.isRequired,
 };
 
 export default BreadCrumbs;

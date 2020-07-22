@@ -1,14 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {PureComponent} from "react";
+import * as React from "react";
 import {connect} from "react-redux";
+import {Subtract} from "utility-types";
 
-import {getFilmById} from '../../reducer/application/selectors.js';
-import {ActionCreator} from '../../reducer/application/application.js';
-import {filmProp} from '../../props.js';
+import {getFilmById} from '../../reducer/application/selectors';
+import {ActionCreator} from '../../reducer/application/application';
+import {FilmType} from '../../types';
+
+interface Props {
+  filmById: FilmType;
+  setFilterByFilm: (genre: string) => void;
+}
+
+interface InjectedProps {
+  currentFilm: FilmType;
+}
 
 const withFindId = (Component) => {
-  class WithFindId extends PureComponent {
+  type WrappedComponentProps = React.ComponentProps<typeof Component>;
+
+  type Self = Props & Subtract<WrappedComponentProps, InjectedProps>;
+
+  class WithFindId extends React.PureComponent<Self> {
     componentDidUpdate(prevProps) {
       const {filmById: before} = prevProps;
       const {filmById: after, setFilterByFilm} = this.props;
@@ -30,11 +42,6 @@ const withFindId = (Component) => {
         />);
     }
   }
-
-  WithFindId.propTypes = {
-    filmById: filmProp,
-    setFilterByFilm: PropTypes.func.isRequired,
-  };
 
   const mapStateToProps = (state, ownProps) => ({
     filmById: getFilmById(state, ownProps),

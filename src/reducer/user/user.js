@@ -1,5 +1,5 @@
-import {extend} from '../../utils.js';
-import {URL, UserStatus} from '../../consts.js';
+import {extend} from '../../utils';
+import {URL, UserStatus} from '../../consts';
 
 
 const initialState = {

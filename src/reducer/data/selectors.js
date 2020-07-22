@@ -1,4 +1,4 @@
-import NameSpace from '../namespace.js';
+import NameSpace from '../namespace';
 
 const NAME_SPACE = NameSpace.DATA;
 

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Review from './review.jsx';
+import Review from './review';
 
 const comment = {
   id: `0`,
@@ -19,4 +19,4 @@ it(`Render Review component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/review/review.test.js
+// npm run test.jest -- components/review/review.test

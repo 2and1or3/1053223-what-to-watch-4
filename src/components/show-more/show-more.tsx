@@ -1,7 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const ShowMore = (props) => {
+interface Props {
+  onMoreClick: () => void;
+  hide: boolean;
+}
+
+const ShowMore: React.FunctionComponent<Props> = (props: Props) => {
   const {onMoreClick, hide} = props;
 
   const element = (
@@ -10,11 +14,7 @@ const ShowMore = (props) => {
     </div>
   );
 
-  return hide ? hide : element;
-};
-
-ShowMore.propTypes = {
-  onMoreClick: PropTypes.func.isRequired,
+  return hide ? null : element;
 };
 
 export default ShowMore;

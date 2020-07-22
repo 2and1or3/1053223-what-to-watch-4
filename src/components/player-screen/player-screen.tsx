@@ -1,11 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {filmProp, refProp} from '../../props.js';
-import history from '../../history.js';
-import {getWatchTimeFormat} from '../../utils.js';
+import {FilmType, RefType} from '../../types';
+import history from '../../history';
+import {getWatchTimeFormat} from '../../utils';
 
-const PlayerScreen = (props) => {
+interface Props {
+  currentFilm: FilmType;
+  children: React.ReactNode;
+  onPlayClick: () => void;
+  progress: number;
+  isPlaying: boolean;
+  onFullScreen: () => void;
+  containerRef: RefType;
+  progressRef: RefType;
+  onToggleMove: (downEvt: React.SyntheticEvent) => void;
+  togglerPosition: number;
+}
+
+const PlayerScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {
     currentFilm,
     children,
@@ -68,22 +80,6 @@ const PlayerScreen = (props) => {
       </div>
     </div>
   );
-};
-
-PlayerScreen.propTypes = {
-  currentFilm: filmProp,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  onPlayClick: PropTypes.func.isRequired,
-  progress: PropTypes.number.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  onFullScreen: PropTypes.func.isRequired,
-  containerRef: refProp,
-  progressRef: refProp,
-  onToggleMove: PropTypes.func.isRequired,
-  togglerPosition: PropTypes.number.isRequired,
 };
 
 export default PlayerScreen;

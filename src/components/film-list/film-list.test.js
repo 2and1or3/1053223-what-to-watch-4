@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
-import {FilmList} from './film-list.jsx';
-import {createVideoMock} from '../../utils.js';
+import {FilmList} from './film-list';
+import {createVideoMock} from '../../utils';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
@@ -191,4 +191,4 @@ describe(`Render FilmList component`, () => {
   });
 });
 
-// npm run test.jest -- components/film-list/film-list.test.js
+// npm run test.jest -- components/film-list/film-list.test

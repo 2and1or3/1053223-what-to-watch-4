@@ -1,28 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Router, Switch, Route} from "react-router-dom";
-import {PureComponent} from "react";
 import {connect} from "react-redux";
 
-import Main from '../main/main.jsx';
-import FilmDetails from '../film-details/film-details.jsx';
-import PlayerScreen from '../player-screen/player-screen.jsx';
-import AlertError from '../alert-error/alert-error.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import AddReview from '../add-review/add-review.jsx';
-import MyList from '../my-list/my-list.jsx';
-import PrivateRoute from '../private-route/private-route.jsx';
+import Main from '../main/main';
+import FilmDetails from '../film-details/film-details';
+import PlayerScreen from '../player-screen/player-screen';
+import AlertError from '../alert-error/alert-error';
+import SignIn from '../sign-in/sign-in';
+import AddReview from '../add-review/add-review';
+import MyList from '../my-list/my-list';
+import PrivateRoute from '../private-route/private-route';
 
 
-import {filmProp} from '../../props.js';
-import {AppRoute, UserStatus} from '../../consts.js';
-import withVideo from '../../hocs/with-video/with-video.js';
-import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application.js';
-import {getError} from '../../reducer/application/selectors.js';
-import {getPromoFilm} from '../../reducer/data/selectors.js';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
-import history from '../../history.js';
-import withFindId from '../../hocs/with-find-id/with-find-id.js';
+import {FilmType} from '../../types';
+import {AppRoute, UserStatus} from '../../consts';
+import withVideo from '../../hocs/with-video/with-video';
+import {ActionCreator as ApplicationActionCreator} from '../../reducer/application/application';
+import {getError} from '../../reducer/application/selectors';
+import {getPromoFilm} from '../../reducer/data/selectors';
+import {Operation as UserOperation} from '../../reducer/user/user';
+import history from '../../history';
+import withFindId from '../../hocs/with-find-id/with-find-id';
 
 
 const PlayerScreenWithVideo = withVideo(PlayerScreen);
@@ -32,7 +30,15 @@ const FilmDetailsWithFindId = withFindId(FilmDetails);
 const AddReviewWithFindId = withFindId(AddReview);
 
 
-class App extends PureComponent {
+interface Props {
+  promoFilm: FilmType;
+  onClose: () => void;
+  onAuthSubmit: (login: string, password: string, onSuccess: () => void) => void;
+  onCommentSend: (review: {rating: number; comment: string}, id: number, handleResponse: {onSuccess: () => void; onError: () => void}) => void;
+  error: {message: string; code: string | number};
+}
+
+class App extends React.PureComponent<Props> {
 
   render() {
     const {error, onClose, onCommentSend, onAuthSubmit, promoFilm} = this.props;
@@ -91,17 +97,6 @@ class App extends PureComponent {
     );
   }
 }
-
-App.propTypes = {
-  promoFilm: filmProp,
-  onClose: PropTypes.func.isRequired,
-  onAuthSubmit: PropTypes.func.isRequired,
-  onCommentSend: PropTypes.func.isRequired,
-  error: PropTypes.shape({
-    message: PropTypes.string.isRequired,
-    code: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  }).isRequired,
-};
 
 const mapStateToProps = (state) => ({
   error: getError(state),

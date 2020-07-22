@@ -1,10 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {AppRoute} from '../../consts.js';
-import history from '../../history.js';
+import {AppRoute} from '../../consts';
+import history from '../../history';
 
-const Logo = (props) => {
+interface Props {
+  hasLight?: boolean;
+}
+
+const Logo: React.FunctionComponent<Props> = (props: Props) => {
   const {hasLight} = props;
   const logoClass = `logo__link ${hasLight ? `logo__link--light` : ``}`;
 
@@ -20,10 +23,6 @@ const Logo = (props) => {
       </a>
     </div>
   );
-};
-
-Logo.propTypes = {
-  hasLight: PropTypes.bool,
 };
 
 export default Logo;

@@ -1,20 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 
-import App from './components/app/app.jsx';
+import App from './components/app/app';
 
-import {reducer} from './reducer/reducer.js';
-import {Operation as DataOperation} from './reducer/data/data.js';
-import {Operation as UserOperation} from './reducer/user/user.js';
-import createApi from './api.js';
-import {ActionCreator as ApplicationActionCreator} from './reducer/application/application.js';
-import {ActionCreator as UserActionCreator} from './reducer/user/user.js';
+import {reducer} from './reducer/reducer';
+import {Operation as DataOperation} from './reducer/data/data';
+import {Operation as UserOperation} from './reducer/user/user';
+import createApi from './api';
+import {ActionCreator as ApplicationActionCreator} from './reducer/application/application';
+import {ActionCreator as UserActionCreator} from './reducer/user/user';
 
-import {UserStatus} from './consts.js';
+import {UserStatus} from './consts';
 
 const rootContainer = document.querySelector(`#root`);
 
@@ -44,8 +44,9 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-Promise.allSettled([
-  store.dispatch(UserOperation.checkAuthStatus()),
+Promise.all([
+  store.dispatch(UserOperation.checkAuthStatus()).catch(() => {
+  }),
   store.dispatch(DataOperation.getPromoFilm()),
   store.dispatch(DataOperation.loadFilms())])
   .then(() => initApp())

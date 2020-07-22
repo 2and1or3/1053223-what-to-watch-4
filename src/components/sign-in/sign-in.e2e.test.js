@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import SignIn from './sign-in.jsx';
+import SignIn from './sign-in';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -31,4 +31,4 @@ describe(`SignIn component`, () => {
   });
 });
 
-// npm run test.jest -- components/sign-in/sign-in.e2e.test.js
+// npm run test.jest -- components/sign-in/sign-in.e2e.test

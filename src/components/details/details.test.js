@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Details from './details.jsx';
+import Details from './details';
 
 const film = {
   id: `1`,
@@ -42,4 +42,4 @@ it(`Render Details component`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-// npm run test.jest -- components/details/details.test.js
+// npm run test.jest -- components/details/details.test

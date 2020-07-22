@@ -4,8 +4,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
 
-import Header from './header.jsx';
-import NameSpace from '../../reducer/namespace.js';
+import Header from './header';
+import NameSpace from '../../reducer/namespace';
 
 const middlewares = [];
 
@@ -103,4 +103,4 @@ describe(`Render Header component`, () => {
   });
 });
 
-// npm run test.jest -- components/header/header.test.js
+// npm run test.jest -- components/header/header.test

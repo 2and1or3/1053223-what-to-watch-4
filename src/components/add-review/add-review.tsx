@@ -1,35 +1,48 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {PureComponent} from "react";
+import * as React from "react";
 
-import Logo from '../logo/logo.jsx';
-import BreadCrumbs from '../breadcrumbs/breadcrumbs.jsx';
-import UserBlock from '../user-block/user-block.jsx';
+import Logo from '../logo/logo';
+import BreadCrumbs from '../breadcrumbs/breadcrumbs';
+import UserBlock from '../user-block/user-block';
 
-import {filmProp} from '../../props.js';
-import history from '../../history.js';
+import {FilmType} from '../../types';
+import history from '../../history';
 
-const PostLimit = {
-  MIN_LENGTH: 50,
-  MAX_LENGTH: 400,
-};
+enum PostLimit {
+  MIN_LENGTH = 50,
+  MAX_LENGTH = 400,
+}
 
 const DEFAULT_CHECKED = 3;
 
-class AddReview extends PureComponent {
+interface Props {
+  onCommentSend: (review: {rating: number; comment: string}, id: number, handleResponse: {onSuccess: () => void; onError: () => void}) => void;
+  currentFilm: FilmType;
+}
+
+
+class AddReview extends React.PureComponent<Props> {
+  private textRef: React.RefObject<HTMLTextAreaElement>;
+  private sendRef: React.RefObject<HTMLButtonElement>;
+  private inputElements: HTMLInputElement[];
+
+  private handleResponse: {
+    onSuccess: () => void;
+    onError: () => void;
+  }
+
   constructor(props) {
     super(props);
 
-    this._inputRefs = [];
-    this._textRef = React.createRef();
-    this._sendRef = React.createRef();
+    this.inputElements = [];
+    this.textRef = React.createRef();
+    this.sendRef = React.createRef();
 
     this._addRef = this._addRef.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleTextInput = this._handleTextInput.bind(this);
     this._enableForm = this._enableForm.bind(this);
 
-    this._handleResponse = {
+    this.handleResponse = {
       onSuccess: () => {
         this._enableForm();
         history.goBack();
@@ -42,7 +55,7 @@ class AddReview extends PureComponent {
   }
 
   _addRef(ref) {
-    this._inputRefs.push(ref);
+    this.inputElements.push(ref);
   }
 
   _handleSubmit(evt) {
@@ -51,10 +64,10 @@ class AddReview extends PureComponent {
     let rating = 0;
     let comment = ``;
 
-    this._inputRefs.map((input) => {
+    this.inputElements.map((input) => {
       if (input.checked) {
-        rating = input.value;
-        comment = this._textRef.current.value;
+        rating = +input.value;
+        comment = this.textRef.current.value;
       }
     });
 
@@ -65,47 +78,47 @@ class AddReview extends PureComponent {
         comment,
       };
 
-      onCommentSend(review, currentFilm.id, this._handleResponse);
+      onCommentSend(review, currentFilm.id, this.handleResponse);
       this._disableForm();
     }
   }
 
   _disableForm() {
-    this._inputRefs.map((input) => {
+    this.inputElements.map((input) => {
       input.disabled = true;
     });
 
-    this._sendRef.current.disabled = true;
-    this._textRef.current.disabled = true;
+    this.sendRef.current.disabled = true;
+    this.textRef.current.disabled = true;
   }
 
   _enableForm() {
-    this._inputRefs.map((input) => {
+    this.inputElements.map((input) => {
       input.disabled = false;
     });
 
-    this._textRef.current.disabled = false;
+    this.textRef.current.disabled = false;
   }
 
   _handleTextInput() {
-    const textarea = this._textRef.current;
+    const textarea = this.textRef.current;
     const length = textarea.value.length;
 
     if (PostLimit.MIN_LENGTH <= length && length <= PostLimit.MAX_LENGTH) {
-      this._sendRef.current.disabled = false;
+      this.sendRef.current.disabled = false;
     } else {
-      this._sendRef.current.disabled = true;
+      this.sendRef.current.disabled = true;
     }
   }
 
   componentDidMount() {
-    this._inputRefs.map((input, i) => {
+    this.inputElements.map((input, i) => {
       if (i + 1 === DEFAULT_CHECKED) {
         input.checked = true;
       }
     });
 
-    this._sendRef.current.disabled = true;
+    this.sendRef.current.disabled = true;
   }
 
   render() {
@@ -154,9 +167,9 @@ class AddReview extends PureComponent {
             </div>
 
             <div className="add-review__text">
-              <textarea onChange={this._handleTextInput} ref={this._textRef} className="add-review__textarea" minLength={PostLimit.MIN_LENGTH} maxLength={PostLimit.MAX_LENGTH} name="review-text" id="review-text" placeholder="Review text"></textarea>
+              <textarea onChange={this._handleTextInput} ref={this.textRef} className="add-review__textarea" minLength={PostLimit.MIN_LENGTH} maxLength={PostLimit.MAX_LENGTH} name="review-text" id="review-text" placeholder="Review text"></textarea>
               <div className="add-review__submit">
-                <button ref={this._sendRef} className="add-review__btn" type="submit">Post</button>
+                <button ref={this.sendRef} className="add-review__btn" type="submit">Post</button>
               </div>
             </div>
           </form>
@@ -165,10 +178,5 @@ class AddReview extends PureComponent {
     );
   }
 }
-
-AddReview.propTypes = {
-  onCommentSend: PropTypes.func.isRequired,
-  currentFilm: filmProp,
-};
 
 export default AddReview;
