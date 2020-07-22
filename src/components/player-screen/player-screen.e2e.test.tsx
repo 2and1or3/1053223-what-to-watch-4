@@ -1,17 +1,20 @@
-import React from "react";
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as React from "react";
+import * as Enzyme from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
 import PlayerScreen from './player-screen';
+import {FilmType} from '../../types';
+import {noop} from '../../utils';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const film = {
+const film: FilmType = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -41,11 +44,11 @@ const children = <div/>;
 
 const commonProps = {
   currentFilm: film,
-  onPlayClick: () => {},
+  onPlayClick: noop,
   progress: 5,
   isPlaying: false,
-  onFullScreen: () => {},
-  onToggleMove: () => {},
+  onFullScreen: noop,
+  onToggleMove: noop,
   togglerPosition: 5,
 };
 
@@ -57,8 +60,8 @@ describe(`PlayerScreen component`, () => {
     const wrapper = Enzyme.mount(
         <PlayerScreen
           {... commonProps}
-          containerRef = {React.createRef()}
-          progressRef = {React.createRef()}
+          containerRef = {React.createRef<HTMLDivElement>()}
+          progressRef = {React.createRef<HTMLProgressElement>()}
           onPlayClick = {mockPlayClick}
           onFullScreen = {mockFullScreenClick}
         >

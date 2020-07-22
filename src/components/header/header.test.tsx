@@ -1,23 +1,24 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
 
 import Header from './header';
 import NameSpace from '../../reducer/namespace';
+import {FilmType} from '../../types';
+import {noop} from '../../utils';
 
-const middlewares = [];
-
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore();
 
 
-const film = {
+const film: FilmType = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -48,7 +49,7 @@ const children = <div/>;
 const commonProps = {
   film,
   isFull: true,
-  onPlayClick: () => {},
+  onPlayClick: noop,
 };
 
 describe(`Render Header component`, () => {

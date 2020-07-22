@@ -1,4 +1,4 @@
-import {AppRoute, MONTHS} from './consts.js';
+import {AppRoute, MONTHS} from './consts';
 
 const createVideoMock = (element) => {
   if (element.type === `video`) {
@@ -114,4 +114,6 @@ const getUniqueGenres = (genres) => {
   return localUniqueGenres;
 };
 
-export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments, GetPath, getDateFormat, getWatchTimeFormat, getUniqueGenres};
+const noop = () => {};
+
+export {createVideoMock, adapterToLocalFilms, extend, adapterToLocalComments, GetPath, getDateFormat, getWatchTimeFormat, getUniqueGenres, noop};

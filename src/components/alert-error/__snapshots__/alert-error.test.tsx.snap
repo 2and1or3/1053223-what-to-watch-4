@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render AlertError component Render AlertError with error 1`] = `
+<div
+  className="error"
+>
+  <button
+    className="error__close"
+    onClick={[Function]}
+    type="button"
+  >
+    Close
+  </button>
+  <h2
+    className="error__title"
+  >
+    Something goes wrong :(
+  </h2>
+  <p
+    className="error__message"
+  >
+    Server is unavailable
+    : 
+    <span>
+      503
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Render AlertError component Render AlertError without error 1`] = `null`;

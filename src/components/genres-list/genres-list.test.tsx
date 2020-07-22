@@ -1,9 +1,11 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import GenresList from './genres-list';
+import {GenreType} from '../../types';
+import {noop} from '../../utils';
 
-const genres = [
+const genres: GenreType[] = [
   {
     id: `id1`,
     title: `id1`,
@@ -16,7 +18,7 @@ const genres = [
 
 it(`Render GenresList component`, () => {
   const tree = renderer
-    .create(<GenresList activeItem = {`all`} onLinkClick = {() => {}} onTargetClick = {() => {}} genres = {genres}/>)
+    .create(<GenresList activeItem = {`all`} onLinkClick = {noop} onTargetClick = {noop} genres = {genres}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

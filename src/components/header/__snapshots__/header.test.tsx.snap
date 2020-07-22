@@ -11,7 +11,7 @@ exports[`Render Header component Render full Header component 1`] = `
       className="movie-card__bg"
       style={
         Object {
-          "backgroundColor": undefined,
+          "backgroundColor": "#000",
         }
       }
     >
@@ -165,7 +165,7 @@ exports[`Render Header component Render short Header component 1`] = `
       className="movie-card__bg"
       style={
         Object {
-          "backgroundColor": undefined,
+          "backgroundColor": "#000",
         }
       }
     >

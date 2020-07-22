@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Subtract} from "utility-types";
 
-import {FilmType, RefType} from '../../types';
+import {FilmType} from '../../types';
 
 const getLeftfromElement = (evt, element) =>{
   return evt.clientX - element.getBoundingClientRect().x;
@@ -38,8 +38,8 @@ interface InjectedProps {
   progress: number;
   isPlaying: boolean;
   onFullScreen: () => void;
-  containerRef: RefType;
-  progressRef: RefType;
+  containerRef: React.RefObject<HTMLDivElement>;
+  progressRef: React.RefObject<HTMLProgressElement>;
   onToggleMove: (downEvt: React.SyntheticEvent) => void;
   togglerPosition: number;
   children: React.ReactNode;

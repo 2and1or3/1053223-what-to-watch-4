@@ -15,6 +15,7 @@ import {ActionCreator as ApplicationActionCreator} from './reducer/application/a
 import {ActionCreator as UserActionCreator} from './reducer/user/user';
 
 import {UserStatus} from './consts';
+import {noop} from './utils';
 
 const rootContainer = document.querySelector(`#root`);
 
@@ -45,8 +46,7 @@ const store = createStore(
 );
 
 Promise.all([
-  store.dispatch(UserOperation.checkAuthStatus()).catch(() => {
-  }),
+  store.dispatch(UserOperation.checkAuthStatus()).catch(noop),
   store.dispatch(DataOperation.getPromoFilm()),
   store.dispatch(DataOperation.loadFilms())])
   .then(() => initApp())

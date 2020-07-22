@@ -1,11 +1,12 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import ShowMore from './show-more';
+import {noop} from '../../utils';
 
 it(`Render ShowMore component`, () => {
   const tree = renderer
-    .create(<ShowMore onMoreClick = {() => {}}/>)
+    .create(<ShowMore onMoreClick = {noop} hide = {false}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

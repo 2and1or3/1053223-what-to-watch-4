@@ -1,14 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import Details from './details';
+import {FilmType} from '../../types';
 
-const film = {
+const film: FilmType = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,

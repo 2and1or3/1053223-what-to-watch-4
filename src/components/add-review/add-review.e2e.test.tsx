@@ -1,24 +1,26 @@
-import React from "react";
-import Enzyme from "enzyme";
+import * as React from "react";
+import * as Enzyme from "enzyme";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import Adapter from "enzyme-adapter-react-16";
+import * as Adapter from "enzyme-adapter-react-16";
 import {Router} from "react-router-dom";
 
 import AddReview from './add-review';
 import NameSpace from '../../reducer/namespace';
 import history from '../../history';
+import {FilmType} from '../../types';
 
 Enzyme.configure({adapter: new Adapter()});
 
 const mockStore = configureStore();
 
-const film = {
+const film: FilmType = {
   id: `0`,
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -48,7 +50,7 @@ describe(`AddReview component works correctly`, () => {
   it(`AddReview component pass review object and film id into onCommentSend func`, () => {
     const review = {
       comment: `some very very very long long long long review text for film`,
-      rating: `1`,
+      rating: 1,
     };
 
     const initialState = {
@@ -70,7 +72,7 @@ describe(`AddReview component works correctly`, () => {
 
     const form = wrapper.find(`.add-review__form`);
     const textarea = wrapper.find(`.add-review__textarea`);
-    const ratingInput = wrapper.find(`.rating__input`).at(review.rating - 1);
+    const ratingInput = wrapper.find(`.rating__input`).at(Number(review.rating) - 1);
 
     ratingInput.instance().checked = true;
     textarea.instance().value = review.comment;

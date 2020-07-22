@@ -1,15 +1,19 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import withFindId from './with-find-id';
-import {filmProp} from '../../props';
+import {FilmType} from '../../types';
 import NameSpace from '../../reducer/namespace';
 
 const mockStore = configureStore();
 
-const MockComponent = (props) => {
+interface MockProps {
+  currentFilm: FilmType;
+}
+
+const MockComponent: React.FunctionComponent<MockProps> = (props: MockProps) => {
   const {currentFilm} = props;
 
   return (
@@ -17,10 +21,6 @@ const MockComponent = (props) => {
       {JSON.stringify(currentFilm)}
     </div>
   );
-};
-
-MockComponent.propTypes = {
-  currentFilm: filmProp,
 };
 
 const MockComponentWithFindId = withFindId(MockComponent);

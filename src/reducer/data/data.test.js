@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 
 import {reducer, ActionType, Operation, ActionCreator} from './data';
 import createApi from '../../api';
-import {adapterToLocalFilms} from '../../utils';
+import {adapterToLocalFilms, noop} from '../../utils';
 import {DEFAULT_FILM} from '../../consts';
 
 const films = [
@@ -126,7 +126,7 @@ const SERVER_COMMENTS = [
   }
 ];
 
-const api = createApi(() => {});
+const api = createApi(noop);
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator should return correct action for loadFilms`, () => {

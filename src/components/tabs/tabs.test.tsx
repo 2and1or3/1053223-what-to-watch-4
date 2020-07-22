@@ -1,15 +1,18 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import Tabs from './tabs';
 import {TabType} from '../../consts';
+import {FilmType, CommentType} from '../../types';
+import {noop} from '../../utils';
 
-const film = {
+const film: FilmType = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -33,10 +36,9 @@ const film = {
     `Adrien Brody`,
     `Ralph Fiennes`,
     `Jeff Goldblum`],
-  commentIds: [`0`, `1`, `2`, `3`, `4`, `5`],
 };
 
-const comments = [{
+const comments: CommentType[] = [{
   id: `0`,
   author: `Kate Muir`,
   date: `Month dd, yyyy`,
@@ -60,7 +62,7 @@ const comments = [{
 
 it(`Render Tabs component`, () => {
   const tree = renderer
-    .create(<Tabs film = {film} comments = {comments} onTargetClick = {() => {}} activeItem = {TabType.OVERVIEW}/>)
+    .create(<Tabs film = {film} comments = {comments} onTargetClick = {noop} activeItem = {TabType.OVERVIEW}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

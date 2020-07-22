@@ -1,16 +1,17 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import {createVideoMock} from '../../utils';
 import withVideo from './with-video';
+import {FilmType} from '../../types';
 
-const film = {
+const film: FilmType = {
   id: `0`,
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -36,20 +37,17 @@ const film = {
     `Jeff Goldblum`],
 };
 
-const MockComponent = (props) => {
+interface MockProps {
+  children: React.ReactNode;
+}
+
+const MockComponent: React.FunctionComponent<MockProps> = (props: MockProps) => {
   const {children} = props;
   return (
     <div>
       {children}
     </div>
   );
-};
-
-MockComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired
 };
 
 const MockComponentWithVideo = withVideo(MockComponent);

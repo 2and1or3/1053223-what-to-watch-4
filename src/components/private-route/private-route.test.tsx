@@ -1,8 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
 import {PrivateRoute} from './private-route';
+import {noop} from '../../utils';
 
 it(`Render PrivateRoute component`, () => {
   const tree = renderer
@@ -11,7 +12,7 @@ it(`Render PrivateRoute component`, () => {
           <PrivateRoute
             exact
             path = {`some path`}
-            render = {() => {}}
+            render = {noop}
             userStatus = {`AUTH`}
             allowForUserStatus = {`AUTH`}
             redirectTo = {`/login`}

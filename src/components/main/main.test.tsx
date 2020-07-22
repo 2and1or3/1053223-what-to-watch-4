@@ -1,5 +1,5 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
@@ -7,17 +7,18 @@ import {BrowserRouter} from "react-router-dom";
 import Main from './main';
 import {createVideoMock} from '../../utils';
 import NameSpace from '../../reducer/namespace';
+import {FilmType} from '../../types';
 
-const middlewares = [];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore();
 
-const films = [
+const films: FilmType[] = [
   {
     id: `0`,
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
     poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
+    backgroundColor: `#000`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     isFavorite: false,
     src: `path`,
@@ -49,6 +50,7 @@ const films = [
     poster: `img/bohemian-rhapsody.jpg`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
+    backgroundColor: `#000`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     isFavorite: false,
     src: `path`,
@@ -79,6 +81,7 @@ const films = [
     poster: `img/macbeth.jpg`,
     preview: `path-to-video`,
     background: `img/bg-the-grand-budapest-hotel.jpg`,
+    backgroundColor: `#000`,
     cover: `img/the-grand-budapest-hotel-poster.jpg`,
     isFavorite: false,
     src: `path`,

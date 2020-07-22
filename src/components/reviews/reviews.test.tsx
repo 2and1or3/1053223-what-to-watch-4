@@ -1,9 +1,11 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import {Reviews} from './reviews';
+import {CommentType} from '../../types';
+import {noop} from '../../utils';
 
-const comments = [{
+const comments: CommentType[] = [{
   id: `0`,
   author: `Kate Muir`,
   date: `Month dd, yyyy`,
@@ -28,7 +30,7 @@ const comments = [{
 
 it(`Render Reviews component`, () => {
   const tree = renderer
-    .create(<Reviews comments = {comments} filmId = {`1`} loadComments = {() => {}}/>)
+    .create(<Reviews comments = {comments} filmId = {`1`} loadComments = {noop}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

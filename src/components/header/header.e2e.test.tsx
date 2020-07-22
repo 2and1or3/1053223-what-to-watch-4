@@ -1,17 +1,19 @@
-import React from "react";
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as React from "react";
+import * as Enzyme from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
 import {Header} from './header';
+import {FilmType} from '../../types';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const film = {
+const film: FilmType = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -40,7 +42,7 @@ const film = {
 it(`onFavoriteToggle recieves film id and toggle status`, () => {
   const mockToggle = jest.fn();
 
-  const wrapper = Enzyme.shallow(<Header film = {film} onFavoriteToggle = {mockToggle} authStatus = {`AUTH`}/>);
+  const wrapper = Enzyme.shallow(<Header film = {film} onFavoriteToggle = {mockToggle} authStatus = {`AUTH`}><div/></Header>);
 
   const toggleButton = wrapper.find(`.btn--list`);
   toggleButton.simulate(`click`);

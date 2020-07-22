@@ -15,7 +15,7 @@ enum PostLimit {
 const DEFAULT_CHECKED = 3;
 
 interface Props {
-  onCommentSend: (review: {rating: number; comment: string}, id: number, handleResponse: {onSuccess: () => void; onError: () => void}) => void;
+  onCommentSend: (review: {rating: number; comment: string}, id: string, handleResponse: {onSuccess: () => void; onError: () => void}) => void;
   currentFilm: FilmType;
 }
 

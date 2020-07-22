@@ -1,20 +1,23 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 
 import AddReview from './add-review';
 import NameSpace from '../../reducer/namespace';
+import {FilmType} from '../../types';
+import {noop} from '../../utils';
 
 const mockStore = configureStore();
 
-const film = {
+const film: FilmType = {
   id: `0`,
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
@@ -53,7 +56,7 @@ it(`Render AddReview component`, () => {
     .create(
         <Provider store = {store}>
           <BrowserRouter>
-            <AddReview currentFilm = {film} onCommentSend = {() => {}}/>
+            <AddReview currentFilm = {film} onCommentSend = {noop}/>
           </BrowserRouter>
         </Provider>
         , {

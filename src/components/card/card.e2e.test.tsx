@@ -1,23 +1,27 @@
-import React from "react";
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as React from "react";
+import * as Enzyme from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import {shallow} from "enzyme";
 
 import Card from './card';
+import {FilmType} from '../../types';
+import {noop} from '../../utils';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const film = {
+const film: FilmType = {
   id: `1`,
   title: `the Grand Budapest Hotel`,
   poster: `img/bohemian-rhapsody.jpg`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#000`,
   cover: `img/the-grand-budapest-hotel-poster.jpg`,
   isFavorite: false,
   src: `path`,
   genre: `Drama`,
   release: `2014`,
+  duration: 99,
   description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
   rating: 8.9,
   voiceCount: 240,
@@ -26,7 +30,7 @@ const film = {
 };
 
 const mockEvent = {
-  preventDefault() {}
+  preventDefault: noop,
 };
 
 describe(`Card component`, () => {
@@ -37,8 +41,8 @@ describe(`Card component`, () => {
         <Card
           currentFilm = {film}
           onCardClick = {onClick}
-          onCardHover = {() => {}}
-          onCardLeave = {() => {}}>[]
+          onCardHover = {noop}
+          onCardLeave = {noop}>[]
         </Card>);
     wrapper.find(`.small-movie-card__link`).simulate(`click`, mockEvent);
     wrapper.find(`.small-movie-card__image`).simulate(`click`, mockEvent);
@@ -61,9 +65,9 @@ describe(`Card component`, () => {
     const wrapper = shallow(
         <Card
           currentFilm = {film}
-          onCardClick = {() => {}}
+          onCardClick = {noop}
           onCardHover = {onCardHover}
-          onCardLeave = {() => {}}>[]
+          onCardLeave = {noop}>[]
         </Card>);
     wrapper.find(`.small-movie-card`).simulate(`mouseenter`);
   });

@@ -1,5 +1,5 @@
 interface FilmType {
-  id: number;
+  id: string;
   title: string;
   preview: string;
   background: string;
@@ -31,6 +31,4 @@ interface GenreType {
   title: string;
 }
 
-type RefType = () => void | {current: React.ReactNode};
-
-export {FilmType, CommentType, RefType, GenreType};
+export {FilmType, CommentType, GenreType};

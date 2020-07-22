@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render FilmDetails component 1`] = `
+exports[`Render Main component 1`] = `
 Array [
   <section
-    className="movie-card movie-card--full"
+    className="movie-card "
   >
     <div
-      className="movie-card__hero"
+      className=""
     >
       <div
         className="movie-card__bg"
         style={
           Object {
-            "backgroundColor": undefined,
+            "backgroundColor": "#000",
           }
         }
       >
         <img
-          alt="the Grand Budapest Hotel"
+          alt="Fantastic Beasts: The Crimes of Grindelwald"
           src="img/bg-the-grand-budapest-hotel.jpg"
         />
       </div>
@@ -75,16 +75,25 @@ Array [
         className="movie-card__wrap"
       >
         <div
-          className=""
+          className="movie-card__info"
         >
-          
+          <div
+            className="movie-card__poster"
+          >
+            <img
+              alt="Fantastic Beasts: The Crimes of Grindelwald poster"
+              height="327"
+              src="img/the-grand-budapest-hotel-poster.jpg"
+              width="218"
+            />
+          </div>
           <div
             className="movie-card__desc"
           >
             <h2
               className="movie-card__title"
             >
-              the Grand Budapest Hotel
+              Fantastic Beasts: The Crimes of Grindelwald
             </h2>
             <p
               className="movie-card__meta"
@@ -139,146 +148,138 @@ Array [
                   My list
                 </span>
               </button>
-              <a
-                className="btn movie-card__button"
-                href="add-review.html"
-                onClick={[Function]}
-              >
-                Add review
-              </a>
+              
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div
-      className="movie-card__wrap movie-card__translate-top"
-    >
-      <div
-        className="movie-card__info"
-      >
-        <div
-          className="movie-card__poster movie-card__poster--big"
-        >
-          <img
-            alt="the Grand Budapest Hotel poster"
-            height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
-            width="218"
-          />
-        </div>
-        <div
-          className="movie-card__desc"
-        >
-          <nav
-            className="movie-nav movie-card__nav"
-          >
-            <ul
-              className="movie-nav__list"
-            >
-              <li
-                className="movie-nav__item movie-nav__item--active"
-              >
-                <a
-                  className="movie-nav__link"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Overview
-                </a>
-              </li>
-              <li
-                className="movie-nav__item "
-              >
-                <a
-                  className="movie-nav__link"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Details
-                </a>
-              </li>
-              <li
-                className="movie-nav__item "
-              >
-                <a
-                  className="movie-nav__link"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Reviews
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div
-            className="movie-rating"
-          >
-            <div
-              className="movie-rating__score"
-            >
-              8.9
-            </div>
-            <p
-              className="movie-rating__meta"
-            >
-              <span
-                className="movie-rating__level"
-              >
-                very good
-              </span>
-              <span
-                className="movie-rating__count"
-              >
-                240
-                 ratings
-              </span>
-            </p>
-          </div>
-          <div
-            className="movie-card__text"
-          >
-            <p>
-              In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
-            </p>
-            <p
-              className="movie-card__director"
-            >
-              <strong>
-                Director: 
-                Wes Andreson
-              </strong>
-            </p>
-            <p
-              className="movie-card__starring"
-            >
-              <strong>
-                Starring: 
-                Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                 and other
-              </strong>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </section>,
   <div
     className="page-content"
   >
     <section
-      className="catalog "
+      className="catalog catalog--like-this"
     >
       <h2
-        className="catalog__title "
+        className="catalog__title visually-hidden"
       >
-        More like this
+        Catalog
       </h2>
-      
+      <ul
+        className="catalog__genres-list"
+      >
+        <li
+          className="catalog__genres-item "
+          id="id1"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            id1
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+          id="id2"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            id2
+          </a>
+        </li>
+      </ul>
       <div
         className="catalog__movies-list"
-      />
-      
+      >
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href=""
+              onClick={[Function]}
+            >
+              Fantastic Beasts: The Crimes of Grindelwald
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href=""
+              onClick={[Function]}
+            >
+              the Grand Budapest Hotel
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              className="player__video"
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href=""
+              onClick={[Function]}
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+      </div>
     </section>
     <footer
       className="page-footer"

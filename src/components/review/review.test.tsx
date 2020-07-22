@@ -1,9 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import Review from './review';
+import {CommentType} from '../../types';
 
-const comment = {
+const comment: CommentType = {
   id: `0`,
   author: `Kate Muir`,
   date: `Month dd, yyyy`,

@@ -1,14 +1,18 @@
-import React from "react";
-import Enzyme from "enzyme";
+import * as React from "react";
+import * as Enzyme from "enzyme";
 import {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import PropTypes from "prop-types";
+import * as Adapter from "enzyme-adapter-react-16";
 
 import withActiveItem from './with-active-item';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const MockComponent = (props) =>{
+interface MockProps {
+  activeItem: string | number | React.ReactNode | {};
+  onTargetClick: (subject: string) => void;
+}
+
+const MockComponent: React.FunctionComponent<MockProps> = (props: MockProps) => {
   const {activeItem, onTargetClick} = props;
 
   const Type = {
@@ -34,11 +38,6 @@ const MockComponent = (props) =>{
       ></li>
     </ul>
   );
-};
-
-MockComponent.propTypes = {
-  activeItem: PropTypes.any.isRequired,
-  onTargetClick: PropTypes.func.isRequired,
 };
 
 const MockComponentWithActiveItem = withActiveItem(MockComponent);

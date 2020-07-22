@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {FilmType, RefType} from '../../types';
+import {FilmType} from '../../types';
 import history from '../../history';
 import {getWatchTimeFormat} from '../../utils';
 
@@ -11,8 +11,8 @@ interface Props {
   progress: number;
   isPlaying: boolean;
   onFullScreen: () => void;
-  containerRef: RefType;
-  progressRef: RefType;
+  containerRef: React.RefObject<HTMLDivElement>;
+  progressRef: React.RefObject<HTMLProgressElement>;
   onToggleMove: (downEvt: React.SyntheticEvent) => void;
   togglerPosition: number;
 }

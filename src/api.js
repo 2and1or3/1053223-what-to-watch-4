@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {URL} from './consts.js';
+import {URL} from './consts';
 
 const ErrorStatus = {
   BAD_REQUEST: 400,

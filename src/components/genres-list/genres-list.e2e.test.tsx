@@ -1,12 +1,14 @@
-import React from "react";
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as React from "react";
+import * as Enzyme from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
 import GenresList from './genres-list';
+import {GenreType} from '../../types';
+import {noop} from '../../utils';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const genres = [
+const genres: GenreType[] = [
   {
     id: `all`,
     title: `All genres`,
@@ -21,7 +23,7 @@ it(`onLinkClick recieves correct genre`, () => {
   const mockLinkClick = jest.fn();
 
 
-  const wrapper = Enzyme.shallow(<GenresList onTargetClick = {() => {}} onLinkClick = {mockLinkClick} genres = {genres} activeItem = {``}/>);
+  const wrapper = Enzyme.shallow(<GenresList onTargetClick = {noop} onLinkClick = {mockLinkClick} genres = {genres} activeItem = {``}/>);
 
   const secondGenre = wrapper.find(`.catalog__genres-link`).at(1);
 

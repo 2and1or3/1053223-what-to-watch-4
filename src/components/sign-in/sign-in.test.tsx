@@ -1,11 +1,12 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import SignIn from './sign-in';
+import {noop} from '../../utils';
 
 it(`Render SignIn component`, () => {
   const tree = renderer
-    .create(<SignIn onAuthSubmit = {() => {}}/>)
+    .create(<SignIn onAuthSubmit = {noop}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

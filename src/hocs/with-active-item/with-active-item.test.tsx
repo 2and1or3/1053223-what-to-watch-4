@@ -1,17 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
 import withActiveItem from './with-active-item';
 
-const MockComponent = (props) => {
+interface MockProps {
+  activeItem: string | number | React.ReactNode | {};
+}
+
+const MockComponent: React.FunctionComponent<MockProps> = (props: MockProps) => {
   const {activeItem} = props;
 
-  return (<div activeItem={activeItem}/>);
-};
-
-MockComponent.propTypes = {
-  activeItem: PropTypes.string.isRequired,
+  return (<div>{activeItem}</div>);
 };
 
 const MockComponentWithActiveItem = withActiveItem(MockComponent);

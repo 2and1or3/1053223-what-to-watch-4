@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Main component 1`] = `
+exports[`Render App component 1`] = `
 Array [
   <section
     className="movie-card "
@@ -12,7 +12,7 @@ Array [
         className="movie-card__bg"
         style={
           Object {
-            "backgroundColor": undefined,
+            "backgroundColor": "#000",
           }
         }
       >
