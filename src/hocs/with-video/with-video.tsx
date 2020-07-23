@@ -40,6 +40,7 @@ interface InjectedProps {
   onFullScreen: () => void;
   containerRef: React.RefObject<HTMLDivElement>;
   progressRef: React.RefObject<HTMLProgressElement>;
+  videoRef: React.RefObject<HTMLVideoElement>;
   onToggleMove: (downEvt: React.SyntheticEvent) => void;
   togglerPosition: number;
   children: React.ReactNode;
@@ -78,31 +79,34 @@ const withVideo = (Component) => {
 
     componentDidMount() {
       const {currentFilm, isMuted} = this.props;
-      const {preview, poster, duration} = currentFilm;
+      const {preview, poster} = currentFilm;
       const video = this.videoRef.current;
 
       video.poster = poster;
       video.src = preview;
+
+      video.onplay = () => this.setState({isPlaying: true});
+      video.onpause = () => this.setState({isPlaying: false});
+
+      video.muted = isMuted;
 
       if (this.props.isPlaying) {
         video.oncanplaythrough = () => this.setState({isLoading: false});
       }
 
       video.ontimeupdate = () => {
+        const duration = Math.trunc(video.duration);
+
         const progressInPercent = getProgressInPercent(Math.floor(video.currentTime), duration);
+        const progressInSeconds = getProgressInSeconds(progressInPercent, duration);
+
         const nextState = {
-          progress: progressInPercent,
+          progress: progressInSeconds,
           togglerPosition: progressInPercent,
         };
 
         this.setState(nextState);
       };
-
-
-      video.onplay = () => this.setState({isPlaying: true});
-      video.onpause = () => this.setState({isPlaying: false});
-
-      video.muted = isMuted;
     }
 
     componentDidUpdate() {
@@ -155,18 +159,19 @@ const withVideo = (Component) => {
     _handleToggleMove(downEvt) {
       const progressElement = this.progressRef.current;
       const video = this.videoRef.current;
-      const {currentFilm} = this.props;
-      const {duration} = currentFilm;
+
+      const duration = Math.trunc(video.duration);
 
       const handleMove = (moveEvt) => {
         const currentTogglerPosition = getLeftfromElement(moveEvt, progressElement);
         const currentTogglerPositionInPercent = getTogglerPositionInPercent(currentTogglerPosition, progressElement);
+        const progressInSeconds = getProgressInSeconds(currentTogglerPositionInPercent, duration);
 
 
         this.setState({isPlaying: false});
 
         const nextState = {
-          togglerPosition: currentTogglerPositionInPercent,
+          togglerPosition: progressInSeconds,
           progress: currentTogglerPositionInPercent,
         };
 
@@ -178,13 +183,14 @@ const withVideo = (Component) => {
       const handleUp = (upEvt) => {
         const currentTogglerPosition = getLeftfromElement(upEvt, progressElement);
         const currentTogglerPositionInPercent = getTogglerPositionInPercent(currentTogglerPosition, progressElement);
+        const progressInSeconds = getProgressInSeconds(currentTogglerPositionInPercent, duration);
 
         const nextState = {
           togglerPosition: currentTogglerPositionInPercent,
-          progress: currentTogglerPositionInPercent,
+          progress: progressInSeconds,
         };
 
-        video.currentTime = getProgressInSeconds(this.state.progress, duration);
+        video.currentTime = progressInSeconds;
 
         this.setState(nextState);
         setTimeout(() => {
@@ -213,6 +219,7 @@ const withVideo = (Component) => {
           onFullScreen = {this._handleFullScreen}
           containerRef = {this.containerRef}
           progressRef = {this.progressRef}
+          videoRef = {this.videoRef}
           onToggleMove = {this._handleToggleMove}
           togglerPosition = {togglerPosition}
         >

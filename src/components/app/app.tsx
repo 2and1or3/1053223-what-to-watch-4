@@ -38,65 +38,63 @@ interface Props {
   error: {message: string; code: string | number};
 }
 
-class App extends React.PureComponent<Props> {
+const App: React.FunctionComponent<Props> = (props: Props) => {
+  const {error, onClose, onCommentSend, onAuthSubmit, promoFilm} = props;
 
-  render() {
-    const {error, onClose, onCommentSend, onAuthSubmit, promoFilm} = this.props;
+  return (
+    <Router history = {history}>
+      <Switch>
+        <Route
+          exact path = {AppRoute.ROOT}
+          render = {() => {
+            return <Main promoFilm = {promoFilm}/>;
+          }}/>
 
-    return (
-      <Router history = {history}>
-        <Switch>
-          <Route
-            exact path = {AppRoute.ROOT}
-            render = {() => {
-              return <Main promoFilm = {promoFilm}/>;
-            }}/>
+        <PrivateRoute
+          allowForUserStatus = {UserStatus.NO_AUTH}
+          redirectTo = {AppRoute.ROOT}
+          exact path = {AppRoute.LOGIN}
+          render = {() => {
+            return <SignIn onAuthSubmit = {onAuthSubmit}/>;
+          }}/>
 
-          <PrivateRoute
-            allowForUserStatus = {UserStatus.NO_AUTH}
-            redirectTo = {AppRoute.ROOT}
-            exact path = {AppRoute.LOGIN}
-            render = {() => {
-              return <SignIn onAuthSubmit = {onAuthSubmit}/>;
-            }}/>
+        <PrivateRoute
+          allowForUserStatus = {UserStatus.AUTH}
+          redirectTo = {AppRoute.LOGIN}
+          exact path = {AppRoute.REVIEW_BY_ID}
+          render = {(routeProps) => {
+            return <AddReviewWithFindId {...routeProps} onCommentSend = {onCommentSend}/>;
+          }}/>
 
-          <PrivateRoute
-            allowForUserStatus = {UserStatus.AUTH}
-            redirectTo = {AppRoute.LOGIN}
-            exact path = {AppRoute.REVIEW_BY_ID}
-            render = {(props) => {
-              return <AddReviewWithFindId {...props} onCommentSend = {onCommentSend}/>;
-            }}/>
+        <Route
+          exact path = {AppRoute.PLAYER_BY_ID}
+          render = {(routeProps) => {
 
-          <Route
-            exact path = {AppRoute.PLAYER_BY_ID}
-            render = {(props) => {
+            return (<PlayerScreenWithVideoWithFindId
+              {...routeProps}
+              isPlaying = {true}
+              isMuted = {false}
+            />);
+          }}/>
 
-              return (<PlayerScreenWithVideoWithFindId
-                {...props}
-                isPlaying = {true}
-                isMuted = {false}
-              />);
-            }}/>
+        <Route
+          exact path = {AppRoute.FILM_BY_ID}
+          render = {(routeProps) => {
 
-          <Route
-            exact path = {AppRoute.FILM_BY_ID}
-            render = {(props) => {
+            return <FilmDetailsWithFindId {...routeProps}/>;
+          }}/>
 
-              return <FilmDetailsWithFindId {...props}/>;
-            }}/>
+        <PrivateRoute
+          allowForUserStatus = {UserStatus.AUTH}
+          redirectTo = {AppRoute.LOGIN}
+          exact path = {AppRoute.LIST}
+          render = {() => <MyList />}/>
+      </Switch>
+      <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
+    </Router>
+  );
 
-          <PrivateRoute
-            allowForUserStatus = {UserStatus.AUTH}
-            redirectTo = {AppRoute.LOGIN}
-            exact path = {AppRoute.LIST}
-            render = {() => <MyList />}/>
-        </Switch>
-        <AlertError message = {error.message} code = {error.code} onClose = {onClose}/>
-      </Router>
-    );
-  }
-}
+};
 
 const mapStateToProps = (state) => ({
   error: getError(state),

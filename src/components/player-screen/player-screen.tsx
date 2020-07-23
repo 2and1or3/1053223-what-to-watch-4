@@ -13,13 +13,13 @@ interface Props {
   onFullScreen: () => void;
   containerRef: React.RefObject<HTMLDivElement>;
   progressRef: React.RefObject<HTMLProgressElement>;
+  videoRef: React.RefObject<HTMLVideoElement>;
   onToggleMove: (downEvt: React.SyntheticEvent) => void;
   togglerPosition: number;
 }
 
 const PlayerScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {
-    currentFilm,
     children,
     onPlayClick,
     progress,
@@ -27,12 +27,17 @@ const PlayerScreen: React.FunctionComponent<Props> = (props: Props) => {
     onFullScreen,
     containerRef,
     progressRef,
+    videoRef,
     onToggleMove,
     togglerPosition} = props;
 
-  const {duration} = currentFilm;
-  const durationInSeconds = duration * 60;
-  const timeToWatch = getWatchTimeFormat(durationInSeconds - progress);
+  let videoDuration = 0;
+
+  if (videoRef.current) {
+    videoDuration = Math.trunc(videoRef.current.duration);
+  }
+
+  const timeToWatch = getWatchTimeFormat(videoDuration - progress);
 
   const playControl = isPlaying ? <>
       <svg viewBox="0 0 14 21" width="14" height="21">
@@ -58,7 +63,7 @@ const PlayerScreen: React.FunctionComponent<Props> = (props: Props) => {
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time" onMouseDown={onToggleMove}>
-            <progress className="player__progress" value={progress} max="100" ref={progressRef}></progress>
+            <progress className="player__progress" value={togglerPosition} max="100" ref={progressRef}></progress>
             <div className="player__toggler" style={{left: togglerPosition + `%`}}>Toggler</div>
           </div>
           <div className="player__time-value">{timeToWatch}</div>

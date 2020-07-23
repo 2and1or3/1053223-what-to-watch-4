@@ -62,6 +62,7 @@ describe(`PlayerScreen component`, () => {
           {... commonProps}
           containerRef = {React.createRef<HTMLDivElement>()}
           progressRef = {React.createRef<HTMLProgressElement>()}
+          videoRef = {React.createRef<HTMLVideoElement>()}
           onPlayClick = {mockPlayClick}
           onFullScreen = {mockFullScreenClick}
         >

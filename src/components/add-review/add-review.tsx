@@ -54,6 +54,16 @@ class AddReview extends React.PureComponent<Props> {
     };
   }
 
+  componentDidMount() {
+    this.inputElements.map((input, i) => {
+      if (i + 1 === DEFAULT_CHECKED) {
+        input.checked = true;
+      }
+    });
+
+    this.sendRef.current.disabled = true;
+  }
+
   _addRef(ref) {
     this.inputElements.push(ref);
   }
@@ -109,16 +119,6 @@ class AddReview extends React.PureComponent<Props> {
     } else {
       this.sendRef.current.disabled = true;
     }
-  }
-
-  componentDidMount() {
-    this.inputElements.map((input, i) => {
-      if (i + 1 === DEFAULT_CHECKED) {
-        input.checked = true;
-      }
-    });
-
-    this.sendRef.current.disabled = true;
   }
 
   render() {

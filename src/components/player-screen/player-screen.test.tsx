@@ -57,6 +57,7 @@ it(`Render PlayerScreen component`, () => {
           {...commonProps}
           containerRef = {React.createRef()}
           progressRef = {React.createRef()}
+          videoRef = {React.createRef()}
         >{children}</PlayerScreen>)
     .toJSON();
 
