@@ -10,7 +10,7 @@ const UserStatus = {
 };
 
 const AppRoute = {
-  ROOT: `/`,
+  ROOT: `${process.env.PUBLIC_URL || ``}/`,
   LOGIN: `/login`,
   LIST: `/mylist`,
   FILM: `/films/`,

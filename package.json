@@ -10,7 +10,7 @@
     "eslint": "npm run eslint.ts && npm run eslint.js",
     "test": "npm run eslint && npm run test.jest",
     "test.jest": "jest",
-    "build": "webpack --mode production",
+    "build": "webpack --env.PUBLIC_URL=/1053223-what-to-watch-4 --mode production",
     "start": "webpack-dev-server",
     "deploy": "npm run build && gh-pages -d public"
   },

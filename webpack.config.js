@@ -1,6 +1,7 @@
 const path = require(`path`);
+const webpack = require(`webpack`);
 
-module.exports = {
+module.exports = (env) => ({
   entry: `./src/index.tsx`,
   output: {
     filename: `bundle.js`,
@@ -30,4 +31,9 @@ module.exports = {
     extensions: [`.ts`, `.tsx`, `.js`, `json`]
   },
   devtool: `source-map`,
-};
+  plugins: [
+    new webpack.DefinePlugin({
+      [`process.env.PUBLIC_URL`]: JSON.stringify(env && env.PUBLIC_URL)
+    })
+  ],
+});
